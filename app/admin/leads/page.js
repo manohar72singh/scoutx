@@ -16,13 +16,11 @@ export default function AdminLeadsPage() {
 
   const fetchLeads = async () => {
     setLoading(true);
-    const token = localStorage.getItem('scoutx_admin_token');
     const url = new URL('/api/admin/leads', window.location.origin);
     url.searchParams.set('page', page);
     url.searchParams.set('limit', limit);
     if (filter) url.searchParams.set('status', filter);
-
-    const res = await fetch(url.toString(), { headers: { Authorization: `Bearer ${token}` } });
+    const res = await fetch(url.toString());
     const data = await res.json();
     if (data.success) { setLeads(data.data); setTotal(data.total); }
     setLoading(false);
@@ -31,10 +29,9 @@ export default function AdminLeadsPage() {
   useEffect(() => { fetchLeads(); }, [page, filter]);
 
   const updateStatus = async (id, status) => {
-    const token = localStorage.getItem('scoutx_admin_token');
     await fetch(`/api/admin/leads/${id}`, {
       method: 'PATCH',
-      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ status }),
     });
     fetchLeads();

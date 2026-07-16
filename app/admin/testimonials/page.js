@@ -15,11 +15,11 @@ export default function AdminTestimonialsPage() {
   const [msg, setMsg] = useState('');
   const API = '';
 
-  const token = () => localStorage.getItem('scoutx_admin_token');
+
 
   const fetchItems = async () => {
     setLoading(true);
-    const res = await fetch(`${API}/api/admin/testimonials`, { headers: { Authorization: `Bearer ${token()}` } });
+    const res = await fetch(`${API}/api/admin/testimonials`);
     const data = await res.json();
     if (data.success) setItems(data.data);
     setLoading(false);
@@ -36,7 +36,7 @@ export default function AdminTestimonialsPage() {
       : `${API}/api/admin/testimonials`;
     const res = await fetch(url, {
       method,
-      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token()}` },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(form),
     });
     const data = await res.json();
@@ -48,8 +48,7 @@ export default function AdminTestimonialsPage() {
   const deleteItem = async (id) => {
     if (!confirm('Delete this testimonial?')) return;
     await fetch(`${API}/api/admin/testimonials/${id}`, {
-      method: 'DELETE',
-      headers: { Authorization: `Bearer ${token()}` },
+      method: 'DELETE'
     });
     fetchItems();
   };

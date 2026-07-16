@@ -17,12 +17,11 @@ export default function AdminApplicationsPage() {
 
   const fetchApps = async () => {
     setLoading(true);
-    const token = localStorage.getItem('scoutx_admin_token');
     const url = new URL(`${API}/api/admin/applications`, window.location.origin);
     url.searchParams.set('page', page);
     url.searchParams.set('limit', limit);
     if (filter) url.searchParams.set('status', filter);
-    const res = await fetch(url.toString(), { headers: { Authorization: `Bearer ${token}` } });
+    const res = await fetch(url.toString());
     const data = await res.json();
     if (data.success) { setApps(data.data); setTotal(data.total); }
     setLoading(false);
@@ -31,10 +30,9 @@ export default function AdminApplicationsPage() {
   useEffect(() => { fetchApps(); }, [page, filter]);
 
   const updateStatus = async (id, status) => {
-    const token = localStorage.getItem('scoutx_admin_token');
     await fetch(`${API}/api/admin/applications/${id}`, {
       method: 'PATCH',
-      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ status }),
     });
     fetchApps();

@@ -16,7 +16,9 @@ CREATE TABLE IF NOT EXISTS leads (
   service_type VARCHAR(100),
   message TEXT,
   status VARCHAR(30) DEFAULT 'new',
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  INDEX idx_status (status)
 );
 
 -- Job applications from guard candidates
@@ -29,7 +31,9 @@ CREATE TABLE IF NOT EXISTS applications (
   experience_years INT,
   resume_file_path VARCHAR(255),
   status VARCHAR(30) DEFAULT 'new',
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  INDEX idx_status (status)
 );
 
 -- Client testimonials (admin-managed)

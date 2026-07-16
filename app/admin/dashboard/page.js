@@ -10,10 +10,7 @@ export default function AdminDashboard() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const token = localStorage.getItem('scoutx_admin_token');
-    fetch(`/api/admin/stats`, {
-      headers: { Authorization: `Bearer ${token}` },
-    })
+    fetch(`/api/admin/stats`)
       .then((r) => r.json())
       .then((data) => { if (data.success) setStats(data.data); })
       .catch(() => {})

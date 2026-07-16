@@ -26,7 +26,6 @@ export default function AdminLoginPage() {
       );
       const data = await res.json();
       if (data.success) {
-        localStorage.setItem('scoutx_admin_token', data.token);
         localStorage.setItem('scoutx_admin_user', JSON.stringify(data.admin));
         router.push('/admin/dashboard');
       } else {

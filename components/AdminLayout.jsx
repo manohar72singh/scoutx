@@ -19,17 +19,16 @@ export default function AdminLayout({ children }) {
   const [admin, setAdmin] = useState(null);
 
   useEffect(() => {
-    const token = localStorage.getItem('scoutx_admin_token');
     const user = localStorage.getItem('scoutx_admin_user');
-    if (!token) {
+    if (!user) {
       router.replace('/admin/login');
       return;
     }
     if (user) setAdmin(JSON.parse(user));
   }, [router]);
 
-  const logout = () => {
-    localStorage.removeItem('scoutx_admin_token');
+  const logout = async () => {
+    await fetch('/api/admin/auth/logout', { method: 'POST' });
     localStorage.removeItem('scoutx_admin_user');
     router.replace('/admin/login');
   };
