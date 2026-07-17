@@ -6,7 +6,6 @@ import TestimonialsSection from '@/components/TestimonialsSection';
 import WhyChooseUsSection from '@/components/WhyChooseUsSection';
 import AnimatedStats from '@/components/AnimatedStats';
 import FadeIn from '@/components/FadeIn';
-import ClientLogoMarquee from '@/components/ClientLogoMarquee';
 
 export const metadata = {
   title: 'Security Guard Services in Ghaziabad, Noida, Delhi NCR',
@@ -27,44 +26,51 @@ const services = [
   {
     num: '01',
     icon: '🛡️',
-    title: 'UNARMED GUARDS',
+    title: 'SECURITY GUARD',
     desc: 'Professionally trained, police-verified guards for residential societies, offices, and retail. Uniform, attendance tracking, and supervisor rounds included.',
-    href: '/services/unarmed-guards',
+    href: '/services/security-guard',
   },
   {
     num: '02',
     icon: '🎯',
-    title: 'ARMED GUARDS',
+    title: 'SECURITY GUARD (GUNMAN)',
     desc: 'Licensed armed security personnel for banks, ATMs, cash-in-transit, jewelry stores, and high-value asset protection.',
-    href: '/services/armed-guards',
+    href: '/services/security-guard-gunman',
   },
   {
     num: '03',
     icon: '👩‍✈️',
-    title: 'FEMALE GUARDS',
+    title: 'FEMALE SECURITY GUARD',
     desc: 'Police-verified female security personnel for hospitals, retail, frisking booths, corporate offices, and spaces requiring gender-specific security.',
-    href: '/services/female-guards',
+    href: '/services/female-security-guard',
   },
   {
     num: '04',
-    icon: '💪',
-    title: 'BOUNCERS',
-    desc: 'Highly trained bouncers and crowd management professionals for nightclubs, events, concerts, and VIP venues. Intimidating presence, zero-incident record.',
-    href: '/services/bouncers',
+    icon: '💼',
+    title: 'FEMALE SECURITY OFFICER',
+    desc: 'Experienced female officers for supervisory roles, sensitive corporate environments, and VIP escorting. Focus on compliance and guest management.',
+    href: '/services/female-security-officer',
   },
   {
     num: '05',
-    icon: '🎪',
-    title: 'EVENT SECURITY',
-    desc: 'End-to-end event security for corporate events, weddings, political gatherings, concerts, and exhibitions. Access control, crowd management, and emergency response.',
-    href: '/services/event-security',
+    icon: '📋',
+    title: 'FIELD SUPERVISOR',
+    desc: 'Dedicated on-site or mobile supervisors to manage guard deployment, conduct night checks, and ensure 100% adherence to SLAs and protocols.',
+    href: '/services/field-supervisor',
   },
   {
     num: '06',
-    icon: '🚗',
-    title: 'MOBILE PATROL / PSO',
-    desc: 'Vehicle-mounted patrol guards covering large premises, industrial parks, and complexes. Personal Security Officers (PSO) for VIP protection.',
-    href: '/services/mobile-patrol',
+    icon: '🕴️',
+    title: 'PSO',
+    desc: 'Personal Security Officers (PSO) providing discreet, close-protection for executives, VIPs, and high-net-worth individuals.',
+    href: '/services/pso',
+  },
+  {
+    num: '07',
+    icon: '💪',
+    title: 'BOUNCER',
+    desc: 'Highly trained bouncers for crowd management, conflict de-escalation, and VIP venues. Intimidating presence with a focus on safe crowd control.',
+    href: '/services/bouncer',
   },
 ];
 
@@ -117,9 +123,9 @@ export default function HomePage() {
       {/* ── HERO ─────────────────────────────────────────────────────── */}
       <section className="relative w-full overflow-hidden min-h-[90vh] flex items-center pt-24 pb-12">
         {/* Optimized Background Image */}
-        <div className="absolute inset-0 z-0 opacity-70">
+        <div className="absolute inset-0 z-0 opacity-100">
           <Image
-            src="/hero-bg.png"
+            src="/hero-bg-new.jpeg"
             alt="Security Guards Background"
             fill
             priority
@@ -127,8 +133,8 @@ export default function HomePage() {
           />
         </div>
         {/* Dark Gradient Overlay for text readability */}
-        <div className="absolute inset-0 z-0 bg-gradient-to-r from-[#050914] via-[#050914]/80 to-transparent" />
-        <div className="absolute inset-0 z-0 bg-gradient-to-t from-[#050914] via-[#050914]/30 to-transparent" />
+        <div className="absolute inset-0 z-0 bg-gradient-to-r from-[#050914]/80 via-[#050914]/40 to-transparent" />
+        <div className="absolute inset-0 z-0 bg-gradient-to-t from-[#050914]/80 via-[#050914]/10 to-transparent" />
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 w-full -mt-20 md:-mt-28">
           <div className="max-w-3xl">
@@ -185,9 +191,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
-      {/* ── CLIENT LOGO MARQUEE ───────────────────────────────────────── */}
-      <ClientLogoMarquee />
 
       {/* ── SERVICES SECTION ──────────────────────────────────────────── */}
       <section className="py-24 px-4 sm:px-6 bg-[#050914] relative">

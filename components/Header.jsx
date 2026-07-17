@@ -12,12 +12,13 @@ const navLinks = [
     label: 'Services',      
     href: '/services',
     dropdown: [
-      { label: 'Armed Guards', href: '/services/armed-guards' },
-      { label: 'Unarmed Guards', href: '/services/unarmed-guards' },
-      { label: 'Bouncers', href: '/services/bouncers' },
-      { label: 'Female Guards', href: '/services/female-guards' },
-      { label: 'Event Security', href: '/services/event-security' },
-      { label: 'Mobile Patrol', href: '/services/mobile-patrol' },
+      { label: 'Security Guard', href: '/services/security-guard' },
+      { label: 'Security Guard (Gunman)', href: '/services/security-guard-gunman' },
+      { label: 'Female Security Guard', href: '/services/female-security-guard' },
+      { label: 'Female Security Officer', href: '/services/female-security-officer' },
+      { label: 'Field Supervisor', href: '/services/field-supervisor' },
+      { label: 'PSO', href: '/services/pso' },
+      { label: 'Bouncer', href: '/services/bouncer' },
     ]
   },
   { label: 'Industries',    href: '/industries' },
@@ -194,13 +195,13 @@ export default function Header() {
               <svg className="w-4 h-4 text-[#2E6FBF]" fill="currentColor" viewBox="0 0 20 20">
                 <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
               </svg>
-              Ashok: 86820 66666
+              Ashok Choudhary: 86820 66666
             </a>
             <a href="tel:+917611865555" className="flex items-center gap-2 px-4 py-2 text-[#C0C0C0] text-sm">
               <svg className="w-4 h-4 text-[#2E6FBF]" fill="currentColor" viewBox="0 0 20 20">
                 <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
               </svg>
-              Anil: 76118 65555
+              Anil Choudhary: 76118 65555
             </a>
             <Link
               href="/contact#quote"

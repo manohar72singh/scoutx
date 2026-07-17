@@ -47,7 +47,7 @@ export default function RootLayout({ children }) {
               description: 'PSARA-licensed private security guard services',
               url: 'https://www.scoutxprotection.com',
               telephone: ['+91-8682066666', '+91-7611865555'],
-              email: 'scoutxprotection@gmail.com',
+              email: 'scoutxsecurity@gmail.com',
               address: {
                 '@type': 'PostalAddress',
                 streetAddress: 'Shop No 1, Ground Floor, H-39 KH No 1468, Govindpuram',

@@ -160,7 +160,7 @@ export default function WhyChooseUsPage() {
           <p className="text-[#A8A8A8] mb-6">Get your customised security deployment from a fully compliant agency.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/contact#quote" className="btn-primary">Request a Quote</Link>
-            <a href="tel:+918682066666" className="btn-secondary">Call Ashok: 86820 66666</a>
+            <a href="tel:+918682066666" className="btn-secondary">Call Ashok Choudhary: 86820 66666</a>
           </div>
         </div>
       </section>

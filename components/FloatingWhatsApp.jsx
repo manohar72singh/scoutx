@@ -6,7 +6,7 @@ import { useState } from 'react';
 export default function FloatingWhatsApp() {
   const [hovered, setHovered] = useState(false);
 
-  const waUrl = 'https://wa.me/918682066666?text=Hi%2C%20I%27d%20like%20a%20quote%20for%20security%20guards.';
+  const waUrl = 'https://wa.me/918682066666?text=Hi%2C%20I%27d%20like%20a%20quote%20for%20security%20services.';
 
   return (
     <a

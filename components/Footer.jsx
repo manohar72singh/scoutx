@@ -4,8 +4,8 @@ import Link from 'next/link';
 import LogoSVG from './LogoSVG';
 
 const services = [
-  'Armed Guards', 'Unarmed Guards', 'Bouncers',
-  'Female Guards', 'Event Security', 'Mobile Patrol / PSO',
+  'Security Guard', 'Security Guard (Gunman)', 'Female Security Guard',
+  'Female Security Officer', 'Field Supervisor', 'PSO', 'Bouncer',
 ];
 
 const quickLinks = [
@@ -108,10 +108,10 @@ export default function Footer() {
                 </svg>
                 <div className="text-sm">
                   <a href="tel:+918682066666" className="text-[#A8A8A8] hover:text-white transition-colors block">
-                    Ashok: +91 86820 66666
+                    Ashok Choudhary: +91 86820 66666
                   </a>
                   <a href="tel:+917611865555" className="text-[#A8A8A8] hover:text-white transition-colors block">
-                    Anil: +91 76118 65555
+                    Anil Choudhary: +91 76118 65555
                   </a>
                 </div>
               </div>
@@ -120,12 +120,12 @@ export default function Footer() {
                   <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
                   <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
                 </svg>
-                <a href="mailto:scoutxprotection@gmail.com" className="text-[#A8A8A8] hover:text-white text-sm transition-colors break-all">
-                  scoutxprotection@gmail.com
+                <a href="mailto:scoutxsecurity@gmail.com" className="text-[#A8A8A8] hover:text-white text-sm transition-colors break-all">
+                  scoutxsecurity@gmail.com
                 </a>
               </div>
               <a
-                href="https://wa.me/918682066666?text=Hi%2C%20I%27d%20like%20a%20quote%20for%20security%20guards."
+                href="https://wa.me/918682066666?text=Hi%2C%20I%27d%20like%20a%20quote%20for%20security%20services."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-4 py-2 bg-[#25D366] hover:bg-[#20BA5A] text-white text-sm font-heading font-bold uppercase tracking-wider rounded transition-all mt-2"
@@ -140,24 +140,7 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* City pages */}
-      <div className="border-t border-[rgba(192,192,192,0.07)]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4">
-          <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-[#A8A8A8]">
-            <span className="text-[#2E6FBF] font-heading uppercase tracking-wider text-xs">We Serve:</span>
-            {[
-              ['Ghaziabad', '/security-guards-ghaziabad'],
-              ['Noida', '/security-guards-noida'],
-              ['Greater Noida', '/security-guards-greater-noida'],
-              ['Delhi', '/security-guards-delhi'],
-            ].map(([city, href]) => (
-              <Link key={city} href={href} className="hover:text-white transition-colors">
-                Security Guards {city}
-              </Link>
-            ))}
-          </div>
-        </div>
-      </div>
+
 
       {/* Bottom bar */}
       <div className="border-t border-[rgba(192,192,192,0.07)]">

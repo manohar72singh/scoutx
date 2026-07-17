@@ -20,8 +20,8 @@ export default function ContactPage() {
   const [contactStatus, setContactStatus] = useState(null);
 
   const serviceOptions = [
-    'Unarmed Guards', 'Armed Guards', 'Bouncers', 'Female Guards',
-    'Event Security', 'Mobile Patrol / PSO', 'Mixed / Multiple Services',
+    'Security Guard', 'Security Guard (Gunman)', 'Female Security Guard',
+    'Female Security Officer', 'Field Supervisor', 'PSO', 'Bouncer', 'Mixed / Multiple Services',
   ];
 
   const handleQuoteChange = (e) => setQuoteForm((f) => ({ ...f, [e.target.name]: e.target.value }));
@@ -119,7 +119,7 @@ export default function ContactPage() {
           </FadeIn>
           <FadeIn delay={0.3} direction="up">
             <a
-              href="https://wa.me/918682066666?text=Hi%2C%20I%27d%20like%20a%20quote%20for%20security%20guards."
+              href="https://wa.me/918682066666?text=Hi%2C%20I%27d%20like%20a%20quote%20for%20security%20services."
               target="_blank" rel="noopener noreferrer"
               className="card-dark p-5 text-center hover:border-[#25D366] hover:shadow-[0_0_15px_rgba(37,211,102,0.2)] hover:-translate-y-1 transition-all duration-300 group block"
             >
@@ -250,8 +250,8 @@ export default function ContactPage() {
               <p className="text-[#A8A8A8] text-sm leading-relaxed">
                 Shop No 1, Ground Floor,<br />H-39 KH No 1468, Govindpuram,<br />Ghaziabad, UP 201013
               </p>
-              <a href="mailto:scoutxprotection@gmail.com" className="flex items-center gap-2 text-[#A8A8A8] hover:text-white text-sm transition-colors">
-                ✉️ scoutxprotection@gmail.com
+              <a href="mailto:scoutxsecurity@gmail.com" className="flex items-center gap-2 text-[#A8A8A8] hover:text-white text-sm transition-colors">
+                ✉️ scoutxsecurity@gmail.com
               </a>
               <div className="pt-2 overflow-hidden rounded-lg">
                 <iframe

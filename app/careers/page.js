@@ -13,8 +13,9 @@ export default function CareersPage() {
   const [errors, setErrors] = useState([]);
 
   const positions = [
-    'Unarmed Security Guard', 'Armed Security Guard', 'Bouncer', 'Female Security Guard',
-    'Event Security Officer', 'Mobile Patrol Guard', 'Supervisor / Field Officer',
+    'Security Guard', 'Security Guard (Gunman)', 'Female Security Guard',
+    'Female Security Officer', 'Field Supervisor', 'Operation Manager',
+    'PSO', 'Bouncer',
   ];
 
   const handleChange = (e) => {
@@ -51,11 +52,14 @@ export default function CareersPage() {
   };
 
   const jobListings = [
-    { title: 'Security Guard (Unarmed)', location: 'Ghaziabad / Noida', type: 'Full-Time / Part-Time', salary: '₹12,000 – ₹18,000/month' },
-    { title: 'Security Guard (Armed)', location: 'Delhi NCR', type: 'Full-Time', salary: '₹18,000 – ₹28,000/month' },
-    { title: 'Female Security Officer', location: 'Ghaziabad / Greater Noida', type: 'Full-Time', salary: '₹12,000 – ₹16,000/month' },
-    { title: 'Event Security Officer', location: 'Delhi NCR', type: 'Contractual', salary: '₹800 – ₹1,200/day' },
-    { title: 'Field Supervisor', location: 'Ghaziabad', type: 'Full-Time', salary: '₹22,000 – ₹30,000/month' },
+    { title: 'Security Guard', type: 'Full-Time / Part-Time' },
+    { title: 'Security Guard (Gunman)', type: 'Full-Time' },
+    { title: 'Female Security Guard', type: 'Full-Time / Part-Time' },
+    { title: 'Female Security Officer', type: 'Full-Time' },
+    { title: 'Field Supervisor', type: 'Full-Time' },
+    { title: 'Operation Manager', type: 'Full-Time' },
+    { title: 'PSO', type: 'Full-Time / Contractual' },
+    { title: 'Bouncer', type: 'Full-Time / Contractual' },
   ];
 
   return (
@@ -78,11 +82,10 @@ export default function CareersPage() {
       {/* Benefits */}
       <section className="py-14 px-4 sm:px-6" style={{ background: '#0B0B0D' }}>
         <div className="max-w-5xl mx-auto">
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-12">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-12">
             {[
               { icon: '💰', label: 'Competitive Pay', sub: 'Monthly salary + overtime' },
               { icon: '🎓', label: 'Free Training', sub: '160+ hours certified' },
-              { icon: '👔', label: 'Free Uniform', sub: 'Full kit on joining' },
               { icon: '🏥', label: 'ESI/PF Benefits', sub: 'Govt. social security' },
             ].map((b) => (
               <div key={b.label} className="card-dark p-4 text-center">
@@ -108,13 +111,7 @@ export default function CareersPage() {
                   <h3 className="font-heading text-lg font-bold uppercase text-[#E8E8E8]">{job.title}</h3>
                   <div className="flex flex-wrap gap-3 mt-2">
                     <span className="text-[#A8A8A8] text-xs flex items-center gap-1">
-                      📍 {job.location}
-                    </span>
-                    <span className="text-[#A8A8A8] text-xs flex items-center gap-1">
                       ⏱️ {job.type}
-                    </span>
-                    <span className="text-[#4A8FD4] text-xs font-semibold flex items-center gap-1">
-                      💰 {job.salary}
                     </span>
                   </div>
                 </div>

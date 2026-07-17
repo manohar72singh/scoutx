@@ -1,6 +1,7 @@
 // app/about/page.js
 
 import Link from 'next/link';
+import Image from 'next/image';
 import LogoSVG from '@/components/LogoSVG';
 import WhyChooseUsSection from '@/components/WhyChooseUsSection';
 
@@ -21,15 +22,27 @@ export default function AboutPage() {
   return (
     <>
       {/* Page Hero */}
-      <section className="relative pt-32 pb-20 px-4 sm:px-6 overflow-hidden" style={{ background: 'linear-gradient(135deg, #0A0F1F, #111827)' }}>
-        <div className="absolute inset-0 tactical-grid opacity-30" />
-        <div className="relative z-10 max-w-4xl mx-auto text-center">
-          <span className="section-label">Our Story</span>
-          <h1 className="font-heading text-5xl md:text-6xl font-bold uppercase text-white mb-4">
+      <section className="relative w-full overflow-hidden min-h-[60vh] flex items-center justify-center pt-32 pb-20 px-4 sm:px-6">
+        {/* Background Image */}
+        <div className="absolute inset-0 z-0 opacity-100">
+          <Image
+            src="/about-hero-indian.png"
+            alt="ScoutX Security Team"
+            fill
+            priority
+            className="object-cover object-center"
+          />
+        </div>
+        {/* Dark Gradient Overlay */}
+        <div className="absolute inset-0 z-0 bg-gradient-to-b from-[#050914]/90 via-[#050914]/50 to-[#0B0B0D]" />
+
+        <div className="relative z-10 max-w-4xl mx-auto text-center mt-10">
+          <span className="section-label shadow-lg bg-black/50">Our Story</span>
+          <h1 className="font-heading text-5xl md:text-6xl font-bold uppercase text-white mb-4 drop-shadow-2xl">
             About <span className="text-gradient-steel">ScoutX</span>
           </h1>
           <div className="chrome-divider max-w-xs mx-auto" />
-          <p className="text-[#A8A8A8] text-lg max-w-2xl mx-auto mt-6">
+          <p className="text-[#E8E8E8] text-lg max-w-2xl mx-auto mt-6 font-medium drop-shadow-lg">
             Born from a vision to bring military-grade professionalism to private security services in India.
           </p>
         </div>
@@ -41,7 +54,7 @@ export default function AboutPage() {
           <div>
             <span className="section-label">Who We Are</span>
             <h2 className="font-heading text-4xl font-bold uppercase text-white mb-6">
-              Redefining Security Standards in <span className="text-gradient-steel">NCR</span>
+              Redefining Security Standards in <span className="text-gradient-steel">UP &amp; Delhi NCR</span>
             </h2>
             <div className="space-y-4 text-[#A8A8A8] leading-relaxed">
               <p>

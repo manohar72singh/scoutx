@@ -4,36 +4,7 @@
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 
-const staticTestimonials = [
-  {
-    id: 1,
-    client_name: 'Rajesh Sharma',
-    client_company: 'Green Valley RWA, Ghaziabad',
-    quote_text:
-      'ScoutX provided highly trained, disciplined guards for our society. Response time is excellent and the team is very professional. Highly recommended!',
-  },
-  {
-    id: 2,
-    client_name: 'Priya Mehta',
-    client_company: 'TechCorp Pvt. Ltd., Noida',
-    quote_text:
-      'We have been using ScoutX for our office premises for over a year. Their guards are punctual, well-uniformed, and always vigilant. Great service!',
-  },
-  {
-    id: 3,
-    client_name: 'Amit Verma',
-    client_company: 'Verma Textile Mills, Greater Noida',
-    quote_text:
-      'After switching to ScoutX, pilferage incidents in our factory dropped significantly. Their mobile patrol and supervisor checks give us real peace of mind.',
-  },
-  {
-    id: 4,
-    client_name: 'Sunita Agarwal',
-    client_company: 'City Mall, Ghaziabad',
-    quote_text:
-      'Managing weekend crowd at our mall was a nightmare before ScoutX. Now their well-trained security team handles it flawlessly every single time.',
-  },
-];
+const staticTestimonials = [];
 
 export default function TestimonialsSection() {
   const [testimonials, setTestimonials] = useState(staticTestimonials);
@@ -52,9 +23,11 @@ export default function TestimonialsSection() {
 
   // Auto-advance carousel
   useEffect(() => {
-    intervalRef.current = setInterval(() => {
-      setCurrent((c) => (c + 1) % testimonials.length);
-    }, 5000);
+    if (testimonials.length > 0) {
+      intervalRef.current = setInterval(() => {
+        setCurrent((c) => (c + 1) % testimonials.length);
+      }, 5000);
+    }
     return () => clearInterval(intervalRef.current);
   }, [testimonials.length]);
 
@@ -62,6 +35,8 @@ export default function TestimonialsSection() {
     clearInterval(intervalRef.current);
     setCurrent(idx);
   };
+
+  if (testimonials.length === 0) return null;
 
   return (
     <section className="py-24 px-4 sm:px-6 bg-[#0B0B0D] relative overflow-hidden">
