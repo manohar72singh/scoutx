@@ -1,6 +1,7 @@
 // app/api/admin/charts/route.js
 // Returns monthly leads + applications data for dashboard charts
 
+export const dynamic = 'force-dynamic';
 import { NextResponse } from 'next/server';
 import pool from '@/lib/db';
 import { verifyAuth } from '@/lib/auth';
