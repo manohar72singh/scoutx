@@ -14,22 +14,25 @@ export async function GET(req) {
     const limit = parseInt(searchParams.get('limit')) || 20;
     const offset = (page - 1) * limit;
     const status = searchParams.get('status');
+    const search = searchParams.get('search')?.trim();
 
-    let query = 'SELECT * FROM leads';
-    let countQuery = 'SELECT COUNT(*) as total FROM leads';
+    let conditions = [];
     let values = [];
 
-    if (status) {
-      query += ' WHERE status = ?';
-      countQuery += ' WHERE status = ?';
-      values.push(status);
+    if (status) { conditions.push('status = ?'); values.push(status); }
+    if (search) {
+      conditions.push('(company_name LIKE ? OR contact_person LIKE ? OR phone LIKE ? OR city LIKE ?)');
+      const q = `%${search}%`;
+      values.push(q, q, q, q);
     }
 
-    query += ' ORDER BY created_at DESC LIMIT ? OFFSET ?';
-    values.push(limit, offset);
+    const whereClause = conditions.length ? ' WHERE ' + conditions.join(' AND ') : '';
 
-    const [rows] = await pool.query(query, values);
-    const [[{ total }]] = await pool.query(countQuery, status ? [status] : []);
+    const query = `SELECT * FROM leads${whereClause} ORDER BY created_at DESC LIMIT ? OFFSET ?`;
+    const countQuery = `SELECT COUNT(*) as total FROM leads${whereClause}`;
+
+    const [rows] = await pool.query(query, [...values, limit, offset]);
+    const [[{ total }]] = await pool.query(countQuery, values);
 
     return NextResponse.json({ success: true, data: rows, total, page, limit }, { status: 200 });
   } catch (error) {

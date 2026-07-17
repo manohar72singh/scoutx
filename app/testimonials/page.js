@@ -4,9 +4,15 @@ import Link from 'next/link';
 import TestimonialsClientPage from './TestimonialsClientPage';
 
 export const metadata = {
-  title: 'Client Testimonials — ScoutX Protection Group Reviews',
+  title: 'Client Reviews & Testimonials | ScoutX Protection Group',
   description:
     'Read what our clients say about ScoutX Protection Group\'s security guard services. Trusted by residential societies, offices, and businesses across Ghaziabad, Noida, Delhi NCR.',
+  alternates: { canonical: 'https://www.scoutxsecurity.com/testimonials' },
+  openGraph: {
+    url: 'https://www.scoutxsecurity.com/testimonials',
+    title: 'ScoutX Security Client Reviews',
+    description: 'See what our clients say about our professional security services in NCR.',
+  }
 };
 
 export default function TestimonialsPage() {

@@ -6,9 +6,15 @@ import WhyChooseUsSection from '@/components/WhyChooseUsSection';
 import FadeIn from '@/components/FadeIn';
 
 export const metadata = {
-  title: 'Security Guard Services — Armed, Unarmed, Event, Female Guards',
+  title: 'Our Security Services | Armed, Event & Corporate Guards in NCR',
   description:
     'ScoutX offers armed guards, unarmed guards, bouncers, female security guards, event security, and mobile patrol services in Ghaziabad, Noida, Delhi NCR. PSARA licensed.',
+  alternates: { canonical: 'https://www.scoutxsecurity.com/services' },
+  openGraph: {
+    url: 'https://www.scoutxsecurity.com/services',
+    title: 'Security Services by ScoutX Protection Group',
+    description: 'Comprehensive security solutions including armed guards, bouncers, and event security in NCR.',
+  }
 };
 
 const services = [

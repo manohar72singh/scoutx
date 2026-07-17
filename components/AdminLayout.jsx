@@ -7,10 +7,11 @@ import Link from 'next/link';
 import LogoSVG from './LogoSVG';
 
 const navItems = [
-  { label: 'Dashboard', href: '/admin/dashboard', icon: '📊' },
-  { label: 'Leads',     href: '/admin/leads',     icon: '📋' },
+  { label: 'Dashboard',    href: '/admin/dashboard',    icon: '📊' },
+  { label: 'Leads',        href: '/admin/leads',        icon: '📋' },
   { label: 'Applications', href: '/admin/applications', icon: '👷' },
   { label: 'Testimonials', href: '/admin/testimonials', icon: '⭐' },
+  { label: 'Settings',     href: '/admin/settings',     icon: '⚙️' },
 ];
 
 export default function AdminLayout({ children }) {

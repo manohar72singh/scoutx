@@ -13,8 +13,8 @@ export default function LayoutUI({ children }) {
   const isAdmin = pathname?.startsWith('/admin');
 
   if (isAdmin) {
-    // For admin pages, just render the content without public layout
-    return <main className="admin-layout">{children}</main>;
+    // For admin pages, render without public layout (no navbar/footer)
+    return <>{children}</>;
   }
 
   return (

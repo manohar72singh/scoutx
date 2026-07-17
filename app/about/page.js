@@ -4,11 +4,18 @@ import Link from 'next/link';
 import Image from 'next/image';
 import LogoSVG from '@/components/LogoSVG';
 import WhyChooseUsSection from '@/components/WhyChooseUsSection';
+import OurClientsSection from '@/components/OurClientsSection';
 
 export const metadata = {
-  title: 'About Us — ScoutX Protection Group',
+  title: 'About Us | ScoutX Protection Group in NCR',
   description:
     'Learn about ScoutX Protection Group Pvt. Ltd. — our founding story, mission, leadership, and commitment to PSARA-compliant security in Ghaziabad and Delhi NCR.',
+  alternates: { canonical: 'https://www.scoutxsecurity.com/about' },
+  openGraph: {
+    url: 'https://www.scoutxsecurity.com/about',
+    title: 'About ScoutX Protection Group',
+    description: 'Our founding story, mission, leadership, and commitment to PSARA-compliant security.',
+  }
 };
 
 const values = [
@@ -185,6 +192,9 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
+
+      {/* Our Clients */}
+      <OurClientsSection />
 
       {/* Why Choose Us */}
       <WhyChooseUsSection />

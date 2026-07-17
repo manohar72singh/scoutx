@@ -178,7 +178,12 @@ export async function generateMetadata({ params }) {
   return {
     title: svc.metaTitle,
     description: svc.metaDesc,
-    alternates: { canonical: `https://www.scoutxprotection.com/services/${resolvedParams.serviceSlug}` },
+    alternates: { canonical: `https://www.scoutxsecurity.com/services/${resolvedParams.serviceSlug}` },
+    openGraph: {
+      url: `https://www.scoutxsecurity.com/services/${resolvedParams.serviceSlug}`,
+      title: svc.metaTitle,
+      description: svc.metaDesc,
+    }
   };
 }
 
@@ -189,6 +194,27 @@ export default async function ServiceDetailedPage({ params }) {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'Service',
+            serviceType: svc.title,
+            provider: {
+              '@type': 'LocalBusiness',
+              name: 'ScoutX Protection Group Pvt. Ltd.',
+              url: 'https://www.scoutxsecurity.com',
+            },
+            areaServed: {
+              '@type': 'State',
+              name: 'Delhi NCR',
+            },
+            description: svc.desc,
+            url: `https://www.scoutxsecurity.com/services/${resolvedParams.serviceSlug}`
+          }),
+        }}
+      />
       {/* Hero */}
       <section className="relative pt-32 pb-20 px-4 sm:px-6 overflow-hidden" style={{ background: 'linear-gradient(135deg, #0A0F1F, #111827)' }}>
         <div className="absolute inset-0 tactical-grid opacity-30" />

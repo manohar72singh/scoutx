@@ -6,8 +6,14 @@ import Image from 'next/image';
 import FadeIn from '@/components/FadeIn';
 
 export const metadata = {
-  title: 'Gallery — ScoutX Guards in Action',
+  title: 'Gallery | ScoutX Guards in Action in NCR',
   description: 'See ScoutX Protection Group\'s guards in action — on duty at residential societies, corporate offices, industrial sites, and events across Delhi NCR.',
+  alternates: { canonical: 'https://www.scoutxsecurity.com/gallery' },
+  openGraph: {
+    url: 'https://www.scoutxsecurity.com/gallery',
+    title: 'ScoutX Security Guard Gallery',
+    description: 'Photos of our professional security guards on duty across NCR.',
+  }
 };
 
 const galleryItems = [

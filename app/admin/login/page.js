@@ -83,10 +83,7 @@ export default function AdminLoginPage() {
             </button>
           </form>
 
-          <p className="text-[#A8A8A8] text-xs text-center mt-6">
-            Default: username <code className="text-[#4A8FD4]">admin</code> / password <code className="text-[#4A8FD4]">password</code><br />
-            <span className="text-red-400">⚠️ Change the password immediately after first login.</span>
-          </p>
+
         </div>
       </div>
     </div>

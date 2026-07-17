@@ -1,7 +1,7 @@
-// app/sitemap.js — Auto-generated sitemap
+﻿// app/sitemap.js â€” Auto-generated sitemap
 
 export default function sitemap() {
-  const baseUrl = 'https://www.scoutxprotection.com';
+  const baseUrl = 'https://www.scoutxsecurity.com';
   const now = new Date();
 
   const staticPages = [

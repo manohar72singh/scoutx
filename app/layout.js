@@ -1,9 +1,10 @@
-// app/layout.js — Root layout with shared metadata
+// app/layout.js â€” Root layout with shared metadata
 
 import './globals.css';
 import LayoutUI from '@/components/LayoutUI';
 
 export const metadata = {
+  metadataBase: new URL('https://www.scoutxsecurity.com'),
   title: {
     default: 'ScoutX Protection Group | Security Guard Services in Ghaziabad, NCR',
     template: '%s | ScoutX Protection Group',
@@ -23,13 +24,27 @@ export const metadata = {
     title: 'ScoutX Protection Group | Security Guard Services in Ghaziabad NCR',
     description:
       'PSARA-licensed, police-verified security guards for residential societies, offices, factories, banks, hospitals, and events across Delhi NCR.',
-    url: 'https://www.scoutxprotection.com',
+    url: 'https://www.scoutxsecurity.com',
     siteName: 'ScoutX Protection Group',
     locale: 'en_IN',
     type: 'website',
+    images: [
+      {
+        url: '/logo.jpeg',
+        width: 800,
+        height: 600,
+        alt: 'ScoutX Protection Group Logo',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'ScoutX Protection Group | Top Security Agency in NCR',
+    description: 'Professional security guard services in Ghaziabad, Noida, and Delhi NCR.',
+    images: ['/logo.jpeg'],
   },
   robots: { index: true, follow: true },
-  alternates: { canonical: 'https://www.scoutxprotection.com' },
+  alternates: { canonical: 'https://www.scoutxsecurity.com' },
 };
 
 export default function RootLayout({ children }) {
@@ -45,7 +60,9 @@ export default function RootLayout({ children }) {
               '@type': 'LocalBusiness',
               name: 'ScoutX Protection Group Pvt. Ltd.',
               description: 'PSARA-licensed private security guard services',
-              url: 'https://www.scoutxprotection.com',
+              url: 'https://www.scoutxsecurity.com',
+              logo: 'https://www.scoutxsecurity.com/logo.jpeg',
+              image: 'https://www.scoutxsecurity.com/logo.jpeg',
               telephone: ['+91-8682066666', '+91-7611865555'],
               email: 'scoutxsecurity@gmail.com',
               address: {
@@ -63,6 +80,17 @@ export default function RootLayout({ children }) {
               },
               areaServed: ['Ghaziabad', 'Noida', 'Greater Noida', 'Delhi'],
               priceRange: '₹₹',
+              openingHoursSpecification: [
+                {
+                  '@type': 'OpeningHoursSpecification',
+                  dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+                  opens: '00:00',
+                  closes: '23:59',
+                },
+              ],
+              sameAs: [
+                'https://www.scoutxsecurity.com',
+              ]
             }),
           }}
         />

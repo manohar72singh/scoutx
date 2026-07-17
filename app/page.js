@@ -4,13 +4,18 @@ import Link from 'next/link';
 import Image from 'next/image';
 import TestimonialsSection from '@/components/TestimonialsSection';
 import WhyChooseUsSection from '@/components/WhyChooseUsSection';
+import OurClientsSection from '@/components/OurClientsSection';
 import AnimatedStats from '@/components/AnimatedStats';
 import FadeIn from '@/components/FadeIn';
 
 export const metadata = {
-  title: 'Security Guard Services in Ghaziabad, Noida, Delhi NCR',
+  title: 'Top Security Guard Services in Ghaziabad, Noida & Delhi NCR',
   description:
     'ScoutX Protection Group — PSARA-licensed security guard company in Ghaziabad. Police-verified guards for societies, offices, factories, banks & events. Get a free quote today.',
+  alternates: { canonical: 'https://www.scoutxsecurity.com' },
+  openGraph: {
+    url: 'https://www.scoutxsecurity.com',
+  }
 };
 
 // ── Trust bar data ────────────────────────────────────────────────────────
@@ -279,6 +284,9 @@ export default function HomePage() {
 
       {/* ── WHY CHOOSE US ────────────────────────────────────────────── */}
       <WhyChooseUsSection />
+
+      {/* ── OUR CLIENTS ──────────────────────────────────────────────── */}
+      <OurClientsSection />
 
       {/* ── TESTIMONIALS ────────────────────────────────────────────── */}
       <div className="bg-[#0A0F1F] border-y border-[#1A2235]">

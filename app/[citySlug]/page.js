@@ -94,7 +94,12 @@ export async function generateMetadata({ params }) {
   return {
     title: city.meta_title,
     description: city.meta_desc,
-    alternates: { canonical: `https://www.scoutxprotection.com/${resolvedParams.citySlug}` },
+    alternates: { canonical: `https://www.scoutxsecurity.com/${resolvedParams.citySlug}` },
+    openGraph: {
+      url: `https://www.scoutxsecurity.com/${resolvedParams.citySlug}`,
+      title: city.meta_title,
+      description: city.meta_desc,
+    }
   };
 }
 
@@ -108,21 +113,41 @@ export default async function CityPage({ params }) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'LocalBusiness',
-            name: `ScoutX Protection Group ${city.name}`,
-            description: city.meta_desc,
-            url: `https://www.scoutxprotection.com/${resolvedParams.citySlug}`,
-            telephone: '+91-8682066666',
-            areaServed: city.name,
-            address: {
-              '@type': 'PostalAddress',
-              addressLocality: city.name,
-              addressRegion: city.state,
-              addressCountry: 'IN',
+          __html: JSON.stringify([
+            {
+              '@context': 'https://schema.org',
+              '@type': 'LocalBusiness',
+              name: `ScoutX Protection Group ${city.name}`,
+              description: city.meta_desc,
+              url: `https://www.scoutxsecurity.com/${resolvedParams.citySlug}`,
+              telephone: '+91-8682066666',
+              areaServed: city.name,
+              address: {
+                '@type': 'PostalAddress',
+                addressLocality: city.name,
+                addressRegion: 'Uttar Pradesh',
+                addressCountry: 'IN',
+              },
+            },
+            {
+              '@context': 'https://schema.org',
+              '@type': 'BreadcrumbList',
+              itemListElement: [
+                {
+                  '@type': 'ListItem',
+                  position: 1,
+                  name: 'Home',
+                  item: 'https://www.scoutxsecurity.com'
+                },
+                {
+                  '@type': 'ListItem',
+                  position: 2,
+                  name: `Security Guards in ${city.name}`,
+                  item: `https://www.scoutxsecurity.com/${resolvedParams.citySlug}`
+                }
+              ]
             }
-          }),
+          ]),
         }}
       />
       {/* Hero */}

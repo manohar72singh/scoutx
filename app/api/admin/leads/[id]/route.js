@@ -10,7 +10,8 @@ export async function PATCH(req, { params }) {
 
   try {
     const { status } = await req.json();
-    const id = params.id;
+    // Await params before using its properties in Next.js App Router context
+    const id = (await params).id;
 
     if (!status) {
       return NextResponse.json({ success: false, message: 'Status is required' }, { status: 400 });
@@ -20,6 +21,22 @@ export async function PATCH(req, { params }) {
     return NextResponse.json({ success: true, message: 'Status updated successfully' }, { status: 200 });
   } catch (error) {
     console.error('Update lead error:', error);
+    return NextResponse.json({ success: false, message: 'Database error' }, { status: 500 });
+  }
+}
+
+export async function DELETE(req, { params }) {
+  const auth = verifyAuth(req);
+  if (auth.error) return NextResponse.json({ success: false, message: auth.error }, { status: auth.status });
+
+  try {
+    // Await params before using its properties
+    const id = (await params).id;
+
+    await pool.query('DELETE FROM leads WHERE id = ?', [id]);
+    return NextResponse.json({ success: true, message: 'Lead deleted successfully' }, { status: 200 });
+  } catch (error) {
+    console.error('Delete lead error:', error);
     return NextResponse.json({ success: false, message: 'Database error' }, { status: 500 });
   }
 }

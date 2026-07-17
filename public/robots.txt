@@ -1,8 +1,8 @@
-User-agent: *
+﻿User-agent: *
 Allow: /
 
 # Disallow admin panel
 Disallow: /admin/
 
 # Sitemap
-Sitemap: https://www.scoutxprotection.com/sitemap.xml
+Sitemap: https://www.scoutxsecurity.com/sitemap.xml

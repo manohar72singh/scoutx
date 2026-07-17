@@ -5,9 +5,15 @@ import ServiceCard from '@/components/ServiceCard';
 import FadeIn from '@/components/FadeIn';
 
 export const metadata = {
-  title: 'Industries We Serve — Residential, Corporate, Industrial Security',
+  title: 'Industries We Serve | Residential, Corporate & Industrial Security',
   description:
     'ScoutX provides security guards for residential societies, corporate offices, factories, banks, hospitals, malls, and events in Ghaziabad, Noida, Delhi NCR.',
+  alternates: { canonical: 'https://www.scoutxsecurity.com/industries' },
+  openGraph: {
+    url: 'https://www.scoutxsecurity.com/industries',
+    title: 'Industries Secured by ScoutX',
+    description: 'Specialized security guard services for residential, commercial, industrial, and institutional sectors in NCR.',
+  }
 };
 
 const industries = [
