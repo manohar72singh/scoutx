@@ -16,9 +16,11 @@ const navLinks = [
       { label: 'Security Guard (Gunman)', href: '/services/security-guard-gunman' },
       { label: 'Female Security Guard', href: '/services/female-security-guard' },
       { label: 'Female Security Officer', href: '/services/female-security-officer' },
-      { label: 'Field Supervisor', href: '/services/field-supervisor' },
+      { label: 'Security Supervisor', href: '/services/security-supervisor' },
       { label: 'PSO', href: '/services/pso' },
       { label: 'Bouncer', href: '/services/bouncer' },
+      { label: 'Housekeeping Services', href: '/services/housekeeping-services' },
+      { label: 'Detective Services', href: '/services/detective-services' },
     ]
   },
   { label: 'Industries',    href: '/industries' },

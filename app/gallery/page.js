@@ -25,7 +25,7 @@ const galleryItems = [
   { emoji: '🚗', label: 'Mobile Patrol Unit', desc: 'Night patrol vehicle, Noida', img: '/gallery-patrol.png' },
   { emoji: '🎓', label: 'Guard Training Session', desc: 'Training centre, Govindpuram', img: '/gallery-training.png' },
   { emoji: '👔', label: 'Guard Uniform & Equipment', desc: 'Uniform parade — annual inspection' },
-  { emoji: '📋', label: 'Supervisor Audit', desc: 'Field supervisor conducting attendance check' },
+  { emoji: '📋', label: 'Supervisor Audit', desc: 'Security supervisor conducting attendance check' },
 ];
 
 export default function GalleryPage() {

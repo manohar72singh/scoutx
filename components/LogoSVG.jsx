@@ -4,7 +4,7 @@ import Image from 'next/image';
 export default function LogoSVG({ size = 40, className = '' }) {
   return (
     <Image
-      src="/logo.jpeg"
+      src="/logo.png"
       alt="ScoutX Protection Group Logo"
       width={size}
       height={size}

@@ -33,7 +33,7 @@ export default function AboutPage() {
         {/* Background Image */}
         <div className="absolute inset-0 z-0 opacity-100">
           <Image
-            src="/about-hero-indian.png"
+            src="/about.jpeg"
             alt="ScoutX Security Team"
             fill
             priority

@@ -21,7 +21,8 @@ export default function ContactPage() {
 
   const serviceOptions = [
     'Security Guard', 'Security Guard (Gunman)', 'Female Security Guard',
-    'Female Security Officer', 'Field Supervisor', 'PSO', 'Bouncer', 'Mixed / Multiple Services',
+    'Female Security Officer', 'Security Supervisor', 'PSO', 'Bouncer',
+    'Housekeeping Services', 'Detective Services', 'Mixed / Multiple Services',
   ];
 
   const handleQuoteChange = (e) => setQuoteForm((f) => ({ ...f, [e.target.name]: e.target.value }));

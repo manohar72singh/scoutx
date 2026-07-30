@@ -14,8 +14,8 @@ export default function CareersPage() {
 
   const positions = [
     'Security Guard', 'Security Guard (Gunman)', 'Female Security Guard',
-    'Female Security Officer', 'Field Supervisor', 'Operation Manager',
-    'PSO', 'Bouncer',
+    'Female Security Officer', 'Security Supervisor', 'Operation Manager',
+    'PSO', 'Bouncer', 'Housekeeping Staff', 'Detective / Investigator',
   ];
 
   const handleChange = (e) => {
@@ -56,10 +56,12 @@ export default function CareersPage() {
     { title: 'Security Guard (Gunman)', type: 'Full-Time' },
     { title: 'Female Security Guard', type: 'Full-Time / Part-Time' },
     { title: 'Female Security Officer', type: 'Full-Time' },
-    { title: 'Field Supervisor', type: 'Full-Time' },
+    { title: 'Security Supervisor', type: 'Full-Time' },
     { title: 'Operation Manager', type: 'Full-Time' },
     { title: 'PSO', type: 'Full-Time / Contractual' },
     { title: 'Bouncer', type: 'Full-Time / Contractual' },
+    { title: 'Housekeeping Staff', type: 'Full-Time / Part-Time' },
+    { title: 'Private Detective', type: 'Full-Time / Contractual' },
   ];
 
   return (

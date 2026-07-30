@@ -50,7 +50,7 @@ const credentials = [
     icon: '📱',
     title: 'GPS & Supervisor Rounds',
     value: 'Real-Time Accountability',
-    desc: 'Field supervisors conduct unannounced visits to all client sites. Guards submit GPS-verified attendance check-ins. Clients receive a dedicated point-of-contact reachable 24/7 for any service issue.',
+    desc: 'Security supervisors conduct unannounced visits to all client sites. Guards submit GPS-verified attendance check-ins. Clients receive a dedicated point-of-contact reachable 24/7 for any service issue.',
   },
   {
     icon: '⚡',

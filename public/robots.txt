@@ -1,8 +1,9 @@
-﻿User-agent: *
+User-agent: *
 Allow: /
 
-# Disallow admin panel
+# Disallow private paths & APIs
 Disallow: /admin/
+Disallow: /api/
 
 # Sitemap
 Sitemap: https://www.scoutxsecurity.com/sitemap.xml

@@ -9,12 +9,16 @@ import AnimatedStats from '@/components/AnimatedStats';
 import FadeIn from '@/components/FadeIn';
 
 export const metadata = {
-  title: 'Top Security Guard Services in Ghaziabad, Noida & Delhi NCR',
+  title: 'Top Security Guard & Housekeeping Services in Ghaziabad, Noida & Delhi NCR',
   description:
-    'ScoutX Protection Group — PSARA-licensed security guard company in Ghaziabad. Police-verified guards for societies, offices, factories, banks & events. Get a free quote today.',
+    'ScoutX Protection Group — PSARA-licensed security guard, housekeeping & detective agency in Ghaziabad, Noida & Delhi NCR. Police-verified guards for societies, offices, factories & events.',
   alternates: { canonical: 'https://www.scoutxsecurity.com' },
   openGraph: {
+    title: 'Top Security Guard & Housekeeping Services in Ghaziabad, Noida & Delhi NCR',
+    description: 'ScoutX Protection Group — PSARA-licensed security guards, housekeeping & detective services across Delhi NCR.',
     url: 'https://www.scoutxsecurity.com',
+    siteName: 'ScoutX Protection Group',
+    type: 'website',
   }
 };
 
@@ -59,9 +63,9 @@ const services = [
   {
     num: '05',
     icon: '📋',
-    title: 'FIELD SUPERVISOR',
+    title: 'SECURITY SUPERVISOR',
     desc: 'Dedicated on-site or mobile supervisors to manage guard deployment, conduct night checks, and ensure 100% adherence to SLAs and protocols.',
-    href: '/services/field-supervisor',
+    href: '/services/security-supervisor',
   },
   {
     num: '06',
@@ -76,6 +80,20 @@ const services = [
     title: 'BOUNCER',
     desc: 'Highly trained bouncers for crowd management, conflict de-escalation, and VIP venues. Intimidating presence with a focus on safe crowd control.',
     href: '/services/bouncer',
+  },
+  {
+    num: '08',
+    icon: '🧹',
+    title: 'HOUSEKEEPING SERVICES',
+    desc: 'Professional housekeeping and sanitation staff for offices, societies, hospitals, and commercial sites. Daily maintenance and deep cleaning.',
+    href: '/services/housekeeping-services',
+  },
+  {
+    num: '09',
+    icon: '🕵️',
+    title: 'DETECTIVE SERVICES',
+    desc: 'Discreet background verification, corporate intelligence, asset tracing, and surveillance handled with utmost confidentiality.',
+    href: '/services/detective-services',
   },
 ];
 
@@ -130,7 +148,7 @@ export default function HomePage() {
         {/* Optimized Background Image */}
         <div className="absolute inset-0 z-0 opacity-100">
           <Image
-            src="/hero-bg-new.jpeg"
+            src="/home.jpeg"
             alt="Security Guards Background"
             fill
             priority

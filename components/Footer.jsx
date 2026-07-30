@@ -5,7 +5,8 @@ import LogoSVG from './LogoSVG';
 
 const services = [
   'Security Guard', 'Security Guard (Gunman)', 'Female Security Guard',
-  'Female Security Officer', 'Field Supervisor', 'PSO', 'Bouncer',
+  'Female Security Officer', 'Security Supervisor', 'PSO', 'Bouncer',
+  'Housekeeping Services', 'Detective Services',
 ];
 
 const quickLinks = [

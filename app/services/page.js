@@ -6,14 +6,14 @@ import WhyChooseUsSection from '@/components/WhyChooseUsSection';
 import FadeIn from '@/components/FadeIn';
 
 export const metadata = {
-  title: 'Our Security Services | Armed, Event & Corporate Guards in NCR',
+  title: 'Our Security & Facility Services | Armed Guards, Housekeeping & Detective in NCR',
   description:
-    'ScoutX offers armed guards, unarmed guards, bouncers, female security guards, event security, and mobile patrol services in Ghaziabad, Noida, Delhi NCR. PSARA licensed.',
+    'ScoutX offers security guards, gunman, bouncers, female security guards, security supervisors, housekeeping services, and private detective investigations across Ghaziabad, Noida & Delhi NCR.',
   alternates: { canonical: 'https://www.scoutxsecurity.com/services' },
   openGraph: {
     url: 'https://www.scoutxsecurity.com/services',
-    title: 'Security Services by ScoutX Protection Group',
-    description: 'Comprehensive security solutions including armed guards, bouncers, and event security in NCR.',
+    title: 'Security & Facility Services by ScoutX Protection Group',
+    description: 'Comprehensive security and housekeeping solutions including armed guards, bouncers, facility cleaning, and private investigations in NCR.',
   }
 };
 
@@ -51,9 +51,9 @@ const services = [
     ideal: ['Corporate Headquarters', 'VIP Escort', 'High-End Retail', 'Event Management'],
   },
   {
-    id: 'field-supervisor',
+    id: 'security-supervisor',
     icon: '📋',
-    title: 'Field Supervisor',
+    title: 'Security Supervisor',
     badge: 'Quality Control',
     desc: 'Dedicated on-site or mobile supervisors that manage guard deployment, conduct surprise night checks, and ensure 100% adherence to SLAs and protocols across all your facilities.',
     ideal: ['Multiple Facility Management', 'Large Campuses', 'Industrial Parks', 'Night Shift Monitoring'],
@@ -74,11 +74,47 @@ const services = [
     desc: 'Physically fit, professionally trained bouncers for crowd management, conflict de-escalation, and VIP area protection. Our bouncers are trained in verbal judo and conflict resolution.',
     ideal: ['Nightclubs & Pubs', 'High-Profile Events', 'Concert Venues', 'Private VIP Functions'],
   },
+  {
+    id: 'housekeeping-services',
+    icon: '🧹',
+    title: 'Housekeeping Services',
+    badge: 'Facility Cleaning',
+    desc: 'Professional housekeeping and sanitation staff for corporate offices, residential societies, hospitals, and commercial sites. Comprehensive facility maintenance and hygiene management.',
+    ideal: ['Corporate Offices', 'Residential Societies', 'Hospitals & Clinics', 'Shopping Malls'],
+  },
+  {
+    id: 'detective-services',
+    icon: '🕵️',
+    title: 'Detective Services',
+    badge: 'Confidential Investigation',
+    desc: 'Discreet background verification, corporate intelligence, asset tracing, and surveillance services handled by experienced private investigators with utmost confidentiality.',
+    ideal: ['Corporate Background Checks', 'Pre/Post-Matrimonial Checks', 'Fraud Investigation', 'Surveillance'],
+  },
 ];
 
 export default function ServicesPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'ItemList',
+            name: 'Services Offered by ScoutX Protection Group',
+            itemListElement: services.map((s, index) => ({
+              '@type': 'ListItem',
+              position: index + 1,
+              item: {
+                '@type': 'Service',
+                name: s.title,
+                description: s.desc,
+                url: `https://www.scoutxsecurity.com/services/${s.id}`,
+              },
+            })),
+          }),
+        }}
+      />
       {/* Hero */}
       <section className="relative pt-32 pb-20 px-4 sm:px-6 overflow-hidden" style={{ background: 'linear-gradient(135deg, #0A0F1F, #111827)' }}>
         <div className="absolute inset-0 tactical-grid opacity-30" />
