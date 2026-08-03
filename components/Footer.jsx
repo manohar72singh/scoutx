@@ -151,11 +151,33 @@ export default function Footer() {
 
       {/* Bottom bar */}
       <div className="border-t border-[rgba(192,192,192,0.07)]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex flex-col sm:flex-row justify-between items-center gap-2 text-xs text-[#A8A8A8]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex flex-col md:flex-row justify-between items-center gap-3 text-xs text-[#A8A8A8]">
           <p>© {new Date().getFullYear()} ScoutX Protection Group Pvt. Ltd. All rights reserved.</p>
-          <div className="flex items-center gap-4">
+          <div className="flex flex-wrap items-center gap-3">
             <Link href="/admin/login" className="hover:text-white transition-colors">Admin</Link>
-            <span>PSARA Licensed | Police Verified Guards</span>
+            <span className="hidden sm:inline text-[#2E6FBF]">•</span>
+            <span className="hidden sm:inline">PSARA Licensed</span>
+            <span className="text-[#2E6FBF]">•</span>
+            <a
+              href="https://quantyrotechnologies.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#0A0F1F] border border-[#2E6FBF]/30 hover:border-[#4A8FD4] shadow-[0_0_10px_rgba(46,111,191,0.15)] hover:shadow-[0_0_20px_rgba(74,143,212,0.35)] transition-all duration-300 group hover:-translate-y-0.5"
+            >
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#25D366] opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#25D366]"></span>
+              </span>
+              <span className="text-[11px] text-[#A8A8A8] group-hover:text-[#E8E8E8] transition-colors">
+                Designed & Developed by
+              </span>
+              <span className="font-heading text-xs font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-[#E8E8E8] to-[#4A8FD4] group-hover:from-white group-hover:to-[#60A5FA] transition-all">
+                Quantyro Technologies
+              </span>
+              <svg className="w-3.5 h-3.5 text-[#4A8FD4] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+            </a>
           </div>
         </div>
       </div>
