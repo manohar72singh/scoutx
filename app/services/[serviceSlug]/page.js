@@ -264,22 +264,50 @@ export default async function ServiceDetailedPage({ params }) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'Service',
-            serviceType: svc.title,
-            provider: {
-              '@type': 'LocalBusiness',
-              name: 'ScoutX Protection Group Pvt. Ltd.',
-              url: 'https://www.scoutxsecurity.com',
+          __html: JSON.stringify([
+            {
+              '@context': 'https://schema.org',
+              '@type': 'Service',
+              name: svc.title,
+              serviceType: svc.title,
+              provider: {
+                '@type': 'LocalBusiness',
+                name: 'ScoutX Protection Group Pvt. Ltd.',
+                url: 'https://www.scoutxsecurity.com',
+                telephone: '+91-8682066666',
+              },
+              areaServed: {
+                '@type': 'State',
+                name: 'Delhi NCR',
+              },
+              description: svc.description,
+              url: `https://www.scoutxsecurity.com/services/${resolvedParams.serviceSlug}`,
             },
-            areaServed: {
-              '@type': 'State',
-              name: 'Delhi NCR',
+            {
+              '@context': 'https://schema.org',
+              '@type': 'BreadcrumbList',
+              itemListElement: [
+                {
+                  '@type': 'ListItem',
+                  position: 1,
+                  name: 'Home',
+                  item: 'https://www.scoutxsecurity.com',
+                },
+                {
+                  '@type': 'ListItem',
+                  position: 2,
+                  name: 'Services',
+                  item: 'https://www.scoutxsecurity.com/services',
+                },
+                {
+                  '@type': 'ListItem',
+                  position: 3,
+                  name: svc.title,
+                  item: `https://www.scoutxsecurity.com/services/${resolvedParams.serviceSlug}`,
+                },
+              ],
             },
-            description: svc.desc,
-            url: `https://www.scoutxsecurity.com/services/${resolvedParams.serviceSlug}`
-          }),
+          ]),
         }}
       />
       {/* Hero */}

@@ -71,6 +71,29 @@ const industries = [
 export default function IndustriesPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+              {
+                '@type': 'ListItem',
+                position: 1,
+                name: 'Home',
+                item: 'https://www.scoutxsecurity.com',
+              },
+              {
+                '@type': 'ListItem',
+                position: 2,
+                name: 'Industries We Serve',
+                item: 'https://www.scoutxsecurity.com/industries',
+              },
+            ],
+          }),
+        }}
+      />
       {/* Hero */}
       <section className="relative pt-32 pb-20 px-4 sm:px-6 overflow-hidden" style={{ background: 'linear-gradient(135deg, #0A0F1F, #111827)' }}>
         <div className="absolute inset-0 tactical-grid opacity-30" />

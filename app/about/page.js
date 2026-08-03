@@ -28,6 +28,45 @@ const values = [
 export default function AboutPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify([
+            {
+              '@context': 'https://schema.org',
+              '@type': 'AboutPage',
+              name: 'About ScoutX Protection Group',
+              description: 'Our founding story, mission, leadership, and commitment to PSARA-compliant security.',
+              url: 'https://www.scoutxsecurity.com/about',
+              mainEntity: {
+                '@type': 'SecurityService',
+                name: 'ScoutX Protection Group Pvt. Ltd.',
+                url: 'https://www.scoutxsecurity.com',
+                telephone: '+91-8682066666',
+                email: 'scoutxsecurity@gmail.com',
+              },
+            },
+            {
+              '@context': 'https://schema.org',
+              '@type': 'BreadcrumbList',
+              itemListElement: [
+                {
+                  '@type': 'ListItem',
+                  position: 1,
+                  name: 'Home',
+                  item: 'https://www.scoutxsecurity.com',
+                },
+                {
+                  '@type': 'ListItem',
+                  position: 2,
+                  name: 'About Us',
+                  item: 'https://www.scoutxsecurity.com/about',
+                },
+              ],
+            },
+          ]),
+        }}
+      />
       {/* Page Hero */}
       <section className="relative w-full overflow-hidden min-h-[60vh] flex items-center justify-center pt-32 pb-20 px-4 sm:px-6">
         {/* Background Image */}

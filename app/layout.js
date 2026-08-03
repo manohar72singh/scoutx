@@ -25,6 +25,15 @@ export const metadata = {
     'industrial security ghaziabad',
     'bouncers for events NCR',
   ],
+  icons: {
+    icon: [
+      { url: '/icon.png', type: 'image/png' },
+      { url: '/icon-192.png', sizes: '192x192', type: 'image/png' },
+      { url: '/icon-512.png', sizes: '512x512', type: 'image/png' },
+    ],
+    shortcut: '/favicon.ico',
+    apple: '/apple-icon.png',
+  },
   openGraph: {
     title: 'ScoutX Protection Group | Security Guard & Housekeeping Services in Ghaziabad NCR',
     description:

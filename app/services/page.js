@@ -98,21 +98,38 @@ export default function ServicesPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'ItemList',
-            name: 'Services Offered by ScoutX Protection Group',
-            itemListElement: services.map((s, index) => ({
-              '@type': 'ListItem',
-              position: index + 1,
-              item: {
-                '@type': 'Service',
+          __html: JSON.stringify([
+            {
+              '@context': 'https://schema.org',
+              '@type': 'BreadcrumbList',
+              itemListElement: [
+                {
+                  '@type': 'ListItem',
+                  position: 1,
+                  name: 'Home',
+                  item: 'https://www.scoutxsecurity.com',
+                },
+                {
+                  '@type': 'ListItem',
+                  position: 2,
+                  name: 'Services',
+                  item: 'https://www.scoutxsecurity.com/services',
+                },
+              ],
+            },
+            {
+              '@context': 'https://schema.org',
+              '@type': 'ItemList',
+              name: 'Security & Facility Management Services',
+              url: 'https://www.scoutxsecurity.com/services',
+              itemListElement: services.map((s, idx) => ({
+                '@type': 'ListItem',
+                position: idx + 1,
                 name: s.title,
-                description: s.desc,
                 url: `https://www.scoutxsecurity.com/services/${s.id}`,
-              },
-            })),
-          }),
+              })),
+            },
+          ]),
         }}
       />
       {/* Hero */}

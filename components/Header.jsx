@@ -6,10 +6,10 @@ import Link from 'next/link';
 import LogoSVG from './LogoSVG';
 
 const navLinks = [
-  { label: 'Home',          href: '/' },
-  { label: 'About',         href: '/about' },
-  { 
-    label: 'Services',      
+  { label: 'Home', href: '/' },
+  { label: 'About', href: '/about' },
+  {
+    label: 'Services',
     href: '/services',
     dropdown: [
       { label: 'Security Guard', href: '/services/security-guard' },
@@ -23,10 +23,10 @@ const navLinks = [
       { label: 'Detective Services', href: '/services/detective-services' },
     ]
   },
-  { label: 'Industries',    href: '/industries' },
-  { label: 'Gallery',       href: '/gallery' },
-  { label: 'Careers',       href: '/careers' },
-  { label: 'Contact',       href: '/contact' },
+  { label: 'Industries', href: '/industries' },
+  { label: 'Gallery', href: '/gallery' },
+  { label: 'Careers', href: '/careers' },
+  { label: 'Contact', href: '/contact' },
 ];
 
 export default function Header() {
@@ -48,11 +48,10 @@ export default function Header() {
 
   return (
     <header
-      className={`sticky top-0 left-0 right-0 z-[60] transition-all duration-300 ${
-        scrolled
+      className={`sticky top-0 left-0 right-0 z-[60] transition-all duration-300 ${scrolled
           ? 'bg-[#0A0F1F]/95 backdrop-blur-md shadow-[0_2px_20px_rgba(0,0,0,0.5)] border-b border-[rgba(192,192,192,0.1)]'
           : 'bg-transparent'
-      }`}
+        }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between h-16 md:h-20">
@@ -88,7 +87,7 @@ export default function Header() {
                   )}
                   <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-[#2E6FBF] group-hover:w-full transition-all duration-300" />
                 </Link>
-                
+
                 {/* Desktop Dropdown */}
                 {link.dropdown && (
                   <div className="absolute top-full left-0 w-56 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top-left -translate-y-2 group-hover:translate-y-0 z-50">
@@ -134,9 +133,8 @@ export default function Header() {
 
       {/* Mobile Menu */}
       <div
-        className={`lg:hidden transition-all duration-300 overflow-hidden ${
-          menuOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'
-        }`}
+        className={`lg:hidden transition-all duration-300 overflow-hidden ${menuOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'
+          }`}
         style={{ background: 'rgba(10,15,31,0.98)', backdropFilter: 'blur(16px)', borderTop: '1px solid rgba(192,192,192,0.1)' }}
       >
         <nav className="px-4 py-4 flex flex-col gap-1" aria-label="Mobile navigation">
@@ -151,10 +149,10 @@ export default function Header() {
                     <span className="w-1 h-1 rounded-full bg-[#2E6FBF]" />
                     {link.label}
                   </div>
-                  <svg 
-                    className={`w-4 h-4 transition-transform duration-300 ${activeDropdown === link.label ? 'rotate-180 text-white' : ''}`} 
-                    fill="none" 
-                    stroke="currentColor" 
+                  <svg
+                    className={`w-4 h-4 transition-transform duration-300 ${activeDropdown === link.label ? 'rotate-180 text-white' : ''}`}
+                    fill="none"
+                    stroke="currentColor"
                     viewBox="0 0 24 24"
                   >
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
@@ -170,13 +168,12 @@ export default function Header() {
                   {link.label}
                 </Link>
               )}
-              
+
               {/* Mobile Submenu (Toggleable) */}
               {link.dropdown && (
-                <div 
-                  className={`pl-8 flex flex-col gap-1 border-l border-[#2E6FBF]/20 ml-5 overflow-hidden transition-all duration-300 ${
-                    activeDropdown === link.label ? 'max-h-96 mt-1 opacity-100' : 'max-h-0 opacity-0'
-                  }`}
+                <div
+                  className={`pl-8 flex flex-col gap-1 border-l border-[#2E6FBF]/20 ml-5 overflow-hidden transition-all duration-300 ${activeDropdown === link.label ? 'max-h-96 mt-1 opacity-100' : 'max-h-0 opacity-0'
+                    }`}
                 >
                   {link.dropdown.map((sublink) => (
                     <Link

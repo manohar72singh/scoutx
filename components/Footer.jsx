@@ -10,14 +10,14 @@ const services = [
 ];
 
 const quickLinks = [
-  { label: 'Home',          href: '/' },
-  { label: 'About Us',      href: '/about' },
-  { label: 'Services',      href: '/services' },
-  { label: 'Industries',    href: '/industries' },
+  { label: 'Home', href: '/' },
+  { label: 'About Us', href: '/about' },
+  { label: 'Services', href: '/services' },
+  { label: 'Industries', href: '/industries' },
   { label: 'Why Choose Us', href: '/why-choose-us' },
-  { label: 'Gallery',       href: '/gallery' },
-  { label: 'Careers',       href: '/careers' },
-  { label: 'Contact',       href: '/contact' },
+  { label: 'Gallery', href: '/gallery' },
+  { label: 'Careers', href: '/careers' },
+  { label: 'Contact', href: '/contact' },
 ];
 
 export default function Footer() {
@@ -107,12 +107,18 @@ export default function Footer() {
                 <svg className="w-4 h-4 text-[#2E6FBF] shrink-0" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
                 </svg>
-                <div className="text-sm">
-                  <a href="tel:+918682066666" className="text-[#A8A8A8] hover:text-white transition-colors block">
-                    Ashok Choudhary: +91 86820 66666
+                <div className="text-sm grid grid-cols-[auto_1fr] gap-x-2 gap-y-1">
+                  <a href="tel:+918682066666" className="text-[#A8A8A8] hover:text-white transition-colors whitespace-nowrap">
+                    Ashok Choudhary:
                   </a>
-                  <a href="tel:+917611865555" className="text-[#A8A8A8] hover:text-white transition-colors block">
-                    Anil Choudhary: +91 76118 65555
+                  <a href="tel:+918682066666" className="text-[#A8A8A8] hover:text-white transition-colors whitespace-nowrap">
+                    +91 86820 66666
+                  </a>
+                  <a href="tel:+917611865555" className="text-[#A8A8A8] hover:text-white transition-colors whitespace-nowrap">
+                    Anil Choudhary:
+                  </a>
+                  <a href="tel:+917611865555" className="text-[#A8A8A8] hover:text-white transition-colors whitespace-nowrap">
+                    +91 76118 65555
                   </a>
                 </div>
               </div>

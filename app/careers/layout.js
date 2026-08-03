@@ -12,5 +12,32 @@ export const metadata = {
 };
 
 export default function CareersLayout({ children }) {
-  return children;
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+              {
+                '@type': 'ListItem',
+                position: 1,
+                name: 'Home',
+                item: 'https://www.scoutxsecurity.com',
+              },
+              {
+                '@type': 'ListItem',
+                position: 2,
+                name: 'Careers',
+                item: 'https://www.scoutxsecurity.com/careers',
+              },
+            ],
+          }),
+        }}
+      />
+      {children}
+    </>
+  );
 }
