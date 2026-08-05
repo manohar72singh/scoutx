@@ -6,4 +6,4 @@ Disallow: /admin/
 Disallow: /api/
 
 # Sitemap
-Sitemap: https://www.scoutxsecurity.com/sitemap.xml
+Sitemap: https://scoutxsecurity.com/sitemap.xml

@@ -3,11 +3,11 @@
 export const metadata = {
   title: 'Careers | Security Guard & Housekeeping Jobs in NCR',
   description: 'Join ScoutX Protection Group. We are hiring professional security guards, PSOs, bouncers, supervisors, housekeeping staff, and private detectives in Ghaziabad, Noida, and Delhi NCR.',
-  alternates: { canonical: 'https://www.scoutxsecurity.com/careers' },
+  alternates: { canonical: 'https://scoutxsecurity.com/careers' },
   openGraph: {
     title: 'Careers at ScoutX Protection Group | Apply Now',
     description: 'We are hiring professional security guards, PSOs, bouncers, supervisors, housekeeping staff, and private detectives in NCR. Apply now!',
-    url: 'https://www.scoutxsecurity.com/careers',
+    url: 'https://scoutxsecurity.com/careers',
   },
 };
 
@@ -25,13 +25,13 @@ export default function CareersLayout({ children }) {
                 '@type': 'ListItem',
                 position: 1,
                 name: 'Home',
-                item: 'https://www.scoutxsecurity.com',
+                item: 'https://scoutxsecurity.com',
               },
               {
                 '@type': 'ListItem',
                 position: 2,
                 name: 'Careers',
-                item: 'https://www.scoutxsecurity.com/careers',
+                item: 'https://scoutxsecurity.com/careers',
               },
             ],
           }),

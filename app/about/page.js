@@ -10,9 +10,9 @@ export const metadata = {
   title: 'About Us | ScoutX Protection Group in NCR',
   description:
     'Learn about ScoutX Protection Group Pvt. Ltd. — our founding story, mission, leadership, and commitment to PSARA-compliant security in Ghaziabad and Delhi NCR.',
-  alternates: { canonical: 'https://www.scoutxsecurity.com/about' },
+  alternates: { canonical: 'https://scoutxsecurity.com/about' },
   openGraph: {
-    url: 'https://www.scoutxsecurity.com/about',
+    url: 'https://scoutxsecurity.com/about',
     title: 'About ScoutX Protection Group',
     description: 'Our founding story, mission, leadership, and commitment to PSARA-compliant security.',
   }
@@ -37,11 +37,11 @@ export default function AboutPage() {
               '@type': 'AboutPage',
               name: 'About ScoutX Protection Group',
               description: 'Our founding story, mission, leadership, and commitment to PSARA-compliant security.',
-              url: 'https://www.scoutxsecurity.com/about',
+              url: 'https://scoutxsecurity.com/about',
               mainEntity: {
                 '@type': 'SecurityService',
                 name: 'ScoutX Protection Group Pvt. Ltd.',
-                url: 'https://www.scoutxsecurity.com',
+                url: 'https://scoutxsecurity.com',
                 telephone: '+91-8682066666',
                 email: 'scoutxsecurity@gmail.com',
               },
@@ -54,13 +54,13 @@ export default function AboutPage() {
                   '@type': 'ListItem',
                   position: 1,
                   name: 'Home',
-                  item: 'https://www.scoutxsecurity.com',
+                  item: 'https://scoutxsecurity.com',
                 },
                 {
                   '@type': 'ListItem',
                   position: 2,
                   name: 'About Us',
-                  item: 'https://www.scoutxsecurity.com/about',
+                  item: 'https://scoutxsecurity.com/about',
                 },
               ],
             },

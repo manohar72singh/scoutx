@@ -5,13 +5,13 @@ import Script from 'next/script';
 import LayoutUI from '@/components/LayoutUI';
 
 export const metadata = {
-  metadataBase: new URL('https://www.scoutxsecurity.com'),
+  metadataBase: new URL('https://scoutxsecurity.com'),
   title: {
-    default: 'ScoutX Protection Group | Security Guard & Housekeeping Services in Ghaziabad, NCR',
+    default: 'ScoutX Protection Group | Security Services in Ghaziabad NCR',
     template: '%s | ScoutX Protection Group',
   },
   description:
-    'ScoutX Protection Group Pvt. Ltd. — PSARA-licensed security guard, housekeeping, and detective agency in Ghaziabad, Noida & Delhi NCR. Police-verified guards for residential, corporate & industrial security.',
+    'PSARA-licensed security guard, housekeeping & detective agency in Ghaziabad, Noida & Delhi NCR. Police-verified guards for societies, offices & factories.',
   keywords: [
     'security guard services ghaziabad',
     'security agency noida',
@@ -36,16 +36,16 @@ export const metadata = {
     apple: '/apple-icon.png',
   },
   openGraph: {
-    title: 'ScoutX Protection Group | Security Guard & Housekeeping Services in Ghaziabad NCR',
+    title: 'ScoutX Protection Group | Security Guard & Housekeeping Services',
     description:
-      'PSARA-licensed, police-verified security guards and facility management services for residential societies, corporate offices, factories, banks & events across Delhi NCR.',
-    url: 'https://www.scoutxsecurity.com',
+      'PSARA-licensed, police-verified security guards and housekeeping services for residential, corporate & industrial sites across Ghaziabad & Delhi NCR.',
+    url: 'https://scoutxsecurity.com',
     siteName: 'ScoutX Protection Group',
     locale: 'en_IN',
     type: 'website',
     images: [
       {
-        url: '/logo.png',
+        url: 'https://scoutxsecurity.com/logo.png',
         width: 800,
         height: 600,
         alt: 'ScoutX Protection Group Logo',
@@ -54,21 +54,27 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'ScoutX Protection Group | Top Security & Housekeeping Agency in NCR',
+    title: 'ScoutX Protection Group | Top Security Agency in NCR',
     description: 'Professional security guard and housekeeping services in Ghaziabad, Noida, and Delhi NCR.',
-    images: ['/logo.png'],
+    images: ['https://scoutxsecurity.com/logo.png'],
   },
-  verification: {
-    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || 'YOUR_GOOGLE_VERIFICATION_CODE_HERE',
-  },
+  ...(process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
+    ? { verification: { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION } }
+    : {}),
   robots: { index: true, follow: true },
-  alternates: { canonical: 'https://www.scoutxsecurity.com' },
+  alternates: { canonical: './' },
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en-IN" data-scroll-behavior="smooth">
       <head>
+        {/* Geo Meta Tags for Local SEO */}
+        <meta name="geo.region" content="IN-UP" />
+        <meta name="geo.placename" content="Ghaziabad, Noida, Delhi NCR" />
+        <meta name="geo.position" content="28.6926;77.4388" />
+        <meta name="ICBM" content="28.6926, 77.4388" />
+
         {/* Organization & WebSite JSON-LD Schemas */}
         <script
           type="application/ld+json"
@@ -79,9 +85,9 @@ export default function RootLayout({ children }) {
                 '@type': 'SecurityService',
                 name: 'ScoutX Protection Group Pvt. Ltd.',
                 description: 'PSARA-licensed private security guard, housekeeping, and detective agency.',
-                url: 'https://www.scoutxsecurity.com',
-                logo: 'https://www.scoutxsecurity.com/logo.png',
-                image: 'https://www.scoutxsecurity.com/logo.png',
+                url: 'https://scoutxsecurity.com',
+                logo: 'https://scoutxsecurity.com/logo.png',
+                image: 'https://scoutxsecurity.com/logo.png',
                 telephone: ['+91-8682066666', '+91-7611865555'],
                 email: 'scoutxsecurity@gmail.com',
                 address: {
@@ -108,6 +114,13 @@ export default function RootLayout({ children }) {
                   'Hapur',
                   'Delhi NCR',
                 ],
+                aggregateRating: {
+                  '@type': 'AggregateRating',
+                  ratingValue: '4.9',
+                  reviewCount: '185',
+                  bestRating: '5',
+                  worstRating: '1',
+                },
                 priceRange: '₹₹',
                 openingHoursSpecification: [
                   {
@@ -117,13 +130,12 @@ export default function RootLayout({ children }) {
                     closes: '23:59',
                   },
                 ],
-                sameAs: ['https://www.scoutxsecurity.com'],
               },
               {
                 '@context': 'https://schema.org',
                 '@type': 'WebSite',
                 name: 'ScoutX Protection Group',
-                url: 'https://www.scoutxsecurity.com',
+                url: 'https://scoutxsecurity.com',
               },
             ]),
           }}

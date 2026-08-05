@@ -6,9 +6,9 @@ export const metadata = {
   title: 'Why Choose ScoutX | PSARA Licensed Security Guards in NCR',
   description:
     'Discover why ScoutX Protection Group is Ghaziabad\'s most trusted security agency. PSARA license, police verification, 160+ hours training, and GPS tracking.',
-  alternates: { canonical: 'https://www.scoutxsecurity.com/why-choose-us' },
+  alternates: { canonical: 'https://scoutxsecurity.com/why-choose-us' },
   openGraph: {
-    url: 'https://www.scoutxsecurity.com/why-choose-us',
+    url: 'https://scoutxsecurity.com/why-choose-us',
     title: 'Why Choose ScoutX Protection Group?',
     description: '100% PSARA licensed, Police verified, and professionally trained security guards in NCR.',
   }
@@ -80,13 +80,13 @@ export default function WhyChooseUsPage() {
                 '@type': 'ListItem',
                 position: 1,
                 name: 'Home',
-                item: 'https://www.scoutxsecurity.com',
+                item: 'https://scoutxsecurity.com',
               },
               {
                 '@type': 'ListItem',
                 position: 2,
                 name: 'Why Choose Us',
-                item: 'https://www.scoutxsecurity.com/why-choose-us',
+                item: 'https://scoutxsecurity.com/why-choose-us',
               },
             ],
           }),

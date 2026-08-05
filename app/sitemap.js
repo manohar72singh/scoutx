@@ -1,7 +1,7 @@
 // app/sitemap.js — Dynamic sitemap for Google Search Console indexing
 
 export default function sitemap() {
-  const baseUrl = 'https://www.scoutxsecurity.com';
+  const baseUrl = 'https://scoutxsecurity.com';
   const now = new Date();
 
   const staticPages = [

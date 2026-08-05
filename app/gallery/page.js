@@ -8,9 +8,9 @@ import FadeIn from '@/components/FadeIn';
 export const metadata = {
   title: 'Gallery | ScoutX Guards in Action in NCR',
   description: 'See ScoutX Protection Group\'s guards in action — on duty at residential societies, corporate offices, industrial sites, and events across Delhi NCR.',
-  alternates: { canonical: 'https://www.scoutxsecurity.com/gallery' },
+  alternates: { canonical: 'https://scoutxsecurity.com/gallery' },
   openGraph: {
-    url: 'https://www.scoutxsecurity.com/gallery',
+    url: 'https://scoutxsecurity.com/gallery',
     title: 'ScoutX Security Guard Gallery',
     description: 'Photos of our professional security guards on duty across NCR.',
   }
@@ -42,13 +42,13 @@ export default function GalleryPage() {
                 '@type': 'ListItem',
                 position: 1,
                 name: 'Home',
-                item: 'https://www.scoutxsecurity.com',
+                item: 'https://scoutxsecurity.com',
               },
               {
                 '@type': 'ListItem',
                 position: 2,
                 name: 'Gallery',
-                item: 'https://www.scoutxsecurity.com/gallery',
+                item: 'https://scoutxsecurity.com/gallery',
               },
             ],
           }),
@@ -84,12 +84,12 @@ export default function GalleryPage() {
                 {/* Image or Placeholder */}
                 {item.img ? (
                   <div className="h-56 relative overflow-hidden">
-                    <Image 
-                      src={item.img} 
-                      alt={item.label} 
-                      fill 
+                    <Image
+                      src={item.img}
+                      alt={item.label}
+                      fill
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      className="object-cover object-center transition-transform duration-300 group-hover:scale-105" 
+                      className="object-cover object-center transition-transform duration-300 group-hover:scale-105"
                     />
                   </div>
                 ) : (

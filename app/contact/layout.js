@@ -3,11 +3,11 @@
 export const metadata = {
   title: 'Contact Us | Get a Free Security Quote',
   description: 'Contact ScoutX Protection Group for PSARA-licensed security guards in Ghaziabad and NCR. Request a free quote for residential, corporate, or event security today.',
-  alternates: { canonical: 'https://www.scoutxsecurity.com/contact' },
+  alternates: { canonical: 'https://scoutxsecurity.com/contact' },
   openGraph: {
     title: 'Contact ScoutX Protection Group | Get a Quote',
     description: 'Looking for reliable security guards in NCR? Contact us today for a free assessment and quote.',
-    url: 'https://www.scoutxsecurity.com/contact',
+    url: 'https://scoutxsecurity.com/contact',
   },
 };
 
@@ -23,7 +23,7 @@ export default function ContactLayout({ children }) {
               '@type': 'ContactPage',
               name: 'Contact ScoutX Protection Group',
               description: 'Request a free security quote or contact our security management team in Ghaziabad & Delhi NCR.',
-              url: 'https://www.scoutxsecurity.com/contact',
+              url: 'https://scoutxsecurity.com/contact',
               mainEntity: {
                 '@type': 'SecurityService',
                 name: 'ScoutX Protection Group Pvt. Ltd.',
@@ -47,13 +47,13 @@ export default function ContactLayout({ children }) {
                   '@type': 'ListItem',
                   position: 1,
                   name: 'Home',
-                  item: 'https://www.scoutxsecurity.com',
+                  item: 'https://scoutxsecurity.com',
                 },
                 {
                   '@type': 'ListItem',
                   position: 2,
                   name: 'Contact Us',
-                  item: 'https://www.scoutxsecurity.com/contact',
+                  item: 'https://scoutxsecurity.com/contact',
                 },
               ],
             },

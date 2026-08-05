@@ -94,9 +94,9 @@ export async function generateMetadata({ params }) {
   return {
     title: city.meta_title,
     description: city.meta_desc,
-    alternates: { canonical: `https://www.scoutxsecurity.com/${resolvedParams.citySlug}` },
+    alternates: { canonical: `https://scoutxsecurity.com/${resolvedParams.citySlug}` },
     openGraph: {
-      url: `https://www.scoutxsecurity.com/${resolvedParams.citySlug}`,
+      url: `https://scoutxsecurity.com/${resolvedParams.citySlug}`,
       title: city.meta_title,
       description: city.meta_desc,
     }
@@ -119,7 +119,7 @@ export default async function CityPage({ params }) {
               '@type': 'LocalBusiness',
               name: `ScoutX Protection Group ${city.name}`,
               description: city.meta_desc,
-              url: `https://www.scoutxsecurity.com/${resolvedParams.citySlug}`,
+              url: `https://scoutxsecurity.com/${resolvedParams.citySlug}`,
               telephone: '+91-8682066666',
               areaServed: city.name,
               address: {
@@ -137,13 +137,13 @@ export default async function CityPage({ params }) {
                   '@type': 'ListItem',
                   position: 1,
                   name: 'Home',
-                  item: 'https://www.scoutxsecurity.com'
+                  item: 'https://scoutxsecurity.com'
                 },
                 {
                   '@type': 'ListItem',
                   position: 2,
                   name: `Security Guards in ${city.name}`,
-                  item: `https://www.scoutxsecurity.com/${resolvedParams.citySlug}`
+                  item: `https://scoutxsecurity.com/${resolvedParams.citySlug}`
                 }
               ]
             }
@@ -194,7 +194,7 @@ export default async function CityPage({ params }) {
 
           {/* CTA / Lead Form Area */}
           <div className="grid md:grid-cols-2 gap-12 items-start mb-12">
-            
+
             {/* Left Col: Info */}
             <div className="space-y-8">
               <div>
@@ -202,33 +202,33 @@ export default async function CityPage({ params }) {
                   Areas &amp; Sectors We Cover in {city.name}
                 </h3>
                 <ul className="space-y-2">
-                {city.industries.map((ind) => (
-                  <li key={ind} className="flex items-center gap-3 text-[#D0D0D0] text-sm">
-                    <span className="w-5 h-5 rounded-full flex items-center justify-center shrink-0 text-xs" style={{ background: 'rgba(46,111,191,0.2)', color: '#4A8FD4' }}>✓</span>
-                    {ind}
-                  </li>
+                  {city.industries.map((ind) => (
+                    <li key={ind} className="flex items-center gap-3 text-[#D0D0D0] text-sm">
+                      <span className="w-5 h-5 rounded-full flex items-center justify-center shrink-0 text-xs" style={{ background: 'rgba(46,111,191,0.2)', color: '#4A8FD4' }}>✓</span>
+                      {ind}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="space-y-4">
+                <h3 className="font-heading text-lg font-bold uppercase text-[#E8E8E8] mb-4">Why Choose ScoutX in {city.name}?</h3>
+                {[
+                  'Local knowledge of key premises and risk areas',
+                  'Fast deployment — guards ready within 24–48 hours',
+                  'Dedicated supervisor for your site',
+                  'WhatsApp contact for instant communication',
+                  'Competitive monthly rates with no hidden charges',
+                ].map((p) => (
+                  <div key={p} className="flex gap-3 text-[#A8A8A8] text-sm">
+                    <span className="text-[#2E6FBF] mt-0.5">→</span>
+                    {p}
+                  </div>
                 ))}
-              </ul>
+              </div>
             </div>
-            <div className="space-y-4">
-              <h3 className="font-heading text-lg font-bold uppercase text-[#E8E8E8] mb-4">Why Choose ScoutX in {city.name}?</h3>
-              {[
-                'Local knowledge of key premises and risk areas',
-                'Fast deployment — guards ready within 24–48 hours',
-                'Dedicated supervisor for your site',
-                'WhatsApp contact for instant communication',
-                'Competitive monthly rates with no hidden charges',
-              ].map((p) => (
-                <div key={p} className="flex gap-3 text-[#A8A8A8] text-sm">
-                  <span className="text-[#2E6FBF] mt-0.5">→</span>
-                  {p}
-                </div>
-              ))}
-            </div>
-          </div>
-            
-          {/* Right Col: Lead Capture Form */}
-          <div className="sticky top-24">
+
+            {/* Right Col: Lead Capture Form */}
+            <div className="sticky top-24">
               <CityLeadForm cityName={city.name} />
             </div>
           </div>

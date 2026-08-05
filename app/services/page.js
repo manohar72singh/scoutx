@@ -9,9 +9,9 @@ export const metadata = {
   title: 'Our Security & Facility Services | Armed Guards, Housekeeping & Detective in NCR',
   description:
     'ScoutX offers security guards, gunman, bouncers, female security guards, security supervisors, housekeeping services, and private detective investigations across Ghaziabad, Noida & Delhi NCR.',
-  alternates: { canonical: 'https://www.scoutxsecurity.com/services' },
+  alternates: { canonical: 'https://scoutxsecurity.com/services' },
   openGraph: {
-    url: 'https://www.scoutxsecurity.com/services',
+    url: 'https://scoutxsecurity.com/services',
     title: 'Security & Facility Services by ScoutX Protection Group',
     description: 'Comprehensive security and housekeeping solutions including armed guards, bouncers, facility cleaning, and private investigations in NCR.',
   }
@@ -107,13 +107,13 @@ export default function ServicesPage() {
                   '@type': 'ListItem',
                   position: 1,
                   name: 'Home',
-                  item: 'https://www.scoutxsecurity.com',
+                  item: 'https://scoutxsecurity.com',
                 },
                 {
                   '@type': 'ListItem',
                   position: 2,
                   name: 'Services',
-                  item: 'https://www.scoutxsecurity.com/services',
+                  item: 'https://scoutxsecurity.com/services',
                 },
               ],
             },
@@ -121,12 +121,12 @@ export default function ServicesPage() {
               '@context': 'https://schema.org',
               '@type': 'ItemList',
               name: 'Security & Facility Management Services',
-              url: 'https://www.scoutxsecurity.com/services',
+              url: 'https://scoutxsecurity.com/services',
               itemListElement: services.map((s, idx) => ({
                 '@type': 'ListItem',
                 position: idx + 1,
                 name: s.title,
-                url: `https://www.scoutxsecurity.com/services/${s.id}`,
+                url: `https://scoutxsecurity.com/services/${s.id}`,
               })),
             },
           ]),
@@ -153,10 +153,10 @@ export default function ServicesPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {services.map((svc, idx) => (
               <FadeIn key={svc.id} delay={idx * 0.1} direction="up" className="h-full">
-                <ServiceCard 
-                  icon={svc.icon} 
-                  title={svc.title} 
-                  badge={svc.badge} 
+                <ServiceCard
+                  icon={svc.icon}
+                  title={svc.title}
+                  badge={svc.badge}
                   link={`/services/${svc.id}`}
                   linkText="View Details"
                 >

@@ -8,9 +8,9 @@ export const metadata = {
   title: 'Industries We Serve | Residential, Corporate & Industrial Security',
   description:
     'ScoutX provides security guards for residential societies, corporate offices, factories, banks, hospitals, malls, and events in Ghaziabad, Noida, Delhi NCR.',
-  alternates: { canonical: 'https://www.scoutxsecurity.com/industries' },
+  alternates: { canonical: 'https://scoutxsecurity.com/industries' },
   openGraph: {
-    url: 'https://www.scoutxsecurity.com/industries',
+    url: 'https://scoutxsecurity.com/industries',
     title: 'Industries Secured by ScoutX',
     description: 'Specialized security guard services for residential, commercial, industrial, and institutional sectors in NCR.',
   }
@@ -82,13 +82,13 @@ export default function IndustriesPage() {
                 '@type': 'ListItem',
                 position: 1,
                 name: 'Home',
-                item: 'https://www.scoutxsecurity.com',
+                item: 'https://scoutxsecurity.com',
               },
               {
                 '@type': 'ListItem',
                 position: 2,
                 name: 'Industries We Serve',
-                item: 'https://www.scoutxsecurity.com/industries',
+                item: 'https://scoutxsecurity.com/industries',
               },
             ],
           }),
@@ -115,9 +115,9 @@ export default function IndustriesPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {industries.map((ind, idx) => (
               <FadeIn key={ind.title} delay={idx * 0.1} direction="up" className="h-full">
-                <ServiceCard 
-                  icon={ind.icon} 
-                  title={ind.title} 
+                <ServiceCard
+                  icon={ind.icon}
+                  title={ind.title}
                   badge={ind.guards}
                   link="/contact#quote"
                   linkText="Get Custom Plan"

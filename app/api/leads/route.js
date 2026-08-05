@@ -163,7 +163,7 @@ export async function POST(req) {
             Providing uncompromised security services across India.
           </p>
           <div style="margin-top: 15px;">
-             <a href="https://www.scoutxsecurity.com" style="color: #4A8FD4; text-decoration: none; font-size: 13px; font-weight: bold; margin: 0 10px;">Visit Website</a> | 
+             <a href="https://scoutxsecurity.com" style="color: #4A8FD4; text-decoration: none; font-size: 13px; font-weight: bold; margin: 0 10px;">Visit Website</a> | 
              <a href="mailto:scoutxsecurity@gmail.com" style="color: #4A8FD4; text-decoration: none; font-size: 13px; font-weight: bold; margin: 0 10px;">Contact Support</a>
           </div>
         </div>
@@ -172,7 +172,7 @@ export async function POST(req) {
 
       // Send both emails asynchronously (we don't await so it doesn't slow down the response)
       transporter.sendMail(adminMailOptions).catch(err => console.error('Failed to send admin email:', err));
-      
+
       if (email) {
         const userMailOptions = {
           from: `"ScoutX Protection Group" <${process.env.SMTP_USER}>`,

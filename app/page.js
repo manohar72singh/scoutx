@@ -9,14 +9,14 @@ import AnimatedStats from '@/components/AnimatedStats';
 import FadeIn from '@/components/FadeIn';
 
 export const metadata = {
-  title: 'Top Security Guard & Housekeeping Services in Ghaziabad, Noida & Delhi NCR',
+  title: 'Security Guard & Housekeeping Services in Ghaziabad NCR',
   description:
-    'ScoutX Protection Group — PSARA-licensed security guard, housekeeping & detective agency in Ghaziabad, Noida & Delhi NCR. Police-verified guards for societies, offices, factories & events.',
-  alternates: { canonical: 'https://www.scoutxsecurity.com' },
+    'PSARA-licensed security guard & housekeeping agency in Ghaziabad, Noida & Delhi NCR. Police-verified guards for societies, offices & factories.',
+  alternates: { canonical: 'https://scoutxsecurity.com/' },
   openGraph: {
-    title: 'Top Security Guard & Housekeeping Services in Ghaziabad, Noida & Delhi NCR',
+    title: 'Security Guard & Housekeeping Services in Ghaziabad NCR',
     description: 'ScoutX Protection Group — PSARA-licensed security guards, housekeeping & detective services across Delhi NCR.',
-    url: 'https://www.scoutxsecurity.com',
+    url: 'https://scoutxsecurity.com',
     siteName: 'ScoutX Protection Group',
     type: 'website',
   }
@@ -163,6 +163,9 @@ export default function HomePage() {
           <div className="max-w-3xl">
             {/* Main headline */}
             <h1 className="font-heading font-black text-3xl sm:text-4xl md:text-5xl lg:text-5xl uppercase tracking-tighter leading-[0.95] mb-3">
+              <span className="text-[#2E6FBF] text-xs sm:text-sm font-semibold tracking-widest block mb-2 font-sans normal-case">
+                Top Security Guard &amp; Housekeeping Services in Ghaziabad, Noida &amp; Delhi NCR
+              </span>
               <span className="text-white block">SECURING WHAT</span>
               <span className="text-[#2E6FBF] block">MATTERS MOST</span>
               <span className="text-white block">TO YOU</span>
@@ -306,10 +309,112 @@ export default function HomePage() {
       {/* ── OUR CLIENTS ──────────────────────────────────────────────── */}
       <OurClientsSection />
 
-      {/* ── TESTIMONIALS ────────────────────────────────────────────── */}
-      <div className="bg-[#0A0F1F] border-y border-[#1A2235]">
-        <TestimonialsSection />
-      </div>
+      {/* ── FAQ SECTION & FAQPage SCHEMA ────────────────────────────────── */}
+      <section className="py-24 px-4 sm:px-6 bg-[#050914] border-t border-[#1A2235]">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'FAQPage',
+              mainEntity: [
+                {
+                  '@type': 'Question',
+                  name: 'What security guard services does ScoutX Protection Group provide in Ghaziabad & NCR?',
+                  acceptedAnswer: {
+                    '@type': 'Answer',
+                    text: 'ScoutX Protection Group provides 100% police-verified security guards, armed gunmen, female security guards, security supervisors, PSOs, event bouncers, housekeeping staff, and detective services across Ghaziabad, Noida & Delhi NCR.',
+                  },
+                },
+                {
+                  '@type': 'Question',
+                  name: 'Is ScoutX Protection Group a PSARA-licensed security agency?',
+                  acceptedAnswer: {
+                    '@type': 'Answer',
+                    text: 'Yes, ScoutX Protection Group Pvt. Ltd. is a PSARA-licensed private security agency operating strictly under government regulations in Uttar Pradesh and Delhi NCR.',
+                  },
+                },
+                {
+                  '@type': 'Question',
+                  name: 'Are all security guards police-verified?',
+                  acceptedAnswer: {
+                    '@type': 'Answer',
+                    text: 'Yes, 100% of our security personnel undergo strict police verification, background screening, and comprehensive security protocol training before on-site deployment.',
+                  },
+                },
+                {
+                  '@type': 'Question',
+                  name: 'How quickly can security guards be deployed to our location?',
+                  acceptedAnswer: {
+                    '@type': 'Answer',
+                    text: 'We can deploy trained security guards to residential societies, corporate offices, factories, or events within 24 to 48 hours of initial consultation.',
+                  },
+                },
+                {
+                  '@type': 'Question',
+                  name: 'Which areas in Delhi NCR do you cover?',
+                  acceptedAnswer: {
+                    '@type': 'Answer',
+                    text: 'We provide security guard services across Ghaziabad, Noida, Greater Noida, Delhi, Gurgaon, Faridabad, Meerut, Hapur, and surrounding Delhi NCR regions.',
+                  },
+                },
+              ],
+            }),
+          }}
+        />
+
+        <div className="max-w-4xl mx-auto">
+          <FadeIn className="text-center mb-16">
+            <span className="text-[#2E6FBF] text-xs font-bold uppercase tracking-[0.2em]">FREQUENTLY ASKED QUESTIONS</span>
+            <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl font-black uppercase mt-2 mb-4 leading-tight">
+              EVERYTHING YOU NEED TO KNOW ABOUT <br />
+              <span className="text-[#2E6FBF]">SCOUTX SECURITY SERVICES</span>
+            </h2>
+            <p className="text-[#A8A8A8] text-sm max-w-2xl mx-auto">
+              Got questions about PSARA licensing, guard deployment, or police verification? We have answers.
+            </p>
+          </FadeIn>
+
+          <div className="space-y-4">
+            {[
+              {
+                q: 'What security guard services does ScoutX Protection Group provide in Ghaziabad & NCR?',
+                a: 'ScoutX Protection Group provides 100% police-verified security guards, armed gunmen, female security guards, security supervisors, PSOs (Personal Security Officers), event bouncers, housekeeping staff, and detective services across Ghaziabad, Noida, Delhi, Gurgaon, and NCR.',
+              },
+              {
+                q: 'Is ScoutX Protection Group a PSARA-licensed security agency?',
+                a: 'Yes, ScoutX Protection Group Pvt. Ltd. is a PSARA-licensed private security agency operating strictly under government regulations in Uttar Pradesh and Delhi NCR.',
+              },
+              {
+                q: 'Are all security guards police-verified?',
+                a: 'Yes, 100% of our security personnel undergo mandatory police background verification, physical fitness screening, address verification, and intensive pre-deployment security training.',
+              },
+              {
+                q: 'How quickly can security guards be deployed to our location?',
+                a: 'We can deploy trained security guards to residential societies, corporate offices, factories, or commercial sites within 24 to 48 hours of initial consultation. Emergency deployments can also be arranged.',
+              },
+              {
+                q: 'Which areas in Delhi NCR do you cover?',
+                a: 'We provide security guard and housekeeping services across Ghaziabad (Govindpuram, Indirapuram, Raj Nagar), Noida, Greater Noida, Delhi, Gurgaon, Faridabad, Meerut, Hapur, and surrounding NCR regions.',
+              },
+            ].map((faq, idx) => (
+              <FadeIn key={idx} delay={idx * 0.05} direction="up">
+                <details className="group bg-[#0A0F1F] border border-[#1A2235] rounded p-5 [&_summary::-webkit-details-marker]:hidden cursor-pointer hover:border-[#2E6FBF]/40 transition-colors">
+                  <summary className="flex items-center justify-between font-heading text-base font-bold text-white tracking-wide">
+                    <span>{faq.q}</span>
+                    <span className="ml-4 flex-shrink-0 text-[#2E6FBF] group-open:rotate-180 transition-transform duration-300 text-lg">
+                      ▼
+                    </span>
+                  </summary>
+                  <p className="text-[#8A93A6] text-xs sm:text-sm leading-relaxed mt-4 pt-4 border-t border-[#1A2235]">
+                    {faq.a}
+                  </p>
+                </details>
+              </FadeIn>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* ── CLOSING CTA ─────────────────────────────────────────────── */}
       <section className="py-24 px-4 sm:px-6 bg-[#050914] relative overflow-hidden">

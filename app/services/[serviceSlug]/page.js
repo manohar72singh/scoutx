@@ -245,9 +245,9 @@ export async function generateMetadata({ params }) {
   return {
     title: svc.metaTitle,
     description: svc.metaDesc,
-    alternates: { canonical: `https://www.scoutxsecurity.com/services/${resolvedParams.serviceSlug}` },
+    alternates: { canonical: `https://scoutxsecurity.com/services/${resolvedParams.serviceSlug}` },
     openGraph: {
-      url: `https://www.scoutxsecurity.com/services/${resolvedParams.serviceSlug}`,
+      url: `https://scoutxsecurity.com/services/${resolvedParams.serviceSlug}`,
       title: svc.metaTitle,
       description: svc.metaDesc,
     }
@@ -273,7 +273,7 @@ export default async function ServiceDetailedPage({ params }) {
               provider: {
                 '@type': 'LocalBusiness',
                 name: 'ScoutX Protection Group Pvt. Ltd.',
-                url: 'https://www.scoutxsecurity.com',
+                url: 'https://scoutxsecurity.com',
                 telephone: '+91-8682066666',
               },
               areaServed: {
@@ -281,7 +281,7 @@ export default async function ServiceDetailedPage({ params }) {
                 name: 'Delhi NCR',
               },
               description: svc.description,
-              url: `https://www.scoutxsecurity.com/services/${resolvedParams.serviceSlug}`,
+              url: `https://scoutxsecurity.com/services/${resolvedParams.serviceSlug}`,
             },
             {
               '@context': 'https://schema.org',
@@ -291,19 +291,19 @@ export default async function ServiceDetailedPage({ params }) {
                   '@type': 'ListItem',
                   position: 1,
                   name: 'Home',
-                  item: 'https://www.scoutxsecurity.com',
+                  item: 'https://scoutxsecurity.com',
                 },
                 {
                   '@type': 'ListItem',
                   position: 2,
                   name: 'Services',
-                  item: 'https://www.scoutxsecurity.com/services',
+                  item: 'https://scoutxsecurity.com/services',
                 },
                 {
                   '@type': 'ListItem',
                   position: 3,
                   name: svc.title,
-                  item: `https://www.scoutxsecurity.com/services/${resolvedParams.serviceSlug}`,
+                  item: `https://scoutxsecurity.com/services/${resolvedParams.serviceSlug}`,
                 },
               ],
             },
@@ -329,7 +329,7 @@ export default async function ServiceDetailedPage({ params }) {
       {/* Details Section */}
       <section className="py-20 px-4 sm:px-6" style={{ background: '#0B0B0D' }}>
         <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12 items-start">
-          
+
           {/* Main Content */}
           <div>
             <h2 className="font-heading text-3xl font-bold uppercase text-white mb-6">
