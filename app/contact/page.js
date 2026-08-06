@@ -5,8 +5,6 @@ import { useState } from 'react';
 import FadeIn from '@/components/FadeIn';
 
 export default function ContactPage() {
-  const API = '';
-
   // Quote form
   const [quoteForm, setQuoteForm] = useState({
     company_name: '', contact_person: '', phone: '', email: '',
@@ -33,7 +31,7 @@ export default function ContactPage() {
     setQuoteStatus('loading');
     setQuoteErrors([]);
     try {
-      const res = await fetch(`${API}/api/leads`, {
+      const res = await fetch('/api/leads', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(quoteForm),
@@ -57,7 +55,7 @@ export default function ContactPage() {
     setContactStatus('loading');
     // For the simple contact form, re-use leads endpoint with minimal fields
     try {
-      const res = await fetch(`${API}/api/leads`, {
+      const res = await fetch('/api/leads', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -94,7 +92,7 @@ export default function ContactPage() {
           </h1>
           <div className="chrome-divider max-w-xs mx-auto" />
           <p className="text-[#A8A8A8] text-lg max-w-2xl mx-auto mt-6">
-            Reach us via phone, WhatsApp, or email — or fill in the quote form below and we'll get back to you within 24 hours.
+            Reach us via phone, WhatsApp, or email — or fill in the quote form below and we&apos;ll get back to you within 24 hours.
           </p>
         </div>
       </section>

@@ -102,7 +102,7 @@ export default function WhyChooseUsPage() {
           </h1>
           <div className="chrome-divider max-w-xs mx-auto" />
           <p className="text-[#A8A8A8] text-lg max-w-2xl mx-auto mt-6">
-            When you hire a security agency, you're trusting them with your people, your assets, and your reputation. Here's what sets us apart.
+            When you hire a security agency, you&apos;re trusting them with your people, your assets, and your reputation. Here&apos;s what sets us apart.
           </p>
         </div>
       </section>

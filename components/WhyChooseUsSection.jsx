@@ -53,7 +53,7 @@ export default function WhyChooseUsSection() {
               <span className="text-[#2E6FBF]">A SECURITY PARTNER</span>
             </h2>
             <p className="text-[#A8A8A8] text-sm leading-relaxed mb-8">
-              In a crowded market of security agencies, the difference between a mediocre agency and a great one is invisible — until something goes wrong. ScoutX's process is built to make sure nothing does.
+              In a crowded market of security agencies, the difference between a mediocre agency and a great one is invisible — until something goes wrong. ScoutX&apos;s process is built to make sure nothing does.
             </p>
             
             <div className="border border-[#1A2235] bg-[#0A0F1F] p-5 rounded flex items-center gap-4 mb-8">

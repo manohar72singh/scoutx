@@ -1,7 +1,7 @@
 'use client';
 // app/admin/testimonials/page.js
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import AdminLayout from '@/components/AdminLayout';
 
 const empty = { client_name: '', client_company: '', quote_text: '', is_featured: false };
@@ -13,27 +13,26 @@ export default function AdminTestimonialsPage() {
   const [editing, setEditing] = useState(null);
   const [saving, setSaving] = useState(false);
   const [msg, setMsg] = useState('');
-  const API = '';
 
+  const fetchItems = useCallback(async () => {
+    try {
+      const res = await fetch('/api/admin/testimonials');
+      const data = await res.json();
+      if (data.success) setItems(data.data);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
 
-
-  const fetchItems = async () => {
-    setLoading(true);
-    const res = await fetch(`${API}/api/admin/testimonials`);
-    const data = await res.json();
-    if (data.success) setItems(data.data);
-    setLoading(false);
-  };
-
-  useEffect(() => { fetchItems(); }, []);
+  useEffect(() => { fetchItems(); }, [fetchItems]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSaving(true);
     const method = editing ? 'PUT' : 'POST';
     const url = editing
-      ? `${API}/api/admin/testimonials/${editing}`
-      : `${API}/api/admin/testimonials`;
+      ? `/api/admin/testimonials/${editing}`
+      : '/api/admin/testimonials';
     const res = await fetch(url, {
       method,
       headers: { 'Content-Type': 'application/json' },
@@ -47,7 +46,7 @@ export default function AdminTestimonialsPage() {
 
   const deleteItem = async (id) => {
     if (!confirm('Delete this testimonial?')) return;
-    await fetch(`${API}/api/admin/testimonials/${id}`, {
+    await fetch(`/api/admin/testimonials/${id}`, {
       method: 'DELETE'
     });
     fetchItems();
@@ -123,7 +122,7 @@ export default function AdminTestimonialsPage() {
                       <button onClick={() => deleteItem(item.id)} className="text-red-400 hover:text-red-300 text-xs font-heading uppercase">Del</button>
                     </div>
                   </div>
-                  <p className="text-[#A8A8A8] text-xs italic leading-relaxed line-clamp-2">"{item.quote_text}"</p>
+                  <p className="text-[#A8A8A8] text-xs italic leading-relaxed line-clamp-2">&quot;{item.quote_text}&quot;</p>
                 </div>
               ))}
             </div>

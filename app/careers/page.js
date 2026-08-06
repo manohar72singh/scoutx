@@ -76,7 +76,7 @@ export default function CareersPage() {
           </h1>
           <div className="chrome-divider max-w-xs mx-auto" />
           <p className="text-[#A8A8A8] text-lg max-w-2xl mx-auto mt-6">
-            Join India's most professional security team. We offer competitive pay, training, uniform, growth opportunities, and stable employment.
+            Join India&apos;s most professional security team. We offer competitive pay, training, uniform, growth opportunities, and stable employment.
           </p>
         </div>
       </section>
@@ -136,7 +136,7 @@ export default function CareersPage() {
 
             {status === 'success' && (
               <div className="mb-6 p-4 rounded-lg bg-green-900/30 border border-green-700/50 text-green-400 text-sm font-medium">
-                ✅ Application submitted successfully! We'll review your profile and contact you within 3 working days.
+                ✅ Application submitted successfully! We&apos;ll review your profile and contact you within 3 working days.
               </div>
             )}
             {status === 'error' && errors.length > 0 && (

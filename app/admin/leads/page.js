@@ -18,16 +18,18 @@ export default function AdminLeadsPage() {
   const limit = 20;
 
   const fetchLeads = useCallback(async () => {
-    setLoading(true);
-    const url = new URL('/api/admin/leads', window.location.origin);
-    url.searchParams.set('page', page);
-    url.searchParams.set('limit', limit);
-    if (filter) url.searchParams.set('status', filter);
-    if (search) url.searchParams.set('search', search);
-    const res = await fetch(url.toString());
-    const data = await res.json();
-    if (data.success) { setLeads(data.data); setTotal(data.total); }
-    setLoading(false);
+    try {
+      const url = new URL('/api/admin/leads', window.location.origin);
+      url.searchParams.set('page', String(page));
+      url.searchParams.set('limit', String(limit));
+      if (filter) url.searchParams.set('status', filter);
+      if (search) url.searchParams.set('search', search);
+      const res = await fetch(url.toString());
+      const data = await res.json();
+      if (data.success) { setLeads(data.data); setTotal(data.total); }
+    } finally {
+      setLoading(false);
+    }
   }, [page, filter, search]);
 
   useEffect(() => { fetchLeads(); }, [fetchLeads]);

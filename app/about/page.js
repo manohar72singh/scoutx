@@ -39,7 +39,7 @@ export default function AboutPage() {
               description: 'Our founding story, mission, leadership, and commitment to PSARA-compliant security.',
               url: 'https://scoutxsecurity.com/about',
               mainEntity: {
-                '@type': 'SecurityService',
+                '@type': 'LocalBusiness',
                 name: 'ScoutX Protection Group Pvt. Ltd.',
                 url: 'https://scoutxsecurity.com',
                 telephone: '+91-8682066666',

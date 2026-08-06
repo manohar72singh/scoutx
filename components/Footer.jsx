@@ -38,7 +38,7 @@ export default function Footer() {
               </div>
             </Link>
             <p className="text-[#A8A8A8] text-sm leading-relaxed mb-4">
-              India's trusted private security agency, providing PSARA-licensed, police-verified guards for residential, corporate, industrial, and event security.
+              India&apos;s trusted private security agency, providing PSARA-licensed, police-verified guards for residential, corporate, industrial, and event security.
             </p>
             {/* PSARA badge */}
             <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-[rgba(30,77,140,0.2)] border border-[rgba(46,111,191,0.3)] rounded text-xs font-heading uppercase tracking-wider text-[#4A8FD4]">

@@ -22,6 +22,7 @@ export default function sitemap() {
     'female-security-guard',
     'female-security-officer',
     'security-supervisor',
+    'field-supervisor',
     'pso',
     'bouncer',
     'housekeeping-services',

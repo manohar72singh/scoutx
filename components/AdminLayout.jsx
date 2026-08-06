@@ -25,7 +25,12 @@ export default function AdminLayout({ children }) {
       router.replace('/admin/login');
       return;
     }
-    if (user) setAdmin(JSON.parse(user));
+    try {
+      const parsed = JSON.parse(user);
+      queueMicrotask(() => setAdmin(parsed));
+    } catch {
+      router.replace('/admin/login');
+    }
   }, [router]);
 
   const logout = async () => {

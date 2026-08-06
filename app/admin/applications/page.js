@@ -1,7 +1,7 @@
 'use client';
 // app/admin/applications/page.js
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import AdminLayout from '@/components/AdminLayout';
 
 const STATUS_OPTIONS = ['new', 'reviewed', 'shortlisted', 'rejected', 'hired'];
@@ -13,24 +13,25 @@ export default function AdminApplicationsPage() {
   const [filter, setFilter] = useState('');
   const [page, setPage] = useState(1);
   const limit = 20;
-  const API = '';
 
-  const fetchApps = async () => {
-    setLoading(true);
-    const url = new URL(`${API}/api/admin/applications`, window.location.origin);
-    url.searchParams.set('page', page);
-    url.searchParams.set('limit', limit);
-    if (filter) url.searchParams.set('status', filter);
-    const res = await fetch(url.toString());
-    const data = await res.json();
-    if (data.success) { setApps(data.data); setTotal(data.total); }
-    setLoading(false);
-  };
+  const fetchApps = useCallback(async () => {
+    try {
+      const url = new URL('/api/admin/applications', window.location.origin);
+      url.searchParams.set('page', String(page));
+      url.searchParams.set('limit', String(limit));
+      if (filter) url.searchParams.set('status', filter);
+      const res = await fetch(url.toString());
+      const data = await res.json();
+      if (data.success) { setApps(data.data); setTotal(data.total); }
+    } finally {
+      setLoading(false);
+    }
+  }, [page, filter]);
 
-  useEffect(() => { fetchApps(); }, [page, filter]);
+  useEffect(() => { fetchApps(); }, [fetchApps]);
 
   const updateStatus = async (id, status) => {
-    await fetch(`${API}/api/admin/applications/${id}`, {
+    await fetch(`/api/admin/applications/${id}`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ status }),
@@ -88,7 +89,7 @@ export default function AdminApplicationsPage() {
                     <td>
                       {app.resume_file_path ? (
                         <a
-                          href={`${API}/uploads/resumes/${app.resume_file_path}`}
+                          href={`/uploads/resumes/${app.resume_file_path}`}
                           target="_blank" rel="noopener noreferrer"
                           className="text-[#4A8FD4] hover:underline text-xs flex items-center gap-1"
                         >

@@ -12,7 +12,7 @@ export const metadata = {
   title: 'Security Guard & Housekeeping Services in Ghaziabad NCR',
   description:
     'PSARA-licensed security guard & housekeeping agency in Ghaziabad, Noida & Delhi NCR. Police-verified guards for societies, offices & factories.',
-  alternates: { canonical: 'https://scoutxsecurity.com/' },
+  alternates: { canonical: 'https://scoutxsecurity.com' },
   openGraph: {
     title: 'Security Guard & Housekeeping Services in Ghaziabad NCR',
     description: 'ScoutX Protection Group — PSARA-licensed security guards, housekeeping & detective services across Delhi NCR.',

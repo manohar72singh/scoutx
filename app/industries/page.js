@@ -148,7 +148,7 @@ export default function IndustriesPage() {
         <FadeIn direction="up">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="font-heading text-4xl font-bold uppercase text-white mb-4">
-              Don't See Your Industry?
+              Don&apos;t See Your Industry?
             </h2>
             <p className="text-[rgba(255,255,255,0.8)] mb-6">We adapt to any environment. Contact us to discuss your specific security requirements.</p>
             <Link href="/contact#quote" className="inline-flex items-center gap-2 px-8 py-4 bg-white text-[#1E4D8C] font-heading font-bold text-base uppercase tracking-wider rounded-md hover:bg-[#0B0B0D] hover:text-white hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all duration-300">

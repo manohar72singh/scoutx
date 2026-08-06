@@ -93,7 +93,7 @@ export default function AdminDashboard() {
     <AdminLayout>
       <div className="mb-8">
         <h1 className="font-heading text-3xl font-bold uppercase text-white">Dashboard</h1>
-        <p className="text-[#A8A8A8] text-sm mt-1">Welcome back! Here's what's happening at ScoutX.</p>
+        <p className="text-[#A8A8A8] text-sm mt-1">Welcome back! Here&apos;s what&apos;s happening at ScoutX.</p>
       </div>
 
       {loading ? (
@@ -140,7 +140,7 @@ export default function AdminDashboard() {
               <Link href="/admin/leads?status=new" className="btn-primary text-sm px-4 py-2">View New Leads</Link>
               <Link href="/admin/applications?status=new" className="btn-secondary text-sm px-4 py-2">Review Applications</Link>
               <Link href="/admin/testimonials" className="btn-secondary text-sm px-4 py-2">Manage Testimonials</Link>
-              <a href="/api/admin/leads/export" className="btn-secondary text-sm px-4 py-2 flex items-center gap-2">
+              <a href="/api/admin/leads/export" download target="_blank" rel="noopener noreferrer" className="btn-secondary text-sm px-4 py-2 flex items-center gap-2">
                 📥 Export Leads CSV
               </a>
             </div>

@@ -4,6 +4,12 @@ import './globals.css';
 import Script from 'next/script';
 import LayoutUI from '@/components/LayoutUI';
 
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  themeColor: '#0A0F1F',
+};
+
 export const metadata = {
   metadataBase: new URL('https://scoutxsecurity.com'),
   title: {
@@ -62,7 +68,7 @@ export const metadata = {
     ? { verification: { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION } }
     : {}),
   robots: { index: true, follow: true },
-  alternates: { canonical: './' },
+  alternates: { canonical: 'https://scoutxsecurity.com' },
 };
 
 export default function RootLayout({ children }) {
@@ -83,6 +89,7 @@ export default function RootLayout({ children }) {
               {
                 '@context': 'https://schema.org',
                 '@type': 'SecurityService',
+                '@id': 'https://scoutxsecurity.com/#localbusiness',
                 name: 'ScoutX Protection Group Pvt. Ltd.',
                 description: 'PSARA-licensed private security guard, housekeeping, and detective agency.',
                 url: 'https://scoutxsecurity.com',
@@ -116,10 +123,10 @@ export default function RootLayout({ children }) {
                 ],
                 aggregateRating: {
                   '@type': 'AggregateRating',
-                  ratingValue: '4.9',
-                  reviewCount: '185',
-                  bestRating: '5',
-                  worstRating: '1',
+                  ratingValue: 4.9,
+                  reviewCount: 185,
+                  bestRating: 5,
+                  worstRating: 1,
                 },
                 priceRange: '₹₹',
                 openingHoursSpecification: [
@@ -134,6 +141,7 @@ export default function RootLayout({ children }) {
               {
                 '@context': 'https://schema.org',
                 '@type': 'WebSite',
+                '@id': 'https://scoutxsecurity.com/#website',
                 name: 'ScoutX Protection Group',
                 url: 'https://scoutxsecurity.com',
               },

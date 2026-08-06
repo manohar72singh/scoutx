@@ -25,7 +25,7 @@ export default function ContactLayout({ children }) {
               description: 'Request a free security quote or contact our security management team in Ghaziabad & Delhi NCR.',
               url: 'https://scoutxsecurity.com/contact',
               mainEntity: {
-                '@type': 'SecurityService',
+                '@type': 'LocalBusiness',
                 name: 'ScoutX Protection Group Pvt. Ltd.',
                 telephone: '+91-8682066666',
                 email: 'scoutxsecurity@gmail.com',

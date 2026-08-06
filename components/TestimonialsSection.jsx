@@ -62,11 +62,11 @@ export default function TestimonialsSection() {
               <div key={t.id} className="min-w-full px-2 md:px-4">
                 <div className="bg-[#111827] border border-[#1A2235] rounded-lg p-8 md:p-10 relative group hover:border-[#2E6FBF]/30 transition-colors">
                   {/* Big Quote Icon */}
-                  <div className="absolute top-6 right-8 text-7xl text-[#1E293B] font-serif leading-none opacity-50 group-hover:text-[#2E6FBF]/20 transition-colors">"</div>
+                  <div className="absolute top-6 right-8 text-7xl text-[#1E293B] font-serif leading-none opacity-50 group-hover:text-[#2E6FBF]/20 transition-colors">&quot;</div>
                   
                   <div className="relative z-10">
                     <p className="text-[#A8A8A8] text-base md:text-lg leading-relaxed italic mb-8">
-                      "{t.quote_text}"
+                      &quot;{t.quote_text}&quot;
                     </p>
                     <div className="flex items-center gap-4">
                       <div

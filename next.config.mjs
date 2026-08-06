@@ -1,7 +1,6 @@
-/** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Standalone output for VPS/Node.js deployment
-  // output: 'standalone', // Uncomment when deploying to VPS
+  // Ensure consistent clean URLs without trailing slashes to prevent redirect loops in GSC
+  trailingSlash: false,
 
   // Only allow images from trusted domains
   images: {
@@ -9,6 +8,18 @@ const nextConfig = {
       { protocol: 'https', hostname: 'res.cloudinary.com' },
       { protocol: 'https', hostname: 'images.unsplash.com' },
     ],
+  },
+
+  // Redirect www to non-www for SEO & Google Search Console consistency
+  async redirects() {
+    return [
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'www.scoutxsecurity.com' }],
+        destination: 'https://scoutxsecurity.com/:path*',
+        permanent: true,
+      },
+    ];
   },
 
   // Production-grade Security Headers
@@ -27,8 +38,8 @@ const nextConfig = {
           { key: 'X-XSS-Protection', value: '1; mode=block' },
           // Restrict browser features
           { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=()' },
-          // Force HTTPS (enable only when SSL is active)
-          // { key: 'Strict-Transport-Security', value: 'max-age=63072000; includeSubDomains; preload' },
+          // Force HTTPS
+          { key: 'Strict-Transport-Security', value: 'max-age=63072000; includeSubDomains; preload' },
         ],
       },
     ];

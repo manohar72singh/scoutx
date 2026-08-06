@@ -27,7 +27,7 @@ export default function TestimonialsClientPage() {
           {testimonials.map((t) => (
             <div key={t.id} className="testimonial-card">
               <div className="pt-6">
-                <p className="text-[#D0D0D0] leading-relaxed italic text-sm mb-6">"{t.quote_text}"</p>
+                <p className="text-[#D0D0D0] leading-relaxed italic text-sm mb-6">&quot;{t.quote_text}&quot;</p>
                 <div className="flex items-center gap-3">
                   <div
                     className="w-10 h-10 rounded-full flex items-center justify-center font-heading font-bold text-white text-sm shrink-0"
