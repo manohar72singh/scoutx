@@ -1,6 +1,9 @@
 // app/sitemap.js — Dynamic sitemap for Google Search Console indexing
+export const dynamic = 'force-dynamic';
 
-export default function sitemap() {
+import pool from '@/lib/db';
+
+export default async function sitemap() {
   const baseUrl = 'https://scoutxsecurity.com';
   const now = new Date();
 
@@ -22,7 +25,6 @@ export default function sitemap() {
     'female-security-guard',
     'female-security-officer',
     'security-supervisor',
-    'field-supervisor',
     'pso',
     'bouncer',
     'housekeeping-services',
@@ -50,5 +52,24 @@ export default function sitemap() {
     priority: 0.9,
   }));
 
-  return [...staticPages, ...servicePages, ...cityPages];
+  let blogPages = [];
+  try {
+    const [rows] = await pool.query(
+      `SELECT slug, updated_at FROM blog_posts WHERE status = 'published'`
+    );
+    blogPages = rows.map((post) => ({
+      url: `${baseUrl}/blog/${post.slug}`,
+      lastModified: post.updated_at,
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    }));
+  } catch (error) {
+    console.error('Sitemap: failed to load blog posts', error);
+  }
+
+  const blogIndex = [
+    { url: `${baseUrl}/blog`, lastModified: now, changeFrequency: 'weekly', priority: 0.8 },
+  ];
+
+  return [...staticPages, ...servicePages, ...cityPages, ...blogIndex, ...blogPages];
 }

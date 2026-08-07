@@ -121,13 +121,6 @@ export default function RootLayout({ children }) {
                   'Hapur',
                   'Delhi NCR',
                 ],
-                aggregateRating: {
-                  '@type': 'AggregateRating',
-                  ratingValue: 4.9,
-                  reviewCount: 185,
-                  bestRating: 5,
-                  worstRating: 1,
-                },
                 priceRange: '₹₹',
                 openingHoursSpecification: [
                   {

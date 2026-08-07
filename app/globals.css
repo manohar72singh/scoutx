@@ -342,3 +342,49 @@ h1, h2, h3, h4, h5, h6 {
   letter-spacing: 0.05em;
   text-transform: uppercase;
 }
+
+/* ── Blog rich-text content (admin editor + public post render) ──────────── */
+.blog-editor-content,
+.blog-content {
+  color: #D0D0D0;
+  line-height: 1.75;
+}
+.blog-editor-content { min-height: 280px; outline: none; }
+.blog-editor-content:focus { outline: none; }
+.blog-content { font-size: 1rem; counter-reset: blog-section; }
+.blog-content h2, .blog-editor-content h2 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #E8E8E8;
+  font-size: 1.4rem;
+  margin: 1.75rem 0 0.75rem;
+}
+.blog-content h2 { scroll-margin-top: 6rem; counter-increment: blog-section; }
+.blog-content h2::before {
+  content: counter(blog-section, decimal-leading-zero) ' ';
+  color: #2E6FBF;
+  margin-right: 0.4rem;
+}
+.blog-content h3, .blog-editor-content h3 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #E8E8E8;
+  font-size: 1.15rem;
+  margin: 1.5rem 0 0.6rem;
+}
+.blog-content h3 { scroll-margin-top: 6rem; }
+.blog-content p, .blog-editor-content p { margin: 0 0 1rem; }
+.blog-content ul, .blog-editor-content ul { list-style: disc; padding-left: 1.4rem; margin: 0 0 1rem; }
+.blog-content ol, .blog-editor-content ol { list-style: decimal; padding-left: 1.4rem; margin: 0 0 1rem; }
+.blog-content li, .blog-editor-content li { margin-bottom: 0.35rem; }
+.blog-content blockquote, .blog-editor-content blockquote {
+  border-left: 3px solid #2E6FBF;
+  padding-left: 1rem;
+  color: #A8A8A8;
+  font-style: italic;
+  margin: 1rem 0;
+}
+.blog-content a, .blog-editor-content a { color: #4A8FD4; text-decoration: underline; text-underline-offset: 2px; }
+.blog-content strong, .blog-editor-content strong { color: #F5F5F5; }

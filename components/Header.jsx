@@ -25,6 +25,7 @@ const navLinks = [
   },
   { label: 'Industries', href: '/industries' },
   { label: 'Gallery', href: '/gallery' },
+  { label: 'Blog', href: '/blog' },
   { label: 'Careers', href: '/careers' },
   { label: 'Contact', href: '/contact' },
 ];

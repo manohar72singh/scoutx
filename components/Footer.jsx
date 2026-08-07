@@ -16,6 +16,7 @@ const quickLinks = [
   { label: 'Industries', href: '/industries' },
   { label: 'Why Choose Us', href: '/why-choose-us' },
   { label: 'Gallery', href: '/gallery' },
+  { label: 'Blog', href: '/blog' },
   { label: 'Careers', href: '/careers' },
   { label: 'Contact', href: '/contact' },
 ];

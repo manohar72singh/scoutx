@@ -163,9 +163,9 @@ export default function HomePage() {
           <div className="max-w-3xl">
             {/* Main headline */}
             <h1 className="font-heading font-black text-3xl sm:text-4xl md:text-5xl lg:text-5xl uppercase tracking-tighter leading-[0.95] mb-3">
-              <span className="text-[#2E6FBF] text-xs sm:text-sm font-semibold tracking-widest block mb-2 font-sans normal-case">
+              {/* <span className="text-[#2E6FBF] text-xs sm:text-sm font-semibold tracking-widest block mb-2 font-sans normal-case">
                 Top Security Guard &amp; Housekeeping Services in Ghaziabad, Noida &amp; Delhi NCR
-              </span>
+              </span> */}
               <span className="text-white block">SECURING WHAT</span>
               <span className="text-[#2E6FBF] block">MATTERS MOST</span>
               <span className="text-white block">TO YOU</span>

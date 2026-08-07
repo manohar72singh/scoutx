@@ -118,27 +118,6 @@ const servicesData = {
     metaTitle: 'Security Supervisor | ScoutX Protection Group',
     metaDesc: 'Expert security supervisors to oversee guard deployments, conduct audits, and manage site security across Delhi NCR.',
   },
-  'field-supervisor': {
-    title: 'Security Supervisor',
-    badge: 'Quality Control',
-    icon: '📋',
-    heroSub: 'Dedicated on-site and mobile supervisors to ensure 100% SLA adherence.',
-    description: 'Security Supervisors act as the critical link between management and ground staff. They manage daily guard deployment, conduct surprise day and night checks, verify attendance and uniform compliance, and ensure all security protocols are followed flawlessly across multiple facilities.',
-    idealFor: [
-      'Multiple Facility Management',
-      'Large Campuses & Industrial Parks',
-      'Night Shift Monitoring',
-      'Multi-tenant Corporate Towers',
-    ],
-    duties: [
-      'Managing guard rosters and shifts',
-      'Conducting surprise audits and night checks',
-      'Liaising directly with client facility managers',
-      'Training guards on site-specific protocols',
-    ],
-    metaTitle: 'Security Supervisor | ScoutX Protection Group',
-    metaDesc: 'Expert security supervisors to oversee guard deployments, conduct audits, and manage site security across Delhi NCR.',
-  },
   'pso': {
     title: 'Personal Security Officer (PSO)',
     badge: 'Executive Protection',
