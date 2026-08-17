@@ -10,13 +10,29 @@ const nextConfig = {
     ],
   },
 
-  // Redirect www to non-www for SEO & Google Search Console consistency
+  // 301 Permanent Redirects for SEO & GSC 404 resolution
   async redirects() {
     return [
       {
         source: '/:path*',
         has: [{ type: 'host', value: 'www.scoutxsecurity.com' }],
         destination: 'https://scoutxsecurity.com/:path*',
+        permanent: true,
+      },
+      // Fix GSC 404 Not Found URLs
+      {
+        source: '/services/event-security',
+        destination: '/services/bouncer',
+        permanent: true,
+      },
+      {
+        source: '/services/unarmed-guards',
+        destination: '/services/security-guard',
+        permanent: true,
+      },
+      {
+        source: '/services/unarmed-security-guard',
+        destination: '/services/security-guard',
         permanent: true,
       },
     ];

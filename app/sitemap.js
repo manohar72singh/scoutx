@@ -17,6 +17,7 @@ export default async function sitemap() {
     { url: `${baseUrl}/testimonials`, lastModified: now, changeFrequency: 'weekly', priority: 0.7 },
     { url: `${baseUrl}/careers`, lastModified: now, changeFrequency: 'weekly', priority: 0.7 },
     { url: `${baseUrl}/contact`, lastModified: now, changeFrequency: 'monthly', priority: 0.9 },
+    { url: `${baseUrl}/html-sitemap`, lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
   ];
 
   const servicePages = [

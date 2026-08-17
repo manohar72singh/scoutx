@@ -17,10 +17,24 @@ const navLinks = [
       { label: 'Female Security Guard', href: '/services/female-security-guard' },
       { label: 'Female Security Officer', href: '/services/female-security-officer' },
       { label: 'Security Supervisor', href: '/services/security-supervisor' },
-      { label: 'PSO', href: '/services/pso' },
-      { label: 'Bouncer', href: '/services/bouncer' },
+      { label: 'PSO / VIP Protection', href: '/services/pso' },
+      { label: 'Bouncer Services', href: '/services/bouncer' },
       { label: 'Housekeeping Services', href: '/services/housekeeping-services' },
       { label: 'Detective Services', href: '/services/detective-services' },
+    ]
+  },
+  {
+    label: 'Locations',
+    href: '/#locations',
+    dropdown: [
+      { label: 'Ghaziabad', href: '/security-guards-ghaziabad' },
+      { label: 'Noida', href: '/security-guards-noida' },
+      { label: 'Greater Noida', href: '/security-guards-greater-noida' },
+      { label: 'Delhi', href: '/security-guards-delhi' },
+      { label: 'Gurgaon (Gurugram)', href: '/security-guards-gurgaon' },
+      { label: 'Faridabad', href: '/security-guards-faridabad' },
+      { label: 'Meerut', href: '/security-guards-meerut' },
+      { label: 'Hapur', href: '/security-guards-hapur' },
     ]
   },
   { label: 'Industries', href: '/industries' },
@@ -75,7 +89,7 @@ export default function Header() {
           {/* Desktop Nav */}
           <nav className="hidden lg:flex items-center gap-1" aria-label="Main navigation">
             {navLinks.map((link) => (
-              <div key={link.href} className="relative group">
+              <div key={link.label} className="relative group">
                 <Link
                   href={link.href}
                   className="px-3 py-2 font-heading text-sm font-medium uppercase tracking-wider text-[#C0C0C0] hover:text-white transition-colors duration-200 flex items-center gap-1"
@@ -91,13 +105,13 @@ export default function Header() {
 
                 {/* Desktop Dropdown */}
                 {link.dropdown && (
-                  <div className="absolute top-full left-0 w-56 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top-left -translate-y-2 group-hover:translate-y-0 z-50">
+                  <div className="absolute top-full left-0 w-60 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top-left -translate-y-2 group-hover:translate-y-0 z-50">
                     <div className="bg-[#0A0F1F] border border-[rgba(192,192,192,0.1)] rounded-md shadow-xl overflow-hidden backdrop-blur-md">
                       {link.dropdown.map((sublink) => (
                         <Link
                           key={sublink.href}
                           href={sublink.href}
-                          className="block px-4 py-3 text-sm font-heading tracking-wide text-[#C0C0C0] hover:text-white hover:bg-[#2E6FBF]/20 transition-colors border-b border-[rgba(192,192,192,0.05)] last:border-0"
+                          className="block px-4 py-2.5 text-sm font-heading tracking-wide text-[#C0C0C0] hover:text-white hover:bg-[#2E6FBF]/20 transition-colors border-b border-[rgba(192,192,192,0.05)] last:border-0"
                         >
                           {sublink.label}
                         </Link>
@@ -140,25 +154,43 @@ export default function Header() {
       >
         <nav className="px-4 py-4 flex flex-col gap-1" aria-label="Mobile navigation">
           {navLinks.map((link) => (
-            <div key={link.href} className="flex flex-col">
+            <div key={link.label} className="flex flex-col">
               {link.dropdown ? (
-                <button
-                  onClick={() => setActiveDropdown(activeDropdown === link.label ? null : link.label)}
-                  className="flex items-center justify-between px-4 py-3 font-heading text-base uppercase tracking-wider text-[#C0C0C0] hover:text-white hover:bg-[rgba(46,111,191,0.1)] rounded-lg transition-all w-full text-left"
-                >
-                  <div className="flex items-center gap-2">
-                    <span className="w-1 h-1 rounded-full bg-[#2E6FBF]" />
-                    {link.label}
-                  </div>
-                  <svg
-                    className={`w-4 h-4 transition-transform duration-300 ${activeDropdown === link.label ? 'rotate-180 text-white' : ''}`}
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
+                <div>
+                  <button
+                    onClick={() => setActiveDropdown(activeDropdown === link.label ? null : link.label)}
+                    className="flex items-center justify-between px-4 py-3 font-heading text-base uppercase tracking-wider text-[#C0C0C0] hover:text-white hover:bg-[rgba(46,111,191,0.1)] rounded-lg transition-all w-full text-left"
                   >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </button>
+                    <div className="flex items-center gap-2">
+                      <span className="w-1 h-1 rounded-full bg-[#2E6FBF]" />
+                      {link.label}
+                    </div>
+                    <svg
+                      className={`w-4 h-4 transition-transform duration-300 ${activeDropdown === link.label ? 'rotate-180 text-white' : ''}`}
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </button>
+                  {/* Mobile Submenu (Toggleable) */}
+                  <div
+                    className={`pl-8 flex flex-col gap-1 border-l border-[#2E6FBF]/20 ml-5 overflow-hidden transition-all duration-300 ${activeDropdown === link.label ? 'max-h-96 mt-1 opacity-100' : 'max-h-0 opacity-0'
+                      }`}
+                  >
+                    {link.dropdown.map((sublink) => (
+                      <Link
+                        key={sublink.href}
+                        href={sublink.href}
+                        onClick={() => setMenuOpen(false)}
+                        className="px-4 py-2 text-sm font-heading text-[#A8A8A8] hover:text-white hover:bg-[rgba(46,111,191,0.1)] rounded-lg transition-all"
+                      >
+                        {sublink.label}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
               ) : (
                 <Link
                   href={link.href}
@@ -168,25 +200,6 @@ export default function Header() {
                   <span className="w-1 h-1 rounded-full bg-[#2E6FBF]" />
                   {link.label}
                 </Link>
-              )}
-
-              {/* Mobile Submenu (Toggleable) */}
-              {link.dropdown && (
-                <div
-                  className={`pl-8 flex flex-col gap-1 border-l border-[#2E6FBF]/20 ml-5 overflow-hidden transition-all duration-300 ${activeDropdown === link.label ? 'max-h-96 mt-1 opacity-100' : 'max-h-0 opacity-0'
-                    }`}
-                >
-                  {link.dropdown.map((sublink) => (
-                    <Link
-                      key={sublink.href}
-                      href={sublink.href}
-                      onClick={() => setMenuOpen(false)}
-                      className="px-4 py-2 text-sm font-heading text-[#A8A8A8] hover:text-white hover:bg-[rgba(46,111,191,0.1)] rounded-lg transition-all"
-                    >
-                      {sublink.label}
-                    </Link>
-                  ))}
-                </div>
               )}
             </div>
           ))}

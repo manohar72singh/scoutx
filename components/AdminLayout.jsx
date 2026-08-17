@@ -12,6 +12,7 @@ const navItems = [
   { label: 'Applications', href: '/admin/applications', icon: '👷' },
   { label: 'Testimonials', href: '/admin/testimonials', icon: '⭐' },
   { label: 'Blog',         href: '/admin/blog',         icon: '📝' },
+  { label: 'Homepage CTA', href: '/admin/cta',          icon: '📢' },
   { label: 'Settings',     href: '/admin/settings',     icon: '⚙️' },
 ];
 

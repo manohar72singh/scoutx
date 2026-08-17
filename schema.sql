@@ -65,6 +65,26 @@ CREATE TABLE IF NOT EXISTS blog_posts (
   INDEX idx_slug (slug)
 );
 
+-- Homepage closing CTA section (admin-editable, single row)
+CREATE TABLE IF NOT EXISTS cta_content (
+  id INT PRIMARY KEY DEFAULT 1,
+  hero_image VARCHAR(255),
+  eyebrow_text VARCHAR(100),
+  heading_line1 VARCHAR(150),
+  heading_line2 VARCHAR(150),
+  description TEXT,
+  primary_btn_text VARCHAR(100),
+  primary_btn_link VARCHAR(255),
+  whatsapp_btn_text VARCHAR(100),
+  whatsapp_number VARCHAR(20),
+  phone1_label VARCHAR(100),
+  phone1_number VARCHAR(20),
+  phone2_label VARCHAR(100),
+  phone2_number VARCHAR(20),
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  CONSTRAINT single_row CHECK (id = 1)
+);
+
 -- Admin panel users
 CREATE TABLE IF NOT EXISTS admin_users (
   id INT PRIMARY KEY AUTO_INCREMENT,
@@ -76,7 +96,14 @@ CREATE TABLE IF NOT EXISTS admin_users (
 -- Seed: default admin (password: Admin@123 — change immediately after first login)
 -- Password hash generated with bcrypt rounds=10
 INSERT IGNORE INTO admin_users (username, password_hash)
-VALUES ('admin', '$2b$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi');
+VALUES ('scoutxsecurity@gmail.com', '$2b$10$9u3WNiDko6v2h.iklLX4NOGDGPz75UKLgkOonMxo0bAbbjG3KsmDK');
+
+-- Seed: default homepage CTA content (matches current hardcoded copy)
+INSERT IGNORE INTO cta_content (id, eyebrow_text, heading_line1, heading_line2, description, primary_btn_text, primary_btn_link, whatsapp_btn_text, whatsapp_number, phone1_label, phone1_number, phone2_label, phone2_number)
+VALUES (1, 'TAKE ACTION TODAY', 'SECURE YOUR PREMISES', 'STARTING TODAY',
+  'Get a customized security deployment plan within 24 hours. No obligation, no pushy sales — just an honest quote from our security experts.',
+  'GET A FREE QUOTE', '/contact#quote', 'WHATSAPP US', '918682066666',
+  'Ashok Choudhary', '+91 86820 66666', 'Anil Choudhary', '+91 76118 65555');
 
 -- Seed: sample testimonials
 INSERT IGNORE INTO testimonials (client_name, client_company, quote_text, is_featured) VALUES

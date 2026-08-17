@@ -57,11 +57,11 @@ export default function AdminLoginPage() {
 
           <form onSubmit={handleSubmit} className="space-y-4" noValidate>
             <div>
-              <label htmlFor="username" className="block text-[#C0C0C0] text-sm font-medium mb-1.5">Username</label>
+              <label htmlFor="username" className="block text-[#C0C0C0] text-sm font-medium mb-1.5">Username / Email</label>
               <input
                 id="username" name="username" type="text" required autoComplete="username"
                 value={form.username} onChange={(e) => setForm((f) => ({ ...f, username: e.target.value }))}
-                placeholder="admin"
+                placeholder="scoutxsecurity@gmail.com"
                 className="form-input"
               />
             </div>

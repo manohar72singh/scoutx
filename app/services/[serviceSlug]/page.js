@@ -4,12 +4,23 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import WhyChooseUsSection from '@/components/WhyChooseUsSection';
 
+const citiesList = [
+  { name: 'Ghaziabad', slug: 'security-guards-ghaziabad' },
+  { name: 'Noida', slug: 'security-guards-noida' },
+  { name: 'Greater Noida', slug: 'security-guards-greater-noida' },
+  { name: 'Delhi', slug: 'security-guards-delhi' },
+  { name: 'Gurgaon', slug: 'security-guards-gurgaon' },
+  { name: 'Faridabad', slug: 'security-guards-faridabad' },
+  { name: 'Meerut', slug: 'security-guards-meerut' },
+  { name: 'Hapur', slug: 'security-guards-hapur' },
+];
+
 const servicesData = {
   'security-guard': {
     title: 'Security Guard',
     badge: 'Most Popular',
     icon: '🛡️',
-    heroSub: 'Professional, police-verified watchmen and security guards for daily operations.',
+    heroSub: 'Professional, police-verified watchmen and security guards for daily operations across Delhi NCR.',
     description: 'Our security personnel form the backbone of day-to-day security at most commercial and residential sites. They are thoroughly vetted, physically fit, and trained in access control, visitor management, perimeter patrol, emergency response, and daily security reporting.',
     idealFor: [
       'Residential Societies & Gated Communities',
@@ -26,14 +37,28 @@ const servicesData = {
       'Monitoring CCTV feeds and reporting anomalies',
       'Enforcing site-specific safety protocols',
     ],
-    metaTitle: 'Security Guards | ScoutX Protection Group',
-    metaDesc: 'Professional security guards for residential societies, offices, and retail in Delhi NCR. 100% police verified and PSARA licensed.',
+    metaTitle: 'Security Guards in NCR | ScoutX Protection Group',
+    metaDesc: 'Professional security guards for residential societies, offices, and factories in Ghaziabad, Noida & Delhi NCR. 100% police verified and PSARA licensed.',
+    faqs: [
+      {
+        q: 'What training do ScoutX security guards undergo?',
+        a: 'Our guards complete 160+ hours of physical training, gate management, fire safety drill handling, emergency evacuation, and dispute de-escalation.'
+      },
+      {
+        q: 'Are guards deployed with proper uniforms and equipment?',
+        a: 'Yes, all guards are equipped with crisp company uniforms, lanyards, whistles, batons (where required), torches for night patrol, and visitor log registers.'
+      },
+      {
+        q: 'Can we replace a guard if we are unsatisfied with their performance?',
+        a: 'Yes, ScoutX offers immediate guard replacement within 24 hours with zero additional replacement charges.'
+      }
+    ]
   },
   'security-guard-gunman': {
     title: 'Security Guard (Gunman)',
     badge: 'High-Risk Premises',
     icon: '🎯',
-    heroSub: 'Licensed armed security personnel for high-value asset protection.',
+    heroSub: 'Licensed armed security personnel for high-value asset protection and bank security.',
     description: 'Our licensed armed security personnel are deployed at high-value and high-risk locations including banks, jewellery stores, cash-counting centres, and cash-in-transit operations. All armed guards hold valid firearms licenses under the Arms Act and are periodically re-trained in safe handling and de-escalation tactics.',
     idealFor: [
       'Banks & Financial Institutions',
@@ -51,12 +76,22 @@ const servicesData = {
     ],
     metaTitle: 'Armed Security Guards (Gunman) | ScoutX Protection Group',
     metaDesc: 'PSARA-licensed armed security guards in Delhi NCR, Noida & Ghaziabad for banks, cash transit, and high-value protection. Call for a quote.',
+    faqs: [
+      {
+        q: 'Do your armed guards have verified gun licenses?',
+        a: 'Yes, all our armed guards carry authentic, government-registered gun licenses validated by local police authorities.'
+      },
+      {
+        q: 'Are armed gunmen available for 24-hour bank and ATM security?',
+        a: 'Yes, we provide 12-hour and 24-hour armed guard shifts for banks, ATMs, and high-value showrooms.'
+      }
+    ]
   },
   'female-security-guard': {
     title: 'Female Security Guard',
     badge: 'Women Safety',
     icon: '👩‍✈️',
-    heroSub: 'Trained female security personnel for frisking, access control, and specialized roles.',
+    heroSub: 'Trained female security personnel for frisking, access control, and specialized roles in NCR.',
     description: 'Certain security roles legally and ethically require female personnel. We provide trained female security guards for frisking, access control at women-only areas, loss prevention in women\'s retail sections, and general security at hospitals, schools, and family-focused venues.',
     idealFor: [
       'Hospitals & Maternity Clinics',
@@ -72,14 +107,20 @@ const servicesData = {
       'Assisting women and children during emergencies',
       'Front-desk access control and visitor management',
     ],
-    metaTitle: 'Female Security Guards | ScoutX Protection Group',
+    metaTitle: 'Female Security Guards in NCR | ScoutX Protection Group',
     metaDesc: 'Trained female security guards for frisking, hospitals, schools, and corporate offices in Delhi NCR. Professional and PSARA licensed.',
+    faqs: [
+      {
+        q: 'Why are female security guards essential for corporate offices and hospitals?',
+        a: 'Female security guards ensure smooth compliance with mandatory frisking laws, provide security in ladies\' washroom zones, and increase comfort for female visitors and staff.'
+      }
+    ]
   },
   'female-security-officer': {
     title: 'Female Security Officer',
     badge: 'Supervision & VIP',
     icon: '💼',
-    heroSub: 'Experienced female officers for supervisory roles and sensitive environments.',
+    heroSub: 'Experienced female officers for supervisory roles and sensitive corporate environments.',
     description: 'Our Female Security Officers take on leadership, supervisory, and specialized roles in corporate, VIP, and high-end retail environments. They focus on maintaining strict compliance, providing superior guest management, and resolving complex security and personnel issues with grace and authority.',
     idealFor: [
       'Corporate Headquarters',
@@ -96,12 +137,18 @@ const servicesData = {
     ],
     metaTitle: 'Female Security Officer | ScoutX Protection Group',
     metaDesc: 'Experienced female security officers for supervisory roles, sensitive corporate environments, and VIP escorting in Delhi NCR.',
+    faqs: [
+      {
+        q: 'What distinguishes a Female Security Officer from a standard guard?',
+        a: 'Officers hold higher administrative qualifications, communication expertise, and leadership training to manage entire security rosters and VIP protocols.'
+      }
+    ]
   },
   'security-supervisor': {
     title: 'Security Supervisor',
     badge: 'Quality Control',
     icon: '📋',
-    heroSub: 'Dedicated on-site and mobile supervisors to ensure 100% SLA adherence.',
+    heroSub: 'Dedicated on-site and mobile supervisors to ensure 100% SLA adherence across sites.',
     description: 'Security Supervisors act as the critical link between management and ground staff. They manage daily guard deployment, conduct surprise day and night checks, verify attendance and uniform compliance, and ensure all security protocols are followed flawlessly across multiple facilities.',
     idealFor: [
       'Multiple Facility Management',
@@ -115,8 +162,14 @@ const servicesData = {
       'Liaising directly with client facility managers',
       'Training guards on site-specific protocols',
     ],
-    metaTitle: 'Security Supervisor | ScoutX Protection Group',
+    metaTitle: 'Security Supervisor Services | ScoutX Protection Group',
     metaDesc: 'Expert security supervisors to oversee guard deployments, conduct audits, and manage site security across Delhi NCR.',
+    faqs: [
+      {
+        q: 'Do you provide mobile patrol supervisors for night audits?',
+        a: 'Yes, our mobile patrol supervisors conduct scheduled and surprise midnight checks on all deployed guard posts.'
+      }
+    ]
   },
   'pso': {
     title: 'Personal Security Officer (PSO)',
@@ -137,15 +190,21 @@ const servicesData = {
       'Securing venues prior to the principal\'s arrival',
       'Mitigating and evading immediate threats',
     ],
-    metaTitle: 'Personal Security Officer (PSO) | ScoutX Protection Group',
-    metaDesc: 'Hire professional Personal Security Officers (PSO) in Delhi NCR. Armed and unarmed bodyguards for VIPs and executives.',
+    metaTitle: 'Personal Security Officer (PSO) Bodyguards | ScoutX',
+    metaDesc: 'Hire professional Personal Security Officers (PSO) in Delhi NCR. Armed and unarmed bodyguards for VIPs, executives, and high-profile events.',
+    faqs: [
+      {
+        q: 'Are PSOs trained in emergency defensive driving and evacuation?',
+        a: 'Yes, our elite PSOs receive training in convoy escort, defensive driving awareness, and immediate executive evacuation.'
+      }
+    ]
   },
   'bouncer': {
     title: 'Professional Bouncer',
     badge: 'Crowd Control',
     icon: '💪',
-    heroSub: 'Physically fit, well-trained bouncers for crowd management and VIP protection.',
-    description: 'We provide highly intimidating yet professional bouncers for crowd management, conflict de-escalation, and VIP area protection. Unlike untrained muscle, our bouncers are trained in "verbal judo" and conflict resolution — ensuring force is strictly used as the last resort to maintain a safe environment.',
+    heroSub: 'Physically fit, well-trained bouncers for crowd management and VIP events in NCR.',
+    description: 'We provide highly intimidating yet professional bouncers for crowd management, conflict de-escalation, and VIP area protection. Unlike untrained muscle, our bouncers are trained in conflict resolution — ensuring force is strictly used as the last resort to maintain a safe environment.',
     idealFor: [
       'Nightclubs, Pubs & Bars',
       'High-Profile Private Events',
@@ -160,8 +219,14 @@ const servicesData = {
       'Escorting unruly individuals off the premises',
       'Providing close protection for VIP guests',
     ],
-    metaTitle: 'Professional Bouncers & Crowd Control | ScoutX Protection Group',
-    metaDesc: 'Hire professional bouncers for nightclubs, events, and VIP protection in Delhi NCR. Trained in conflict resolution and crowd management.',
+    metaTitle: 'Professional Bouncers & Event Security | ScoutX Protection Group',
+    metaDesc: 'Hire professional bouncers for nightclubs, concerts, weddings, and VIP events in Delhi NCR. Trained in crowd control and de-escalation.',
+    faqs: [
+      {
+        q: 'Can we hire bouncers for a single-day wedding or corporate event in NCR?',
+        a: 'Yes, we provide flexible single-day, weekend, and multi-day bouncer teams for events, banquets, and concerts.'
+      }
+    ]
   },
   'housekeeping-services': {
     title: 'Housekeeping Services',
@@ -183,14 +248,20 @@ const servicesData = {
       'Glass, window, and furniture dusting',
       'Deep cleaning of common areas and pantries',
     ],
-    metaTitle: 'Housekeeping Services | ScoutX Protection Group',
+    metaTitle: 'Housekeeping Services in NCR | ScoutX Protection Group',
     metaDesc: 'Professional housekeeping services in Ghaziabad, Noida & Delhi NCR. Vetted and trained cleaning staff for offices, societies, and facilities.',
+    faqs: [
+      {
+        q: 'Do you provide cleaning chemicals and equipment with housekeeping staff?',
+        a: 'Yes, we offer complete housekeeping packages with manpower only or manpower plus industrial grade cleaning materials and tools.'
+      }
+    ]
   },
   'detective-services': {
     title: 'Detective Services',
     badge: 'Confidential Investigation',
     icon: '🕵️',
-    heroSub: 'Discreet background verification, corporate intelligence, and private investigations.',
+    heroSub: 'Discreet background verification, corporate intelligence, and private investigations in NCR.',
     description: 'Our private detective services provide confidential, thorough investigation solutions for corporate and individual clients. From pre-employment vetting and corporate espionage checks to pre-matrimonial investigations and asset tracing, our team delivers accurate, evidence-backed reports with absolute discretion.',
     idealFor: [
       'Corporate Pre-Employment Vetting',
@@ -206,8 +277,14 @@ const servicesData = {
       'Personal background verification and infidelity checks',
       'Compiling confidential, legally sound investigation reports',
     ],
-    metaTitle: 'Private Detective Services | ScoutX Protection Group',
+    metaTitle: 'Private Detective & Investigation Services | ScoutX',
     metaDesc: 'Confidential private detective and corporate investigation services in Delhi NCR. Background checks, surveillance, and fraud investigations.',
+    faqs: [
+      {
+        q: 'Is private investigation conducted legally and confidentially?',
+        a: 'Yes, our investigation protocols strictly protect client confidentiality and follow all legal evidentiary standards.'
+      }
+    ]
   }
 };
 
@@ -229,6 +306,8 @@ export async function generateMetadata({ params }) {
       url: `https://scoutxsecurity.com/services/${resolvedParams.serviceSlug}`,
       title: svc.metaTitle,
       description: svc.metaDesc,
+      siteName: 'ScoutX Protection Group',
+      type: 'website',
     }
   };
 }
@@ -237,6 +316,13 @@ export default async function ServiceDetailedPage({ params }) {
   const resolvedParams = await params;
   const svc = servicesData[resolvedParams.serviceSlug];
   if (!svc) notFound();
+
+  const serviceFaqs = svc.faqs || [
+    {
+      q: `How do I request ${svc.title} for my facility?`,
+      a: `Call ScoutX Protection Group at +91 86820 66666 or click 'Request Free Quote' on this page. We provide site audits and tailored pricing within 24 hours.`
+    }
+  ];
 
   return (
     <>
@@ -286,22 +372,49 @@ export default async function ServiceDetailedPage({ params }) {
                 },
               ],
             },
+            {
+              '@context': 'https://schema.org',
+              '@type': 'FAQPage',
+              mainEntity: serviceFaqs.map((faq) => ({
+                '@type': 'Question',
+                name: faq.q,
+                acceptedAnswer: {
+                  '@type': 'Answer',
+                  text: faq.a,
+                },
+              })),
+            },
           ]),
         }}
       />
+
       {/* Hero */}
       <section className="relative pt-32 pb-20 px-4 sm:px-6 overflow-hidden" style={{ background: 'linear-gradient(135deg, #0A0F1F, #111827)' }}>
         <div className="absolute inset-0 tactical-grid opacity-30" />
         <div className="relative z-10 max-w-4xl mx-auto text-center">
+          {/* Breadcrumb */}
+          <nav className="flex items-center justify-center gap-2 text-xs font-bold uppercase tracking-wider text-[#8A93A6] mb-6">
+            <Link href="/" className="hover:text-white transition-colors">Home</Link>
+            <span className="text-[#2A3550]">/</span>
+            <Link href="/services" className="hover:text-white transition-colors">Services</Link>
+            <span className="text-[#2A3550]">/</span>
+            <span className="text-[#4A8FD4]">{svc.title}</span>
+          </nav>
+
           <span className="section-label">{svc.icon} {svc.badge}</span>
           <h1 className="font-heading text-4xl md:text-6xl font-bold uppercase text-white mb-4">
             {svc.title}
           </h1>
           <div className="chrome-divider max-w-xs mx-auto" />
           <p className="text-[#A8A8A8] text-lg max-w-2xl mx-auto mt-6 mb-8">{svc.heroSub}</p>
-          <Link href="/contact#quote" className="btn-primary text-base px-8 py-4">
-            Request {svc.title}
-          </Link>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link href="/contact#quote" className="btn-primary text-base px-8 py-4">
+              Request {svc.title} Quote
+            </Link>
+            <a href="tel:+918682066666" className="btn-secondary text-base px-8 py-4">
+              📞 86820 66666
+            </a>
+          </div>
         </div>
       </section>
 
@@ -312,7 +425,7 @@ export default async function ServiceDetailedPage({ params }) {
           {/* Main Content */}
           <div>
             <h2 className="font-heading text-3xl font-bold uppercase text-white mb-6">
-              About This <span className="text-gradient-steel">Service</span>
+              About Our <span className="text-gradient-steel">{svc.title}</span>
             </h2>
             <p className="text-[#A8A8A8] leading-relaxed mb-8 text-lg">
               {svc.description}
@@ -347,7 +460,7 @@ export default async function ServiceDetailedPage({ params }) {
               <div className="text-center mb-4">
                 <span className="text-2xl">🛡️</span>
                 <h4 className="font-heading font-bold text-white uppercase text-sm mt-2">PSARA Compliant</h4>
-                <p className="text-[#A8A8A8] text-xs mt-1">Legally sound security deployment</p>
+                <p className="text-[#A8A8A8] text-xs mt-1">Legally sound security deployment across UP &amp; Delhi NCR</p>
               </div>
               <a href="tel:+918682066666" className="w-full btn-secondary text-sm flex justify-center py-3">
                 Call for Consultation
@@ -358,23 +471,106 @@ export default async function ServiceDetailedPage({ params }) {
         </div>
       </section>
 
+      {/* Available Across NCR Cities (SEO Interlinking) */}
+      <section className="py-16 px-4 sm:px-6 bg-[#050914] border-t border-[#1A2235]">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-8">
+            <span className="text-[#2E6FBF] text-xs font-bold uppercase tracking-[0.2em]">LOCAL DEPLOYMENT</span>
+            <h2 className="font-heading text-2xl md:text-3xl font-bold uppercase text-white mt-1">
+              Deploy {svc.title} In Your City
+            </h2>
+            <p className="text-[#8A93A6] text-xs max-w-xl mx-auto mt-2">
+              Our branch offices provide rapid 24-hour guard deployment across all major NCR hubs.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            {citiesList.map((city) => (
+              <Link
+                key={city.slug}
+                href={`/${city.slug}`}
+                className="p-3.5 bg-[#0A0F1F] border border-[#1A2235] rounded text-center hover:border-[#2E6FBF] group transition-all"
+              >
+                <div className="font-heading text-xs font-bold uppercase text-white group-hover:text-[#4A8FD4] transition-colors">
+                  {city.name}
+                </div>
+                <div className="text-[10px] text-[#8A93A6] mt-0.5">
+                  Hire in {city.name} →
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQs Section */}
+      <section className="py-16 px-4 sm:px-6 bg-[#0A0F1F] border-t border-[#1A2235]">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-10">
+            <span className="text-[#2E6FBF] text-xs font-bold uppercase tracking-[0.2em]">QUESTIONS &amp; ANSWERS</span>
+            <h2 className="font-heading text-2xl md:text-3xl font-bold uppercase text-white mt-1">
+              FAQs About {svc.title}
+            </h2>
+          </div>
+
+          <div className="space-y-3">
+            {serviceFaqs.map((faq, idx) => (
+              <details
+                key={idx}
+                className="group bg-[#050914] border border-[#1A2235] rounded p-5 [&_summary::-webkit-details-marker]:hidden cursor-pointer hover:border-[#2E6FBF]/40 transition-colors"
+              >
+                <summary className="flex items-center justify-between font-heading text-sm sm:text-base font-bold text-white tracking-wide">
+                  <span>{faq.q}</span>
+                  <span className="ml-4 flex-shrink-0 text-[#2E6FBF] group-open:rotate-180 transition-transform duration-300 text-lg">
+                    ▼
+                  </span>
+                </summary>
+                <p className="text-[#8A93A6] text-xs sm:text-sm leading-relaxed mt-3 pt-3 border-t border-[#1A2235]">
+                  {faq.a}
+                </p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Trust & Credentials */}
       <WhyChooseUsSection />
+
+      {/* Other Services */}
+      <section className="py-14 px-4 sm:px-6 bg-[#0B0B0D] border-t border-[rgba(192,192,192,0.1)]">
+        <div className="max-w-5xl mx-auto text-center">
+          <h3 className="font-heading text-xs font-bold uppercase tracking-widest text-[#A8A8A8] mb-4">
+            Explore Other Security &amp; Facility Services:
+          </h3>
+          <div className="flex flex-wrap gap-2.5 justify-center">
+            {slugList.filter((s) => s !== resolvedParams.serviceSlug).map((slug) => (
+              <Link
+                key={slug}
+                href={`/services/${slug}`}
+                className="px-3.5 py-2 text-xs font-heading uppercase tracking-wider text-[#C0C0C0] bg-[#111827] border border-[rgba(192,192,192,0.2)] rounded hover:border-[#2E6FBF] hover:text-white transition-all"
+              >
+                {servicesData[slug].title}
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* CTA */}
       <section className="py-16 px-4 sm:px-6" style={{ background: 'linear-gradient(135deg, #1E4D8C, #2E6FBF)' }}>
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="font-heading text-4xl font-bold uppercase text-white mb-4">
-            Ready to Secure Your Premises?
+          <h2 className="font-heading text-3xl md:text-4xl font-bold uppercase text-white mb-3">
+            Ready to Deploy {svc.title}?
           </h2>
-          <p className="text-[rgba(255,255,255,0.8)] mb-6 text-lg">
+          <p className="text-[rgba(255,255,255,0.8)] mb-6 text-base">
             Get a tailored deployment plan and competitive quote for {svc.title.toLowerCase()} within 24 hours.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/contact#quote" className="inline-flex items-center gap-2 px-8 py-4 bg-white text-[#1E4D8C] font-heading font-bold text-base uppercase tracking-wider rounded-md hover:bg-[#F5F5F5] transition-all hover:-translate-y-1">
+            <Link href="/contact#quote" className="inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-white text-[#1E4D8C] font-heading font-bold text-sm uppercase tracking-wider rounded-md hover:bg-[#F5F5F5] transition-all hover:-translate-y-1">
               Get a Free Quote
             </Link>
-            <a href="https://wa.me/918682066666" target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-transparent border border-white text-white font-heading font-bold text-base uppercase tracking-wider rounded-md hover:bg-white/10 transition-all">
+            <a href="https://wa.me/918682066666" target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-transparent border border-white text-white font-heading font-bold text-sm uppercase tracking-wider rounded-md hover:bg-white/10 transition-all">
               WhatsApp Us
             </a>
           </div>

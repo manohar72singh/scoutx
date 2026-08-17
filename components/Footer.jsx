@@ -4,21 +4,39 @@ import Link from 'next/link';
 import LogoSVG from './LogoSVG';
 
 const services = [
-  'Security Guard', 'Security Guard (Gunman)', 'Female Security Guard',
-  'Female Security Officer', 'Security Supervisor', 'PSO', 'Bouncer',
-  'Housekeeping Services', 'Detective Services',
+  { label: 'Security Guard', href: '/services/security-guard' },
+  { label: 'Security Guard (Gunman)', href: '/services/security-guard-gunman' },
+  { label: 'Female Security Guard', href: '/services/female-security-guard' },
+  { label: 'Female Security Officer', href: '/services/female-security-officer' },
+  { label: 'Security Supervisor', href: '/services/security-supervisor' },
+  { label: 'PSO / VIP Bodyguard', href: '/services/pso' },
+  { label: 'Bouncer Services', href: '/services/bouncer' },
+  { label: 'Housekeeping Services', href: '/services/housekeeping-services' },
+  { label: 'Detective Services', href: '/services/detective-services' },
+];
+
+const cityAreas = [
+  { label: 'Security in Ghaziabad', href: '/security-guards-ghaziabad' },
+  { label: 'Security in Noida', href: '/security-guards-noida' },
+  { label: 'Security in Greater Noida', href: '/security-guards-greater-noida' },
+  { label: 'Security in Delhi', href: '/security-guards-delhi' },
+  { label: 'Security in Gurgaon', href: '/security-guards-gurgaon' },
+  { label: 'Security in Faridabad', href: '/security-guards-faridabad' },
+  { label: 'Security in Meerut', href: '/security-guards-meerut' },
+  { label: 'Security in Hapur', href: '/security-guards-hapur' },
 ];
 
 const quickLinks = [
   { label: 'Home', href: '/' },
   { label: 'About Us', href: '/about' },
-  { label: 'Services', href: '/services' },
-  { label: 'Industries', href: '/industries' },
+  { label: 'All Services', href: '/services' },
+  { label: 'Industries Served', href: '/industries' },
   { label: 'Why Choose Us', href: '/why-choose-us' },
   { label: 'Gallery', href: '/gallery' },
-  { label: 'Blog', href: '/blog' },
-  { label: 'Careers', href: '/careers' },
-  { label: 'Contact', href: '/contact' },
+  { label: 'Blog & Insights', href: '/blog' },
+  { label: 'Careers / Jobs', href: '/careers' },
+  { label: 'Contact Us', href: '/contact' },
+  { label: 'HTML Sitemap', href: '/html-sitemap' },
 ];
 
 export default function Footer() {
@@ -27,10 +45,10 @@ export default function Footer() {
 
       {/* Main footer */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 md:py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-10">
 
           {/* Brand column */}
-          <div className="lg:col-span-1">
+          <div className="sm:col-span-2 lg:col-span-1">
             <Link href="/" className="flex items-center gap-3 mb-4">
               <LogoSVG size={40} />
               <div>
@@ -39,7 +57,7 @@ export default function Footer() {
               </div>
             </Link>
             <p className="text-[#A8A8A8] text-sm leading-relaxed mb-4">
-              India&apos;s trusted private security agency, providing PSARA-licensed, police-verified guards for residential, corporate, industrial, and event security.
+              India&apos;s trusted private security agency, providing PSARA-licensed, police-verified guards for residential, corporate, industrial, and event security across Delhi NCR.
             </p>
             {/* PSARA badge */}
             <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-[rgba(30,77,140,0.2)] border border-[rgba(46,111,191,0.3)] rounded text-xs font-heading uppercase tracking-wider text-[#4A8FD4]">
@@ -70,20 +88,40 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Services */}
+          {/* Services with direct internal links */}
           <div>
             <h3 className="font-heading text-sm font-bold uppercase tracking-widest text-[#E8E8E8] mb-4 pb-2 border-b border-[rgba(192,192,192,0.1)]">
-              Our Services
+              Security Services
             </h3>
             <ul className="space-y-2">
               {services.map((s) => (
-                <li key={s}>
+                <li key={s.href}>
                   <Link
-                    href="/services"
+                    href={s.href}
                     className="flex items-center gap-2 text-[#A8A8A8] hover:text-white text-sm transition-colors duration-200 group"
                   >
                     <span className="w-1.5 h-0.5 bg-[#2E6FBF] group-hover:w-3 transition-all duration-200" />
-                    {s}
+                    {s.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Areas We Serve (Cities) with direct internal links for SEO */}
+          <div>
+            <h3 className="font-heading text-sm font-bold uppercase tracking-widest text-[#E8E8E8] mb-4 pb-2 border-b border-[rgba(192,192,192,0.1)]">
+              Areas We Serve
+            </h3>
+            <ul className="space-y-2">
+              {cityAreas.map((city) => (
+                <li key={city.href}>
+                  <Link
+                    href={city.href}
+                    className="flex items-center gap-2 text-[#A8A8A8] hover:text-white text-sm transition-colors duration-200 group"
+                  >
+                    <span className="w-1.5 h-0.5 bg-[#2E6FBF] group-hover:w-3 transition-all duration-200" />
+                    {city.label}
                   </Link>
                 </li>
               ))}
@@ -146,9 +184,24 @@ export default function Footer() {
             </div>
           </div>
         </div>
+
+        {/* Local NCR Areas internal link badge cloud for Googlebot crawl depth */}
+        <div className="mt-12 pt-8 border-t border-[rgba(192,192,192,0.08)]">
+          <div className="text-xs uppercase font-heading font-bold text-[#E8E8E8] mb-3 tracking-wider">
+            Verified Security Guard Deployment Across NCR:
+          </div>
+          <div className="flex flex-wrap gap-2 text-xs text-[#A8A8A8]">
+            <Link href="/security-guards-ghaziabad" className="hover:text-white transition-colors bg-[#111827]/80 px-2.5 py-1 rounded border border-white/5">Ghaziabad (Govindpuram, Indirapuram, Raj Nagar Ext, Crossings Republik, Vasundhara)</Link>
+            <Link href="/security-guards-noida" className="hover:text-white transition-colors bg-[#111827]/80 px-2.5 py-1 rounded border border-white/5">Noida (Sector 62, Sector 18, Sector 137, Expressway)</Link>
+            <Link href="/security-guards-greater-noida" className="hover:text-white transition-colors bg-[#111827]/80 px-2.5 py-1 rounded border border-white/5">Greater Noida (Pari Chowk, Knowledge Park, Ecotech)</Link>
+            <Link href="/security-guards-delhi" className="hover:text-white transition-colors bg-[#111827]/80 px-2.5 py-1 rounded border border-white/5">Delhi (East Delhi, Connaught Place, South Delhi, Okhla)</Link>
+            <Link href="/security-guards-gurgaon" className="hover:text-white transition-colors bg-[#111827]/80 px-2.5 py-1 rounded border border-white/5">Gurgaon / Gurugram (Cyber City, Golf Course Rd, Udyog Vihar)</Link>
+            <Link href="/security-guards-faridabad" className="hover:text-white transition-colors bg-[#111827]/80 px-2.5 py-1 rounded border border-white/5">Faridabad (Sector 15, NIT, Mathura Road)</Link>
+            <Link href="/security-guards-meerut" className="hover:text-white transition-colors bg-[#111827]/80 px-2.5 py-1 rounded border border-white/5">Meerut (Partapur, Shastri Nagar, Delhi-Meerut Expressway)</Link>
+            <Link href="/security-guards-hapur" className="hover:text-white transition-colors bg-[#111827]/80 px-2.5 py-1 rounded border border-white/5">Hapur (UPSIDC, Pilkhuwa, Anand Vihar)</Link>
+          </div>
+        </div>
       </div>
-
-
 
       {/* Bottom bar */}
       <div className="border-t border-[rgba(192,192,192,0.07)]">

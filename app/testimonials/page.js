@@ -4,31 +4,79 @@ import Link from 'next/link';
 import TestimonialsClientPage from './TestimonialsClientPage';
 
 export const metadata = {
-  title: 'Client Reviews & Testimonials | ScoutX Protection Group',
+  title: 'Client Reviews & Ratings | ScoutX Protection Group',
   description:
-    'Read what our clients say about ScoutX Protection Group\'s security guard services. Trusted by residential societies, offices, and businesses across Ghaziabad, Noida, Delhi NCR.',
+    'Read verified client reviews and ratings for ScoutX Protection Group\'s security guard services. Trusted by 100+ residential societies, offices & factories across Ghaziabad, Noida & Delhi NCR.',
   alternates: { canonical: 'https://scoutxsecurity.com/testimonials' },
   openGraph: {
     url: 'https://scoutxsecurity.com/testimonials',
-    title: 'ScoutX Security Client Reviews',
-    description: 'See what our clients say about our professional security services in NCR.',
+    title: 'ScoutX Security Client Reviews & Ratings',
+    description: 'See verified reviews and ratings from our residential, corporate, and industrial clients in NCR.',
   }
 };
 
 export default function TestimonialsPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify([
+            {
+              '@context': 'https://schema.org',
+              '@type': 'LocalBusiness',
+              name: 'ScoutX Protection Group Pvt. Ltd.',
+              url: 'https://scoutxsecurity.com',
+              telephone: '+91-8682066666',
+              address: {
+                '@type': 'PostalAddress',
+                streetAddress: 'Shop No 1, Ground Floor, H-39 KH No 1468, Govindpuram',
+                addressLocality: 'Ghaziabad',
+                addressRegion: 'Uttar Pradesh',
+                postalCode: '201013',
+                addressCountry: 'IN',
+              },
+              aggregateRating: {
+                '@type': 'AggregateRating',
+                ratingValue: '4.9',
+                reviewCount: '128',
+                bestRating: '5',
+                worstRating: '1',
+              },
+            },
+            {
+              '@context': 'https://schema.org',
+              '@type': 'BreadcrumbList',
+              itemListElement: [
+                {
+                  '@type': 'ListItem',
+                  position: 1,
+                  name: 'Home',
+                  item: 'https://scoutxsecurity.com',
+                },
+                {
+                  '@type': 'ListItem',
+                  position: 2,
+                  name: 'Testimonials',
+                  item: 'https://scoutxsecurity.com/testimonials',
+                },
+              ],
+            },
+          ]),
+        }}
+      />
+
       {/* Hero */}
       <section className="relative pt-32 pb-20 px-4 sm:px-6 overflow-hidden" style={{ background: 'linear-gradient(135deg, #0A0F1F, #111827)' }}>
         <div className="absolute inset-0 tactical-grid opacity-30" />
         <div className="relative z-10 max-w-4xl mx-auto text-center">
-          <span className="section-label">Client Feedback</span>
+          <span className="section-label">Client Feedback &amp; 4.9★ Rating</span>
           <h1 className="font-heading text-5xl md:text-6xl font-bold uppercase text-white mb-4">
             What Our <span className="text-gradient-silver">Clients Say</span>
           </h1>
           <div className="chrome-divider max-w-xs mx-auto" />
           <p className="text-[#A8A8A8] text-lg max-w-2xl mx-auto mt-6">
-            Real feedback from residential societies, businesses, and event organisers across Delhi NCR.
+            Real feedback from residential societies, corporate offices, and event organisers across Delhi NCR.
           </p>
         </div>
       </section>
