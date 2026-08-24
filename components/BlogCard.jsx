@@ -6,19 +6,24 @@ export default function BlogCard({ post, priority = false }) {
     ? new Date(post.published_at).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })
     : null;
 
+  const imageUrl = post.featured_image
+    ? (post.featured_image.startsWith('http') || post.featured_image.startsWith('/')
+        ? post.featured_image
+        : `/uploads/blog/${post.featured_image}`)
+    : null;
+
   return (
     <Link
       href={`/blog/${post.slug}`}
       className="bg-[#0A0F1F] border border-[#1A2235] rounded-lg overflow-hidden group hover:border-[#2E6FBF]/50 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_20px_50px_-15px_rgba(46,111,191,0.35)] flex flex-col h-full"
     >
       <div className="relative w-full h-48 overflow-hidden shrink-0">
-        {post.featured_image ? (
-          <Image
-            src={`/uploads/blog/${post.featured_image}`}
+        {imageUrl ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={imageUrl}
             alt={post.title}
-            fill
-            priority={priority}
-            className="object-cover group-hover:scale-105 transition-transform duration-500"
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           />
         ) : (
           <div

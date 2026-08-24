@@ -86,7 +86,8 @@ export default function AdminDashboard() {
   const statCards = stats ? [
     { label: 'Total Leads',    value: stats.leads_total,    sub: `${stats.leads_new} new · ${stats.leads_today} today`, icon: '📋', href: '/admin/leads',       color: '#2E6FBF' },
     { label: 'Applications',   value: stats.apps_total,     sub: `${stats.apps_new} new · ${stats.apps_today} today`,   icon: '👷', href: '/admin/applications', color: '#4A8FD4' },
-    { label: 'Testimonials',   value: stats.testimonials_total, sub: 'in database',                                       icon: '⭐', href: '/admin/testimonials', color: '#1E4D8C' },
+    { label: 'Blog Posts',     value: stats.posts_total || 0, sub: 'articles published',                              icon: '📝', href: '/admin/blog',         color: '#38BDF8' },
+    { label: 'Blog Comments',  value: stats.comments_total || 0, sub: 'user discussions',                             icon: '💬', href: '/admin/comments',     color: '#10B981' },
   ] : [];
 
   return (
@@ -101,7 +102,7 @@ export default function AdminDashboard() {
       ) : (
         <>
           {/* ── Stat Cards ── */}
-          <div className="grid sm:grid-cols-3 gap-5 mb-8">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
             {statCards.map((c) => (
               <Link key={c.label} href={c.href} className="card-dark p-6 hover:border-[rgba(46,111,191,0.5)] transition-all block group">
                 <div className="flex items-center justify-between mb-3">

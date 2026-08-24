@@ -2,11 +2,15 @@
 export const dynamic = 'force-dynamic';
 
 import pool from '@/lib/db';
+import { locationsData, locationSlugs } from '@/lib/locationsData';
+import { servicesData, serviceSlugs } from '@/lib/servicesData';
+import { keywordSlugs } from '@/lib/keywordsData';
 
 export default async function sitemap() {
   const baseUrl = 'https://scoutxsecurity.com';
   const now = new Date();
 
+  // Core Static Pages
   const staticPages = [
     { url: baseUrl, lastModified: now, changeFrequency: 'weekly', priority: 1.0 },
     { url: `${baseUrl}/about`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
@@ -20,23 +24,15 @@ export default async function sitemap() {
     { url: `${baseUrl}/html-sitemap`, lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
   ];
 
-  const servicePages = [
-    'security-guard',
-    'security-guard-gunman',
-    'female-security-guard',
-    'female-security-officer',
-    'security-supervisor',
-    'pso',
-    'bouncer',
-    'housekeeping-services',
-    'detective-services',
-  ].map((slug) => ({
+  // Core Services
+  const servicePages = serviceSlugs.map((slug) => ({
     url: `${baseUrl}/services/${slug}`,
     lastModified: now,
     changeFrequency: 'weekly',
     priority: 0.9,
   }));
 
+  // Top 8 Cities
   const cityPages = [
     'security-guards-ghaziabad',
     'security-guards-noida',
@@ -53,6 +49,36 @@ export default async function sitemap() {
     priority: 0.9,
   }));
 
+  // Shopping Malls & Micro-Hubs
+  const locationHubPages = locationSlugs.map((slug) => ({
+    url: `${baseUrl}/locations/${slug}`,
+    lastModified: now,
+    changeFrequency: 'weekly',
+    priority: 0.9,
+  }));
+
+  // Programmatic Service x Location Matrix Pages
+  const serviceLocationPages = [];
+  for (const locationSlug of locationSlugs) {
+    for (const serviceSlug of serviceSlugs) {
+      serviceLocationPages.push({
+        url: `${baseUrl}/locations/${locationSlug}/${serviceSlug}`,
+        lastModified: now,
+        changeFrequency: 'weekly',
+        priority: 0.85,
+      });
+    }
+  }
+
+  // Targeted High-Intent Keyword Pages
+  const keywordPages = keywordSlugs.map((slug) => ({
+    url: `${baseUrl}/security-services/${slug}`,
+    lastModified: now,
+    changeFrequency: 'weekly',
+    priority: 0.9,
+  }));
+
+  // Blog Posts
   let blogPages = [];
   try {
     const [rows] = await pool.query(
@@ -72,5 +98,14 @@ export default async function sitemap() {
     { url: `${baseUrl}/blog`, lastModified: now, changeFrequency: 'weekly', priority: 0.8 },
   ];
 
-  return [...staticPages, ...servicePages, ...cityPages, ...blogIndex, ...blogPages];
+  return [
+    ...staticPages,
+    ...servicePages,
+    ...cityPages,
+    ...locationHubPages,
+    ...serviceLocationPages,
+    ...keywordPages,
+    ...blogIndex,
+    ...blogPages,
+  ];
 }

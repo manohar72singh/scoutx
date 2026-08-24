@@ -20,9 +20,35 @@ export async function GET(req) {
     
     const [[{ total: testimonials_total }]] = await pool.query('SELECT COUNT(*) as total FROM testimonials');
 
+    let comments_total = 0;
+    try {
+      const [[{ total }]] = await pool.query('SELECT COUNT(*) as total FROM blog_comments');
+      comments_total = total;
+    } catch {
+      comments_total = 0;
+    }
+
+    let posts_total = 0;
+    try {
+      const [[{ total }]] = await pool.query('SELECT COUNT(*) as total FROM blog_posts');
+      posts_total = total;
+    } catch {
+      posts_total = 0;
+    }
+
     return NextResponse.json({
       success: true,
-      data: { leads_total, leads_new, leads_today, apps_total, apps_new, apps_today, testimonials_total },
+      data: {
+        leads_total,
+        leads_new,
+        leads_today,
+        apps_total,
+        apps_new,
+        apps_today,
+        testimonials_total,
+        comments_total,
+        posts_total,
+      },
     }, { status: 200 });
 
   } catch (error) {

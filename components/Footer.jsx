@@ -50,7 +50,7 @@ export default function Footer() {
 
           {/* Brand column */}
           <div className="sm:col-span-2 lg:col-span-1">
-            <Link href="/" className="flex items-center gap-3 mb-4">
+            <Link href="/" className="flex items-center gap-3 mb-4" title="ScoutX Protection Group">
               <LogoSVG size={40} />
               <div>
                 <div className="font-heading text-lg font-bold uppercase tracking-widest text-gradient-silver">ScoutX</div>
@@ -79,6 +79,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
+                    title={link.label}
                     className="flex items-center gap-2 text-[#A8A8A8] hover:text-white text-sm transition-colors duration-200 group"
                   >
                     <span className="w-1.5 h-0.5 bg-[#2E6FBF] group-hover:w-3 transition-all duration-200" />
@@ -99,6 +100,7 @@ export default function Footer() {
                 <li key={s.href}>
                   <Link
                     href={s.href}
+                    title={s.label}
                     className="flex items-center gap-2 text-[#A8A8A8] hover:text-white text-sm transition-colors duration-200 group"
                   >
                     <span className="w-1.5 h-0.5 bg-[#2E6FBF] group-hover:w-3 transition-all duration-200" />
@@ -119,6 +121,7 @@ export default function Footer() {
                 <li key={city.href}>
                   <Link
                     href={city.href}
+                    title={city.label}
                     className="flex items-center gap-2 text-[#A8A8A8] hover:text-white text-sm transition-colors duration-200 group"
                   >
                     <span className="w-1.5 h-0.5 bg-[#2E6FBF] group-hover:w-3 transition-all duration-200" />
@@ -148,16 +151,16 @@ export default function Footer() {
                   <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
                 </svg>
                 <div className="text-sm grid grid-cols-[auto_1fr] gap-x-2 gap-y-1">
-                  <a href="tel:+918682066666" className="text-[#A8A8A8] hover:text-white transition-colors whitespace-nowrap">
+                  <a href="tel:+918682066666" title="Call Ashok Choudhary" className="text-[#A8A8A8] hover:text-white transition-colors whitespace-nowrap">
                     Ashok Choudhary:
                   </a>
-                  <a href="tel:+918682066666" className="text-[#A8A8A8] hover:text-white transition-colors whitespace-nowrap">
+                  <a href="tel:+918682066666" title="Call Ashok Choudhary" className="text-[#A8A8A8] hover:text-white transition-colors whitespace-nowrap">
                     +91 86820 66666
                   </a>
-                  <a href="tel:+917611865555" className="text-[#A8A8A8] hover:text-white transition-colors whitespace-nowrap">
+                  <a href="tel:+917611865555" title="Call Anil Choudhary" className="text-[#A8A8A8] hover:text-white transition-colors whitespace-nowrap">
                     Anil Choudhary:
                   </a>
-                  <a href="tel:+917611865555" className="text-[#A8A8A8] hover:text-white transition-colors whitespace-nowrap">
+                  <a href="tel:+917611865555" title="Call Anil Choudhary" className="text-[#A8A8A8] hover:text-white transition-colors whitespace-nowrap">
                     +91 76118 65555
                   </a>
                 </div>
@@ -167,7 +170,7 @@ export default function Footer() {
                   <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
                   <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
                 </svg>
-                <a href="mailto:scoutxsecurity@gmail.com" className="text-[#A8A8A8] hover:text-white text-sm transition-colors break-all">
+                <a href="mailto:scoutxsecurity@gmail.com" title="Email ScoutX" className="text-[#A8A8A8] hover:text-white text-sm transition-colors break-all">
                   scoutxsecurity@gmail.com
                 </a>
               </div>
@@ -175,6 +178,7 @@ export default function Footer() {
                 href="https://wa.me/918682066666?text=Hi%2C%20I%27d%20like%20a%20quote%20for%20security%20services."
                 target="_blank"
                 rel="noopener noreferrer"
+                title="Chat on WhatsApp"
                 className="inline-flex items-center gap-2 px-4 py-2 bg-[#25D366] hover:bg-[#20BA5A] text-white text-sm font-heading font-bold uppercase tracking-wider rounded transition-all mt-2"
               >
                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
@@ -186,22 +190,6 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Local NCR Areas internal link badge cloud for Googlebot crawl depth */}
-        <div className="mt-12 pt-8 border-t border-[rgba(192,192,192,0.08)]">
-          <div className="text-xs uppercase font-heading font-bold text-[#E8E8E8] mb-3 tracking-wider">
-            Verified Security Guard Deployment Across NCR:
-          </div>
-          <div className="flex flex-wrap gap-2 text-xs text-[#A8A8A8]">
-            <Link href="/security-guards-ghaziabad" className="hover:text-white transition-colors bg-[#111827]/80 px-2.5 py-1 rounded border border-white/5">Ghaziabad (Govindpuram, Indirapuram, Raj Nagar Ext, Crossings Republik, Vasundhara)</Link>
-            <Link href="/security-guards-noida" className="hover:text-white transition-colors bg-[#111827]/80 px-2.5 py-1 rounded border border-white/5">Noida (Sector 62, Sector 18, Sector 137, Expressway)</Link>
-            <Link href="/security-guards-greater-noida" className="hover:text-white transition-colors bg-[#111827]/80 px-2.5 py-1 rounded border border-white/5">Greater Noida (Pari Chowk, Knowledge Park, Ecotech)</Link>
-            <Link href="/security-guards-delhi" className="hover:text-white transition-colors bg-[#111827]/80 px-2.5 py-1 rounded border border-white/5">Delhi (East Delhi, Connaught Place, South Delhi, Okhla)</Link>
-            <Link href="/security-guards-gurgaon" className="hover:text-white transition-colors bg-[#111827]/80 px-2.5 py-1 rounded border border-white/5">Gurgaon / Gurugram (Cyber City, Golf Course Rd, Udyog Vihar)</Link>
-            <Link href="/security-guards-faridabad" className="hover:text-white transition-colors bg-[#111827]/80 px-2.5 py-1 rounded border border-white/5">Faridabad (Sector 15, NIT, Mathura Road)</Link>
-            <Link href="/security-guards-meerut" className="hover:text-white transition-colors bg-[#111827]/80 px-2.5 py-1 rounded border border-white/5">Meerut (Partapur, Shastri Nagar, Delhi-Meerut Expressway)</Link>
-            <Link href="/security-guards-hapur" className="hover:text-white transition-colors bg-[#111827]/80 px-2.5 py-1 rounded border border-white/5">Hapur (UPSIDC, Pilkhuwa, Anand Vihar)</Link>
-          </div>
-        </div>
       </div>
 
       {/* Bottom bar */}
@@ -209,14 +197,17 @@ export default function Footer() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex flex-col md:flex-row justify-between items-center gap-3 text-xs text-[#A8A8A8]">
           <p>© {new Date().getFullYear()} ScoutX Protection Group Pvt. Ltd. All rights reserved.</p>
           <div className="flex flex-wrap items-center gap-3">
-            <Link href="/admin/login" className="hover:text-white transition-colors">Admin</Link>
+            <Link href="/admin/login" title="Admin Portal" className="hover:text-white transition-colors">Admin</Link>
             <span className="hidden sm:inline text-[#2E6FBF]">•</span>
             <span className="hidden sm:inline">PSARA Licensed</span>
+            <span className="text-[#2E6FBF]">•</span>
+            <Link href="/html-sitemap" title="Website Sitemap" className="hover:text-white transition-colors">Sitemap</Link>
             <span className="text-[#2E6FBF]">•</span>
             <a
               href="https://quantyrotechnologies.com/"
               target="_blank"
               rel="noopener noreferrer"
+              title="Quantyro Technologies"
               className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#0A0F1F] border border-[#2E6FBF]/30 hover:border-[#4A8FD4] shadow-[0_0_10px_rgba(46,111,191,0.15)] hover:shadow-[0_0_20px_rgba(74,143,212,0.35)] transition-all duration-300 group hover:-translate-y-0.5"
             >
               <span className="relative flex h-2 w-2">

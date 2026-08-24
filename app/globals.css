@@ -388,3 +388,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 .blog-content a, .blog-editor-content a { color: #4A8FD4; text-decoration: underline; text-underline-offset: 2px; }
 .blog-content strong, .blog-editor-content strong { color: #F5F5F5; }
+.blog-content img, .blog-editor-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+  margin: 1.5rem 0;
+  border: 1px solid rgba(192, 192, 192, 0.15);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+}

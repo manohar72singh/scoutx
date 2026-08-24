@@ -1,22 +1,24 @@
 'use client';
-// components/admin/BlogPostForm.jsx — Shared create/edit form for blog posts
+// components/admin/BlogPostForm.jsx — Shared create/edit form for blog posts with TipTap Image support
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Link from '@tiptap/extension-link';
+import ImageExtension from '@tiptap/extension-image';
 import { slugify } from '@/lib/slugify';
 
-function ToolbarButton({ onClick, active, children, title }) {
+function ToolbarButton({ onClick, active, children, title, disabled }) {
   return (
     <button
       type="button"
       title={title}
+      disabled={disabled}
       onClick={onClick}
       className={`px-2.5 py-1.5 rounded text-xs font-heading uppercase tracking-wide transition-colors ${
         active ? 'bg-[#2E6FBF] text-white' : 'text-[#C0C0C0] hover:bg-[rgba(255,255,255,0.08)] hover:text-white'
-      }`}
+      } ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
     >
       {children}
     </button>
@@ -24,6 +26,9 @@ function ToolbarButton({ onClick, active, children, title }) {
 }
 
 function EditorToolbar({ editor }) {
+  const [uploadingImage, setUploadingImage] = useState(false);
+  const fileInputRef = useRef(null);
+
   if (!editor) return null;
 
   const setLink = () => {
@@ -37,8 +42,43 @@ function EditorToolbar({ editor }) {
     editor.chain().focus().extendMarkRange('link').setLink({ href: url }).run();
   };
 
+  const handleInlineImageUpload = async (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setUploadingImage(true);
+    try {
+      const formData = new FormData();
+      formData.append('file', file);
+
+      const res = await fetch('/api/admin/upload', {
+        method: 'POST',
+        body: formData,
+      });
+      const data = await res.json();
+
+      if (data.success && data.url) {
+        editor.chain().focus().setImage({ src: data.url, alt: file.name }).run();
+      } else {
+        alert(data.message || 'Failed to upload image.');
+      }
+    } catch (err) {
+      alert('Error uploading image. Please check your connection.');
+    } finally {
+      setUploadingImage(false);
+      if (fileInputRef.current) fileInputRef.current.value = '';
+    }
+  };
+
+  const insertImageUrl = () => {
+    const url = window.prompt('Enter Image Web URL (https://... or /uploads/...):');
+    if (url && url.trim()) {
+      editor.chain().focus().setImage({ src: url.trim(), alt: 'Blog Image' }).run();
+    }
+  };
+
   return (
-    <div className="flex flex-wrap gap-1 p-2 border-b border-[rgba(192,192,192,0.15)]" style={{ background: '#0B0B0D' }}>
+    <div className="flex flex-wrap items-center gap-1 p-2 border-b border-[rgba(192,192,192,0.15)]" style={{ background: '#0B0B0D' }}>
       <ToolbarButton title="Bold" active={editor.isActive('bold')} onClick={() => editor.chain().focus().toggleBold().run()}>B</ToolbarButton>
       <ToolbarButton title="Italic" active={editor.isActive('italic')} onClick={() => editor.chain().focus().toggleItalic().run()}>I</ToolbarButton>
       <ToolbarButton title="Strikethrough" active={editor.isActive('strike')} onClick={() => editor.chain().focus().toggleStrike().run()}>S</ToolbarButton>
@@ -48,6 +88,26 @@ function EditorToolbar({ editor }) {
       <ToolbarButton title="Numbered List" active={editor.isActive('orderedList')} onClick={() => editor.chain().focus().toggleOrderedList().run()}>1. List</ToolbarButton>
       <ToolbarButton title="Quote" active={editor.isActive('blockquote')} onClick={() => editor.chain().focus().toggleBlockquote().run()}>&quot;</ToolbarButton>
       <ToolbarButton title="Link" active={editor.isActive('link')} onClick={setLink}>🔗</ToolbarButton>
+
+      {/* Inline Image Upload & URL */}
+      <input
+        type="file"
+        ref={fileInputRef}
+        onChange={handleInlineImageUpload}
+        accept="image/jpeg,image/png,image/webp,image/gif"
+        className="hidden"
+      />
+      <ToolbarButton
+        title="Upload & Insert Image"
+        disabled={uploadingImage}
+        onClick={() => fileInputRef.current?.click()}
+      >
+        {uploadingImage ? '⏳ Uploading...' : '🖼️ +Image'}
+      </ToolbarButton>
+      <ToolbarButton title="Insert Image via Web URL" onClick={insertImageUrl}>
+        🌐 Image URL
+      </ToolbarButton>
+
       <ToolbarButton title="Undo" onClick={() => editor.chain().focus().undo().run()}>↺</ToolbarButton>
       <ToolbarButton title="Redo" onClick={() => editor.chain().focus().redo().run()}>↻</ToolbarButton>
     </div>
@@ -74,13 +134,24 @@ export default function BlogPostForm({ initialData, postId }) {
   );
   const [imageFile, setImageFile] = useState(null);
   const [imagePreview, setImagePreview] = useState(
-    initialData?.featured_image ? `/uploads/blog/${initialData.featured_image}` : null
+    initialData?.featured_image
+      ? (initialData.featured_image.startsWith('http') || initialData.featured_image.startsWith('/')
+          ? initialData.featured_image
+          : `/uploads/blog/${initialData.featured_image}`)
+      : null
   );
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
 
   const editor = useEditor({
-    extensions: [StarterKit, Link.configure({ openOnClick: false })],
+    extensions: [
+      StarterKit,
+      Link.configure({ openOnClick: false }),
+      ImageExtension.configure({
+        inline: true,
+        allowBase64: true,
+      }),
+    ],
     content: initialData?.content || '',
     immediatelyRender: false,
     editorProps: {
@@ -173,11 +244,12 @@ export default function BlogPostForm({ initialData, postId }) {
           </div>
 
           <div className="card-dark p-0 overflow-hidden">
-            <div className="px-5 pt-4">
+            <div className="px-5 pt-4 flex items-center justify-between">
               <label className="block text-[#C0C0C0] text-sm font-medium mb-1.5">Content *</label>
+              <span className="text-xs text-[#8A93A6]">💡 You can insert images anywhere using the &quot;🖼️ +Image&quot; button</span>
             </div>
             <EditorToolbar editor={editor} />
-            <div className="p-4 min-h-[320px]" onClick={() => editor?.chain().focus().run()}>
+            <div className="p-4 min-h-[350px]" onClick={() => editor?.chain().focus().run()}>
               <EditorContent editor={editor} />
             </div>
           </div>
@@ -222,9 +294,10 @@ export default function BlogPostForm({ initialData, postId }) {
             <label className="block text-[#C0C0C0] text-sm font-medium mb-1.5">Featured Image</label>
             {imagePreview && (
               // eslint-disable-next-line @next/next/no-img-element
-              <img src={imagePreview} alt="" className="w-full h-32 object-cover rounded mb-2 border border-[rgba(192,192,192,0.15)]" />
+              <img src={imagePreview} alt="Featured Preview" className="w-full h-36 object-cover rounded mb-2 border border-[rgba(192,192,192,0.15)]" />
             )}
-            <input type="file" accept="image/jpeg,image/png,image/webp" onChange={handleImageChange} className="form-input text-xs" />
+            <input type="file" accept="image/jpeg,image/png,image/webp,image/gif" onChange={handleImageChange} className="form-input text-xs" />
+            <p className="text-[11px] text-[#8A93A6] mt-1.5">Supported formats: JPG, PNG, WEBP, GIF (Max 10MB)</p>
           </div>
 
           <div className="card-dark p-5">

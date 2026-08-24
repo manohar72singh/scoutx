@@ -7,7 +7,7 @@ import { slugify } from '@/lib/slugify';
 import fs from 'fs/promises';
 import path from 'path';
 
-const ALLOWED_IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
+const ALLOWED_IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/gif', 'image/svg+xml'];
 
 async function uniqueSlug(base) {
   let slug = base;
@@ -21,7 +21,9 @@ async function uniqueSlug(base) {
 
 async function saveImage(file) {
   const buffer = Buffer.from(await file.arrayBuffer());
-  const filename = `${Date.now()}-${Math.round(Math.random() * 1e9)}-${file.name.replace(/[^a-zA-Z0-9.]/g, '_')}`;
+  const ext = path.extname(file.name) || '.jpg';
+  const cleanBase = path.basename(file.name, ext).replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
+  const filename = `${Date.now()}-${Math.round(Math.random() * 1e6)}-${cleanBase}${ext}`;
   const uploadDir = path.join(process.cwd(), 'public', 'uploads', 'blog');
   await fs.mkdir(uploadDir, { recursive: true });
   await fs.writeFile(path.join(uploadDir, filename), buffer);
@@ -78,6 +80,7 @@ export async function POST(req) {
     const scheduledDate = formData.get('published_at')?.toString().trim();
     const requestedSlug = formData.get('slug')?.toString().trim();
     const imageFile = formData.get('featured_image');
+    const imageUrl = formData.get('featured_image_url')?.toString().trim();
 
     if (!title || !content) {
       return NextResponse.json({ success: false, message: 'Title and content are required.' }, { status: 400 });
@@ -90,11 +93,13 @@ export async function POST(req) {
     const slug = await uniqueSlug(baseSlug);
 
     let featuredImage = null;
-    if (imageFile && imageFile.size > 0) {
+    if (imageFile && typeof imageFile === 'object' && imageFile.size > 0) {
       if (!ALLOWED_IMAGE_TYPES.includes(imageFile.type)) {
-        return NextResponse.json({ success: false, message: 'Invalid image type. Only JPEG, PNG, and WEBP are allowed.' }, { status: 400 });
+        return NextResponse.json({ success: false, message: 'Invalid image type. Only JPEG, PNG, WEBP, and GIF are allowed.' }, { status: 400 });
       }
       featuredImage = await saveImage(imageFile);
+    } else if (imageUrl) {
+      featuredImage = imageUrl;
     }
 
     let publishedAt = null;

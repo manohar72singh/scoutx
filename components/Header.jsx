@@ -38,6 +38,7 @@ const navLinks = [
     ]
   },
   { label: 'Industries', href: '/industries' },
+  { label: 'Why Us', href: '/why-choose-us' },
   { label: 'Gallery', href: '/gallery' },
   { label: 'Blog', href: '/blog' },
   { label: 'Careers', href: '/careers' },

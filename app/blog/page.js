@@ -131,13 +131,14 @@ export default async function BlogIndexPage() {
                 >
                   <div className="relative h-64 md:h-full min-h-[280px] overflow-hidden">
                     {featured.featured_image ? (
-                      <Image
-                        src={`/uploads/blog/${featured.featured_image}`}
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img
+                        src={featured.featured_image.startsWith('http') || featured.featured_image.startsWith('/')
+                          ? featured.featured_image
+                          : `/uploads/blog/${featured.featured_image}`}
                         alt={`ScoutX Blog: ${featured.title}`}
                         title={featured.title}
-                        fill
-                        priority
-                        className="object-cover group-hover:scale-105 transition-transform duration-500"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       />
                     ) : (
                       <div
