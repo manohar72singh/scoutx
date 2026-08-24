@@ -56,7 +56,7 @@ export default async function sitemap() {
   let blogPages = [];
   try {
     const [rows] = await pool.query(
-      `SELECT slug, updated_at FROM blog_posts WHERE status = 'published'`
+      `SELECT slug, updated_at FROM blog_posts WHERE status = 'published' OR (status = 'scheduled' AND published_at <= NOW())`
     );
     blogPages = rows.map((post) => ({
       url: `${baseUrl}/blog/${post.slug}`,

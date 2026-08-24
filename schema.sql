@@ -57,12 +57,28 @@ CREATE TABLE IF NOT EXISTS blog_posts (
   featured_image VARCHAR(255),
   meta_title VARCHAR(200),
   meta_description VARCHAR(300),
-  status VARCHAR(20) DEFAULT 'draft',
+  status VARCHAR(20) DEFAULT 'draft', -- 'draft', 'published', 'scheduled'
   published_at TIMESTAMP NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   INDEX idx_status (status),
-  INDEX idx_slug (slug)
+  INDEX idx_slug (slug),
+  INDEX idx_published_at (published_at)
+);
+
+-- Blog comments (public submissions with moderation)
+CREATE TABLE IF NOT EXISTS blog_comments (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  post_id INT NOT NULL,
+  author_name VARCHAR(100) NOT NULL,
+  author_email VARCHAR(150) NOT NULL,
+  comment_text TEXT NOT NULL,
+  parent_id INT DEFAULT NULL,
+  status VARCHAR(20) DEFAULT 'approved', -- 'pending', 'approved', 'spam'
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  INDEX idx_post_id (post_id),
+  INDEX idx_status (status),
+  FOREIGN KEY (post_id) REFERENCES blog_posts(id) ON DELETE CASCADE
 );
 
 -- Homepage closing CTA section (admin-editable, single row)

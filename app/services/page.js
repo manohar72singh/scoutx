@@ -3,6 +3,8 @@
 import Link from 'next/link';
 import ServiceCard from '@/components/ServiceCard';
 import WhyChooseUsSection from '@/components/WhyChooseUsSection';
+import CertificationsSection from '@/components/CertificationsSection';
+import FAQSection from '@/components/FAQSection';
 import FadeIn from '@/components/FadeIn';
 
 export const metadata = {
@@ -14,6 +16,8 @@ export const metadata = {
     url: 'https://scoutxsecurity.com/services',
     title: 'Security & Facility Services by ScoutX Protection Group',
     description: 'Comprehensive security and housekeeping solutions including armed guards, bouncers, facility cleaning, and private investigations in NCR.',
+    siteName: 'ScoutX Protection Group',
+    type: 'website',
   }
 };
 
@@ -92,6 +96,25 @@ const services = [
   },
 ];
 
+const servicesFaqs = [
+  {
+    q: 'Can ScoutX provide a customized combination of armed guards, supervisors, and housekeeping?',
+    a: 'Yes, we specialize in integrated facility and security contracts. We design custom deployments combining gate guards, night patrol supervisors, female frisking personnel, and housekeeping crews under a single SLA.',
+  },
+  {
+    q: 'What are the shift timings available for security guard deployments?',
+    a: 'We offer flexible shift structures including 8-hour three-shift rotations (24/7) or 12-hour two-shift rotations, with dedicated reserve guards on standby to ensure zero absenteeism.',
+  },
+  {
+    q: 'Are all guard deployments covered under Workmen’s Compensation Insurance?',
+    a: 'Yes, 100% of our security guards, gunmen, and supervisors are covered under comprehensive Workmen’s Compensation insurance along with statutory EPF and ESIC registrations, shielding clients from legal liability.',
+  },
+  {
+    q: 'How do you handle unexpected guard absences or performance issues?',
+    a: 'We guarantee a same-day guard replacement within 24 hours with zero replacement fees. Our roving supervisors maintain relief guard pools in Ghaziabad, Noida, and across Delhi NCR.',
+  },
+];
+
 export default function ServicesPage() {
   return (
     <>
@@ -129,6 +152,18 @@ export default function ServicesPage() {
                 url: `https://scoutxsecurity.com/services/${s.id}`,
               })),
             },
+            {
+              '@context': 'https://schema.org',
+              '@type': 'FAQPage',
+              mainEntity: servicesFaqs.map((faq) => ({
+                '@type': 'Question',
+                name: faq.q,
+                acceptedAnswer: {
+                  '@type': 'Answer',
+                  text: faq.a,
+                },
+              })),
+            },
           ]),
         }}
       />
@@ -142,7 +177,7 @@ export default function ServicesPage() {
           </h1>
           <div className="chrome-divider max-w-xs mx-auto" />
           <p className="text-[#A8A8A8] text-lg max-w-2xl mx-auto mt-6">
-            Six specialised service lines, each staffed by guards trained specifically for that environment. One agency, every requirement.
+            Nine specialised service lines, each staffed by personnel trained specifically for that environment. One trusted agency, every requirement.
           </p>
         </div>
       </section>
@@ -169,7 +204,7 @@ export default function ServicesPage() {
                       {svc.ideal.map((use) => (
                         <li key={use} className="flex items-start gap-2 text-[#D0D0D0] text-xs">
                           <span className="text-[#4A8FD4] mt-0.5">✓</span>
-                          {use}
+                          <span>{use}</span>
                         </li>
                       ))}
                     </ul>
@@ -180,6 +215,17 @@ export default function ServicesPage() {
           </div>
         </div>
       </section>
+
+      {/* Certifications Section */}
+      <CertificationsSection />
+
+      {/* 4 FAQs Section */}
+      <FAQSection
+        title="Frequently Asked Questions on Service Delivery"
+        subtitle="SLA & DEPLOYMENT PROTOCOLS"
+        description="Understanding our guard rosters, replacement warranties, and insurance coverage."
+        faqs={servicesFaqs}
+      />
 
       {/* Why Choose Us */}
       <WhyChooseUsSection />
@@ -194,7 +240,7 @@ export default function ServicesPage() {
             <p className="text-[rgba(255,255,255,0.8)] mb-6">
               Many clients require a combination of services. Tell us your requirements and we&apos;ll design a complete security deployment plan.
             </p>
-            <Link href="/contact#quote" className="inline-flex items-center gap-2 px-8 py-4 bg-white text-[#1E4D8C] font-heading font-bold text-base uppercase tracking-wider rounded-md hover:bg-[#0B0B0D] hover:text-white hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all duration-300">
+            <Link href="/contact#quote" title="Request a custom security deployment plan" className="inline-flex items-center gap-2 px-8 py-4 bg-white text-[#1E4D8C] font-heading font-bold text-base uppercase tracking-wider rounded-md hover:bg-[#0B0B0D] hover:text-white hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all duration-300">
               Get a Custom Quote
             </Link>
           </div>

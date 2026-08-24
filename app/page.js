@@ -6,6 +6,7 @@ import Image from 'next/image';
 import TestimonialsSection from '@/components/TestimonialsSection';
 import WhyChooseUsSection from '@/components/WhyChooseUsSection';
 import OurClientsSection from '@/components/OurClientsSection';
+import CertificationsSection from '@/components/CertificationsSection';
 import AnimatedStats from '@/components/AnimatedStats';
 import FadeIn from '@/components/FadeIn';
 import pool from '@/lib/db';
@@ -438,6 +439,9 @@ export default async function HomePage() {
           </FadeIn>
         </div>
       </section>
+
+      {/* ── COMPANY CERTIFICATIONS & PSARA ACCREDITATION ─────────── */}
+      <CertificationsSection />
 
       {/* ── WHY CHOOSE US ────────────────────────────────────────────── */}
       <WhyChooseUsSection />

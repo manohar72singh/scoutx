@@ -65,7 +65,9 @@ export async function PUT(req, { params }) {
     const content = formData.get('content')?.toString().trim();
     const metaTitle = formData.get('meta_title')?.toString().trim() || null;
     const metaDescription = formData.get('meta_description')?.toString().trim() || null;
-    const status = formData.get('status')?.toString() === 'published' ? 'published' : 'draft';
+    const rawStatus = formData.get('status')?.toString();
+    const status = ['published', 'scheduled', 'draft'].includes(rawStatus) ? rawStatus : 'draft';
+    const scheduledDate = formData.get('published_at')?.toString().trim();
     const requestedSlug = formData.get('slug')?.toString().trim();
     const imageFile = formData.get('featured_image');
 
@@ -87,7 +89,14 @@ export async function PUT(req, { params }) {
       featuredImage = await saveImage(imageFile);
     }
 
-    const publishedAt = status === 'published' ? (existing.published_at || new Date()) : existing.published_at;
+    let publishedAt = existing.published_at;
+    if (status === 'scheduled' && scheduledDate) {
+      publishedAt = new Date(scheduledDate);
+    } else if (status === 'published') {
+      publishedAt = scheduledDate ? new Date(scheduledDate) : (existing.published_at || new Date());
+    } else if (status === 'draft') {
+      publishedAt = scheduledDate ? new Date(scheduledDate) : existing.published_at;
+    }
 
     await pool.execute(
       `UPDATE blog_posts

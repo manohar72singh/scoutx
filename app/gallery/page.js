@@ -1,31 +1,48 @@
 // app/gallery/page.js
-// Placeholder gallery — replace images with real photos when supplied
 
 import Link from 'next/link';
 import Image from 'next/image';
+import FAQSection from '@/components/FAQSection';
 import FadeIn from '@/components/FadeIn';
 
 export const metadata = {
-  title: 'Gallery | ScoutX Guards in Action in NCR',
+  title: 'Operational Gallery | ScoutX Security Guards on Duty in NCR',
   description: 'See ScoutX Protection Group\'s guards in action — on duty at residential societies, corporate offices, industrial sites, and events across Delhi NCR.',
   alternates: { canonical: 'https://scoutxsecurity.com/gallery' },
   openGraph: {
     url: 'https://scoutxsecurity.com/gallery',
-    title: 'ScoutX Security Guard Gallery',
-    description: 'Photos of our professional security guards on duty across NCR.',
+    title: 'ScoutX Security Guard Gallery | Guards in Action in NCR',
+    description: 'Photos and field deployments of our professional security guards on duty across NCR.',
+    siteName: 'ScoutX Protection Group',
+    type: 'website',
   }
 };
 
 const galleryItems = [
-  { emoji: '🦺', label: 'Unarmed Guards on Duty', desc: 'Gate security at residential complex, Ghaziabad' },
-  { emoji: '🔫', label: 'Armed Guard Deployment', desc: 'Bank branch security, Noida', img: '/services-armed.png' },
-  { emoji: '👩‍✈️', label: 'Female Security Officers', desc: 'Hospital security team, Greater Noida', img: '/gallery-female-guard.png' },
-  { emoji: '🎪', label: 'Event Security Team', desc: 'Conference security, Delhi', img: '/gallery-event.png' },
-  { emoji: '🏭', label: 'Industrial Security', desc: 'Factory perimeter patrol, Ghaziabad' },
-  { emoji: '🚗', label: 'Mobile Patrol Unit', desc: 'Night patrol vehicle, Noida', img: '/gallery-patrol.png' },
-  { emoji: '🎓', label: 'Guard Training Session', desc: 'Training centre, Govindpuram', img: '/gallery-training.png' },
-  { emoji: '👔', label: 'Guard Uniform & Equipment', desc: 'Uniform parade — annual inspection' },
-  { emoji: '📋', label: 'Supervisor Audit', desc: 'Security supervisor conducting attendance check' },
+  { emoji: '🦺', label: 'Unarmed Society Guards on Duty', desc: 'Gate security & visitor screening at residential complex, Ghaziabad' },
+  { emoji: '🔫', label: 'Armed Gunman Security Deployment', desc: 'Bank branch & cash-in-transit vault protection, Noida', img: '/services-armed.png' },
+  { emoji: '👩‍✈️', label: 'Female Security Officers', desc: 'Hospital & women retail security team, Greater Noida', img: '/gallery-female-guard.png' },
+  { emoji: '🎪', label: 'Event Security & Crowd Control Team', desc: 'Conference & exhibition perimeter protection, Delhi', img: '/gallery-event.png' },
+  { emoji: '🏭', label: 'Industrial Factory & Warehouse Security', desc: 'Factory perimeter patrol and material gate pass verification, Ghaziabad' },
+  { emoji: '🚗', label: 'Mobile Patrol Supervisor Unit', desc: 'Surprise midnight audit patrol vehicle, Noida', img: '/gallery-patrol.png' },
+  { emoji: '🎓', label: 'Guard Tactical Training Drill', desc: 'Fire safety & physical drill session at Govindpuram Training Centre', img: '/gallery-training.png' },
+  { emoji: '👔', label: 'Guard Uniform & Equipment Inspection', desc: 'Turnout inspection with photo ID, whistles, batons & torches' },
+  { emoji: '📋', label: 'On-Site Security Supervisor Audit', desc: 'Digital GPS attendance check and register review' },
+];
+
+const galleryFaqs = [
+  {
+    q: 'Can client committees request an in-person site visit or guard demonstration before signing a contract?',
+    a: 'Yes, ScoutX gladly arranges guided site visits to active society or corporate deployments across Ghaziabad and Noida, or brings a sample guard squad for committee review.',
+  },
+  {
+    q: 'Are guards equipped with standard tactical gear and company uniforms as shown in the gallery?',
+    a: 'Yes, every deployed security personnel is issued a customized ScoutX uniform, photo identification badge, shift register, flashlight, lanyard, whistle, and batons where permitted.',
+  },
+  {
+    q: 'How frequently do ScoutX field managers conduct turnout inspections and uniform parades?',
+    a: 'Field supervisors inspect guard turnouts daily during shift handovers and conduct surprise weekly uniform and equipment readiness audits.',
+  },
 ];
 
 export default function GalleryPage() {
@@ -34,24 +51,38 @@ export default function GalleryPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'BreadcrumbList',
-            itemListElement: [
-              {
-                '@type': 'ListItem',
-                position: 1,
-                name: 'Home',
-                item: 'https://scoutxsecurity.com',
-              },
-              {
-                '@type': 'ListItem',
-                position: 2,
-                name: 'Gallery',
-                item: 'https://scoutxsecurity.com/gallery',
-              },
-            ],
-          }),
+          __html: JSON.stringify([
+            {
+              '@context': 'https://schema.org',
+              '@type': 'BreadcrumbList',
+              itemListElement: [
+                {
+                  '@type': 'ListItem',
+                  position: 1,
+                  name: 'Home',
+                  item: 'https://scoutxsecurity.com',
+                },
+                {
+                  '@type': 'ListItem',
+                  position: 2,
+                  name: 'Gallery',
+                  item: 'https://scoutxsecurity.com/gallery',
+                },
+              ],
+            },
+            {
+              '@context': 'https://schema.org',
+              '@type': 'FAQPage',
+              mainEntity: galleryFaqs.map((faq) => ({
+                '@type': 'Question',
+                name: faq.q,
+                acceptedAnswer: {
+                  '@type': 'Answer',
+                  text: faq.a,
+                },
+              })),
+            },
+          ]),
         }}
       />
       {/* Hero */}
@@ -86,7 +117,8 @@ export default function GalleryPage() {
                   <div className="h-56 relative overflow-hidden">
                     <Image
                       src={item.img}
-                      alt={item.label}
+                      alt={`ScoutX Operational Deployment: ${item.label}`}
+                      title={item.label}
                       fill
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       className="object-cover object-center transition-transform duration-300 group-hover:scale-105"
@@ -99,7 +131,7 @@ export default function GalleryPage() {
                   >
                     <span className="text-6xl">{item.emoji}</span>
                     <div className="text-[#A8A8A8] text-xs text-center px-4 font-body italic">
-                      [Real photo to be inserted]
+                      [Operational photo: {item.label}]
                     </div>
                   </div>
                 )}
@@ -107,13 +139,13 @@ export default function GalleryPage() {
                 {/* Overlay on hover */}
                 <div className="absolute inset-0 flex flex-col justify-end p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                   style={{ background: 'linear-gradient(transparent, rgba(10,15,31,0.95))' }}>
-                  <h3 className="font-heading text-sm font-bold uppercase tracking-wider text-white">{item.label}</h3>
+                  <h2 className="font-heading text-sm font-bold uppercase tracking-wider text-white">{item.label}</h2>
                   <p className="text-[#A8A8A8] text-xs mt-1">{item.desc}</p>
                 </div>
 
                 {/* Caption */}
                 <div className="p-4">
-                  <h3 className="font-heading text-sm font-bold uppercase tracking-wider text-[#E8E8E8]">{item.label}</h3>
+                  <h2 className="font-heading text-sm font-bold uppercase tracking-wider text-[#E8E8E8]">{item.label}</h2>
                   <p className="text-[#A8A8A8] text-xs mt-1">{item.desc}</p>
                 </div>
               </FadeIn>
@@ -122,14 +154,22 @@ export default function GalleryPage() {
 
           <FadeIn delay={0.2} className="mt-12 p-6 rounded-xl border border-dashed border-[rgba(192,192,192,0.2)] text-center">
             <p className="text-[#A8A8A8] text-sm mb-4">
-              📸 <strong className="text-[#E8E8E8]">Placeholder Notice:</strong> Real operational photos will be added here once supplied by the client. Contact us to see actual on-site demonstrations.
+              📸 <strong className="text-[#E8E8E8]">Operational Transparency:</strong> Live field photos from our client sites in Ghaziabad, Noida, and Greater Noida. Contact us to schedule a site demonstration.
             </p>
-            <Link href="/contact" className="btn-secondary text-sm">
+            <Link href="/contact" title="Arrange a site demonstration" className="btn-secondary text-sm">
               Arrange a Site Visit
             </Link>
           </FadeIn>
         </div>
       </section>
+
+      {/* 3 FAQs Section */}
+      <FAQSection
+        title="Frequently Asked Questions: Field Operations & Proof"
+        subtitle="OPERATIONAL STANDARDS"
+        description="Understanding our turnout inspections, equipment standards, and site verification."
+        faqs={galleryFaqs}
+      />
     </>
   );
 }

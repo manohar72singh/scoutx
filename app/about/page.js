@@ -5,6 +5,8 @@ import Image from 'next/image';
 import LogoSVG from '@/components/LogoSVG';
 import WhyChooseUsSection from '@/components/WhyChooseUsSection';
 import OurClientsSection from '@/components/OurClientsSection';
+import CertificationsSection from '@/components/CertificationsSection';
+import FAQSection from '@/components/FAQSection';
 
 export const metadata = {
   title: 'About Us | ScoutX Protection Group in NCR',
@@ -13,8 +15,10 @@ export const metadata = {
   alternates: { canonical: 'https://scoutxsecurity.com/about' },
   openGraph: {
     url: 'https://scoutxsecurity.com/about',
-    title: 'About ScoutX Protection Group',
-    description: 'Our founding story, mission, leadership, and commitment to PSARA-compliant security.',
+    title: 'About ScoutX Protection Group | PSARA Licensed Agency',
+    description: 'Our founding story, mission, leadership, and commitment to PSARA-compliant security across Delhi NCR.',
+    siteName: 'ScoutX Protection Group',
+    type: 'website',
   }
 };
 
@@ -23,6 +27,21 @@ const values = [
   { icon: '🎯', title: 'Zero Compromise', desc: 'Every guard deployed meets our stringent vetting, training, and conduct standards — no exceptions.' },
   { icon: '🤝', title: 'Client Partnership', desc: 'We are not just a vendor. We become your long-term security partner, adapting as your needs evolve.' },
   { icon: '⚡', title: '24/7 Accountability', desc: 'Supervisor rounds, GPS attendance, and dedicated point-of-contact ensure continuous service quality.' },
+];
+
+const aboutFaqs = [
+  {
+    q: 'When was ScoutX Protection Group established and where is it headquartered?',
+    a: 'ScoutX Protection Group Pvt. Ltd. was founded to provide military-grade private security and is headquartered with its central operational command in Govindpuram, Ghaziabad, operating across the entire Delhi NCR region.',
+  },
+  {
+    q: 'How does ScoutX verify the credentials and criminal background of its guards?',
+    a: 'Every candidate undergoes mandatory local police background checks, residence verification, physical fitness drills, and 160+ hours of certified tactical training before on-site placement.',
+  },
+  {
+    q: 'What makes ScoutX different from unorganized local security guard vendors?',
+    a: 'ScoutX operates under a legitimate Government UP-PSARA license, provides statutory ESIC/EPF benefits, comprehensive Workmen’s Compensation insurance, 24/7 mobile supervisor checks, and guaranteed same-day guard replacement.',
+  },
 ];
 
 export default function AboutPage() {
@@ -64,6 +83,18 @@ export default function AboutPage() {
                 },
               ],
             },
+            {
+              '@context': 'https://schema.org',
+              '@type': 'FAQPage',
+              mainEntity: aboutFaqs.map((faq) => ({
+                '@type': 'Question',
+                name: faq.q,
+                acceptedAnswer: {
+                  '@type': 'Answer',
+                  text: faq.a,
+                },
+              })),
+            },
           ]),
         }}
       />
@@ -73,7 +104,8 @@ export default function AboutPage() {
         <div className="absolute inset-0 z-0 opacity-100">
           <Image
             src="/about.jpeg"
-            alt="ScoutX Security Team"
+            alt="ScoutX Security Guard Team in Ghaziabad"
+            title="ScoutX Professional Security Team"
             fill
             priority
             className="object-cover object-center"
@@ -114,8 +146,8 @@ export default function AboutPage() {
               </p>
             </div>
             <div className="flex gap-4 mt-8">
-              <Link href="/contact#quote" className="btn-primary">Get a Quote</Link>
-              <Link href="/why-choose-us" className="btn-secondary">Our Credentials</Link>
+              <Link href="/contact#quote" title="Request a security quote" className="btn-primary">Get a Quote</Link>
+              <Link href="/why-choose-us" title="Review our credentials" className="btn-secondary">Our Credentials</Link>
             </div>
           </div>
 
@@ -129,7 +161,7 @@ export default function AboutPage() {
             ].map((stat) => (
               <div key={stat.label} className="card-dark p-6 text-center">
                 <div className="font-heading text-5xl font-bold text-gradient-steel mb-2">{stat.value}</div>
-                <div className="font-heading text-sm font-bold uppercase tracking-wider text-[#C0C0C0]">{stat.label}</div>
+                <h3 className="font-heading text-sm font-bold uppercase tracking-wider text-[#C0C0C0]">{stat.label}</h3>
               </div>
             ))}
           </div>
@@ -140,7 +172,7 @@ export default function AboutPage() {
       <section className="py-16 px-4 sm:px-6" style={{ background: 'linear-gradient(135deg, #0A0F1F, #111827)' }}>
         <div className="max-w-4xl mx-auto text-center">
           <span className="section-label">Our Purpose</span>
-          <h2 className="font-heading text-4xl font-bold uppercase text-white mb-6">Mission & Vision</h2>
+          <h2 className="font-heading text-4xl font-bold uppercase text-white mb-6">Mission &amp; Vision</h2>
           <div className="grid md:grid-cols-2 gap-6 mt-8">
             <div className="card-dark p-8">
               <div className="text-4xl mb-4">🎯</div>
@@ -193,10 +225,11 @@ export default function AboutPage() {
                   {dir.name.charAt(0)}
                 </div>
                 <h3 className="font-heading text-xl font-bold uppercase text-[#E8E8E8] mb-1">{dir.name}</h3>
-                <p className="text-[#2E6FBF] text-sm font-heading uppercase tracking-wider mb-4">{dir.title}</p>
+                <h4 className="text-[#2E6FBF] text-sm font-heading uppercase tracking-wider mb-4">{dir.title}</h4>
                 <p className="text-[#A8A8A8] text-sm leading-relaxed mb-4">{dir.bio}</p>
                 <a
                   href={`tel:+91${dir.phone}`}
+                  title={`Call Director ${dir.name}`}
                   className="inline-flex items-center gap-2 text-[#4A8FD4] text-sm hover:text-white transition-colors font-heading font-semibold"
                 >
                   <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
@@ -232,8 +265,19 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* Certifications Section */}
+      <CertificationsSection />
+
       {/* Our Clients */}
       <OurClientsSection />
+
+      {/* 3 FAQs Section */}
+      <FAQSection
+        title="Frequently Asked Questions About ScoutX"
+        subtitle="COMPANY & LEADERSHIP"
+        description="Learn more about our licensing, training, and deployment standards."
+        faqs={aboutFaqs}
+      />
 
       {/* Why Choose Us */}
       <WhyChooseUsSection />
@@ -245,7 +289,7 @@ export default function AboutPage() {
             Partner With ScoutX Today
           </h2>
           <p className="text-[#A8A8A8] mb-6">Get a customised security deployment plan for your premises within 24 hours.</p>
-          <Link href="/contact#quote" className="btn-primary">Request a Free Quote</Link>
+          <Link href="/contact#quote" title="Request a free customized security quote" className="btn-primary">Request a Free Quote</Link>
         </div>
       </section>
     </>

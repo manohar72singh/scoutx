@@ -32,6 +32,7 @@ const quickLinks = [
   { label: 'All Services', href: '/services' },
   { label: 'Industries Served', href: '/industries' },
   { label: 'Why Choose Us', href: '/why-choose-us' },
+  { label: 'Licenses & Certifications', href: '/why-choose-us#certifications' },
   { label: 'Gallery', href: '/gallery' },
   { label: 'Blog & Insights', href: '/blog' },
   { label: 'Careers / Jobs', href: '/careers' },

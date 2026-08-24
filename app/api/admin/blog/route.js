@@ -73,7 +73,9 @@ export async function POST(req) {
     const content = formData.get('content')?.toString().trim();
     const metaTitle = formData.get('meta_title')?.toString().trim() || null;
     const metaDescription = formData.get('meta_description')?.toString().trim() || null;
-    const status = formData.get('status')?.toString() === 'published' ? 'published' : 'draft';
+    const rawStatus = formData.get('status')?.toString();
+    const status = ['published', 'scheduled', 'draft'].includes(rawStatus) ? rawStatus : 'draft';
+    const scheduledDate = formData.get('published_at')?.toString().trim();
     const requestedSlug = formData.get('slug')?.toString().trim();
     const imageFile = formData.get('featured_image');
 
@@ -95,7 +97,12 @@ export async function POST(req) {
       featuredImage = await saveImage(imageFile);
     }
 
-    const publishedAt = status === 'published' ? new Date() : null;
+    let publishedAt = null;
+    if (status === 'scheduled' && scheduledDate) {
+      publishedAt = new Date(scheduledDate);
+    } else if (status === 'published') {
+      publishedAt = scheduledDate ? new Date(scheduledDate) : new Date();
+    }
 
     const [result] = await pool.execute(
       `INSERT INTO blog_posts (title, slug, excerpt, content, featured_image, meta_title, meta_description, status, published_at)

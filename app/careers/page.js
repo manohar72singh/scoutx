@@ -1,71 +1,91 @@
-'use client';
 // app/careers/page.js
 
-import { useState } from 'react';
 import Link from 'next/link';
+import CareersClient from '@/components/CareersClient';
+import FAQSection from '@/components/FAQSection';
+
+export const metadata = {
+  title: 'Security Careers & Guard Jobs in Ghaziabad, Noida & NCR | ScoutX',
+  description:
+    'Join ScoutX Protection Group — Apply for security guard, armed gunman, female security officer, supervisor, bouncer, and housekeeping jobs across Delhi NCR. Competitive pay, PF/ESIC & free training.',
+  alternates: { canonical: 'https://scoutxsecurity.com/careers' },
+  openGraph: {
+    url: 'https://scoutxsecurity.com/careers',
+    title: 'Security Careers & Guard Jobs in Delhi NCR | ScoutX',
+    description: 'Apply for verified security guard, supervisor, and facility jobs in Ghaziabad, Noida, and NCR.',
+    siteName: 'ScoutX Protection Group',
+    type: 'website',
+  }
+};
+
+const jobListings = [
+  { title: 'Security Guard (Unarmed)', type: 'Full-Time / Part-Time' },
+  { title: 'Security Guard (Gunman)', type: 'Full-Time' },
+  { title: 'Female Security Guard', type: 'Full-Time / Part-Time' },
+  { title: 'Female Security Officer', type: 'Full-Time' },
+  { title: 'Security Supervisor', type: 'Full-Time' },
+  { title: 'Operation Manager', type: 'Full-Time' },
+  { title: 'PSO (Personal Security Officer)', type: 'Full-Time / Contractual' },
+  { title: 'Professional Bouncer', type: 'Full-Time / Contractual' },
+  { title: 'Housekeeping Staff', type: 'Full-Time / Part-Time' },
+  { title: 'Private Detective / Field Investigator', type: 'Full-Time / Contractual' },
+];
+
+const careersFaqs = [
+  {
+    q: 'What are the basic eligibility criteria for joining ScoutX as a security guard?',
+    a: 'Candidates must be minimum 18 years old, physically fit, possess valid government ID proof (Aadhaar/Voter ID), pass local police character verification, and complete our mandatory training.',
+  },
+  {
+    q: 'Does ScoutX provide free uniforms, accommodation, and PF/ESIC benefits?',
+    a: 'Yes. All active guards are provided complete uniforms and duty gear, statutory Provident Fund, ESIC healthcare coverage, and accommodation support at select NCR depots.',
+  },
+  {
+    q: 'How long does the recruitment and training process take before placement?',
+    a: 'After document verification and physical screening, candidates undergo our structured 160+ hour training module and are deployed within 7 to 10 days.',
+  },
+];
 
 export default function CareersPage() {
-  const [form, setForm] = useState({
-    full_name: '', phone: '', email: '', position_applied: '', experience_years: '', website: '',
-  });
-  const [resume, setResume] = useState(null);
-  const [status, setStatus] = useState(null); // null | 'loading' | 'success' | 'error'
-  const [errors, setErrors] = useState([]);
-
-  const positions = [
-    'Security Guard', 'Security Guard (Gunman)', 'Female Security Guard',
-    'Female Security Officer', 'Security Supervisor', 'Operation Manager',
-    'PSO', 'Bouncer', 'Housekeeping Staff', 'Detective / Investigator',
-  ];
-
-  const handleChange = (e) => {
-    setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setStatus('loading');
-    setErrors([]);
-
-    const fd = new FormData();
-    Object.entries(form).forEach(([k, v]) => fd.append(k, v));
-    if (resume) fd.append('resume', resume);
-
-    try {
-      const res = await fetch(
-        `/api/applications`,
-        { method: 'POST', body: fd }
-      );
-      const data = await res.json();
-      if (data.success) {
-        setStatus('success');
-        setForm({ full_name: '', phone: '', email: '', position_applied: '', experience_years: '', website: '' });
-        setResume(null);
-      } else {
-        setStatus('error');
-        setErrors(data.errors || [{ msg: data.message || 'Submission failed. Please try again.' }]);
-      }
-    } catch {
-      setStatus('error');
-      setErrors([{ msg: 'Network error. Please check your connection.' }]);
-    }
-  };
-
-  const jobListings = [
-    { title: 'Security Guard', type: 'Full-Time / Part-Time' },
-    { title: 'Security Guard (Gunman)', type: 'Full-Time' },
-    { title: 'Female Security Guard', type: 'Full-Time / Part-Time' },
-    { title: 'Female Security Officer', type: 'Full-Time' },
-    { title: 'Security Supervisor', type: 'Full-Time' },
-    { title: 'Operation Manager', type: 'Full-Time' },
-    { title: 'PSO', type: 'Full-Time / Contractual' },
-    { title: 'Bouncer', type: 'Full-Time / Contractual' },
-    { title: 'Housekeeping Staff', type: 'Full-Time / Part-Time' },
-    { title: 'Private Detective', type: 'Full-Time / Contractual' },
-  ];
-
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify([
+            {
+              '@context': 'https://schema.org',
+              '@type': 'BreadcrumbList',
+              itemListElement: [
+                {
+                  '@type': 'ListItem',
+                  position: 1,
+                  name: 'Home',
+                  item: 'https://scoutxsecurity.com',
+                },
+                {
+                  '@type': 'ListItem',
+                  position: 2,
+                  name: 'Careers',
+                  item: 'https://scoutxsecurity.com/careers',
+                },
+              ],
+            },
+            {
+              '@context': 'https://schema.org',
+              '@type': 'FAQPage',
+              mainEntity: careersFaqs.map((faq) => ({
+                '@type': 'Question',
+                name: faq.q,
+                acceptedAnswer: {
+                  '@type': 'Answer',
+                  text: faq.a,
+                },
+              })),
+            },
+          ]),
+        }}
+      />
       {/* Hero */}
       <section className="relative pt-32 pb-20 px-4 sm:px-6 overflow-hidden" style={{ background: 'linear-gradient(135deg, #0A0F1F, #111827)' }}>
         <div className="absolute inset-0 tactical-grid opacity-30" />
@@ -76,7 +96,7 @@ export default function CareersPage() {
           </h1>
           <div className="chrome-divider max-w-xs mx-auto" />
           <p className="text-[#A8A8A8] text-lg max-w-2xl mx-auto mt-6">
-            Join India&apos;s most professional security team. We offer competitive pay, training, uniform, growth opportunities, and stable employment.
+            Join India&apos;s most professional security team. We offer competitive pay, certified training, free uniforms, growth opportunities, and stable employment.
           </p>
         </div>
       </section>
@@ -86,13 +106,13 @@ export default function CareersPage() {
         <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-12">
             {[
-              { icon: '💰', label: 'Competitive Pay', sub: 'Monthly salary + overtime' },
-              { icon: '🎓', label: 'Free Training', sub: '160+ hours certified' },
-              { icon: '🏥', label: 'ESI/PF Benefits', sub: 'Govt. social security' },
+              { icon: '💰', label: 'Competitive Pay', sub: 'Monthly salary + overtime & bonuses' },
+              { icon: '🎓', label: 'Free Certified Training', sub: '160+ hours certified by ex-defence staff' },
+              { icon: '🏥', label: 'ESI/PF & Medical Cover', sub: 'Full statutory social security & insurance' },
             ].map((b) => (
               <div key={b.label} className="card-dark p-4 text-center">
                 <div className="text-3xl mb-2">{b.icon}</div>
-                <div className="font-heading text-sm font-bold uppercase text-[#E8E8E8]">{b.label}</div>
+                <h3 className="font-heading text-sm font-bold uppercase text-[#E8E8E8]">{b.label}</h3>
                 <div className="text-[#A8A8A8] text-xs mt-1">{b.sub}</div>
               </div>
             ))}
@@ -100,11 +120,11 @@ export default function CareersPage() {
         </div>
       </section>
 
-      {/* Job Listings */}
+      {/* Job Listings & Interactive Form */}
       <section className="py-4 pb-16 px-4 sm:px-6" style={{ background: '#0B0B0D' }}>
         <div className="max-w-5xl mx-auto">
           <h2 className="font-heading text-3xl font-bold uppercase text-white mb-6">
-            Open <span className="text-gradient-steel">Positions</span>
+            Current Open <span className="text-gradient-steel">Job Positions</span>
           </h2>
           <div className="space-y-3 mb-12">
             {jobListings.map((job) => (
@@ -119,122 +139,27 @@ export default function CareersPage() {
                 </div>
                 <a
                   href="#apply"
-                  className="btn-primary text-sm shrink-0"
+                  title={`Apply for ${job.title}`}
+                  className="btn-primary text-xs uppercase tracking-wider px-5 py-2.5 shrink-0"
                 >
-                  Apply Now
+                  Apply Now →
                 </a>
               </div>
             ))}
           </div>
 
-          {/* Application Form */}
-          <div id="apply" className="card-dark p-8 scroll-mt-24">
-            <h2 className="font-heading text-2xl font-bold uppercase text-white mb-2">
-              Submit Your Application
-            </h2>
-            <p className="text-[#A8A8A8] text-sm mb-6">Fill in your details and upload your resume (PDF/DOC, max 5MB). Our HR team will contact you within 3 working days.</p>
-
-            {status === 'success' && (
-              <div className="mb-6 p-4 rounded-lg bg-green-900/30 border border-green-700/50 text-green-400 text-sm font-medium">
-                ✅ Application submitted successfully! We&apos;ll review your profile and contact you within 3 working days.
-              </div>
-            )}
-            {status === 'error' && errors.length > 0 && (
-              <div className="mb-6 p-4 rounded-lg bg-red-900/30 border border-red-700/50 text-red-400 text-sm">
-                {errors.map((err, i) => <p key={i}>❌ {err.msg}</p>)}
-              </div>
-            )}
-
-            <form onSubmit={handleSubmit} encType="multipart/form-data" className="space-y-5" noValidate>
-              {/* Honeypot */}
-              <input type="text" name="website" value={form.website} onChange={handleChange} style={{ display: 'none' }} tabIndex={-1} autoComplete="off" />
-
-              <div className="grid sm:grid-cols-2 gap-5">
-                <div>
-                  <label htmlFor="full_name" className="block text-[#C0C0C0] text-sm font-medium mb-1.5">Full Name *</label>
-                  <input
-                    id="full_name" name="full_name" type="text" required
-                    value={form.full_name} onChange={handleChange}
-                    placeholder="Your full name"
-                    className="form-input"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="phone" className="block text-[#C0C0C0] text-sm font-medium mb-1.5">Mobile Number *</label>
-                  <input
-                    id="phone" name="phone" type="tel" required
-                    value={form.phone} onChange={handleChange}
-                    placeholder="10-digit mobile number"
-                    className="form-input"
-                  />
-                </div>
-              </div>
-
-              <div className="grid sm:grid-cols-2 gap-5">
-                <div>
-                  <label htmlFor="email" className="block text-[#C0C0C0] text-sm font-medium mb-1.5">Email Address</label>
-                  <input
-                    id="email" name="email" type="email"
-                    value={form.email} onChange={handleChange}
-                    placeholder="your@email.com (optional)"
-                    className="form-input"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="position_applied" className="block text-[#C0C0C0] text-sm font-medium mb-1.5">Position Applied For *</label>
-                  <select
-                    id="position_applied" name="position_applied" required
-                    value={form.position_applied} onChange={handleChange}
-                    className="form-input"
-                    style={{ background: '#111827' }}
-                  >
-                    <option value="">-- Select Position --</option>
-                    {positions.map((p) => <option key={p} value={p}>{p}</option>)}
-                  </select>
-                </div>
-              </div>
-
-              <div className="grid sm:grid-cols-2 gap-5">
-                <div>
-                  <label htmlFor="experience_years" className="block text-[#C0C0C0] text-sm font-medium mb-1.5">Years of Security Experience *</label>
-                  <input
-                    id="experience_years" name="experience_years" type="number" min="0" max="50" required
-                    value={form.experience_years} onChange={handleChange}
-                    placeholder="0 if fresher"
-                    className="form-input"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="resume" className="block text-[#C0C0C0] text-sm font-medium mb-1.5">Upload Resume (PDF/DOC, max 5MB)</label>
-                  <input
-                    id="resume" name="resume" type="file"
-                    accept=".pdf,.doc,.docx"
-                    onChange={(e) => setResume(e.target.files[0])}
-                    className="form-input cursor-pointer file:mr-3 file:py-1 file:px-3 file:rounded file:border-0 file:text-xs file:font-heading file:font-bold file:uppercase file:bg-[rgba(46,111,191,0.3)] file:text-[#4A8FD4] hover:file:bg-[rgba(46,111,191,0.5)]"
-                  />
-                </div>
-              </div>
-
-              <button
-                type="submit"
-                disabled={status === 'loading'}
-                id="careers-submit-btn"
-                className="btn-primary w-full justify-center disabled:opacity-60 disabled:cursor-not-allowed"
-              >
-                {status === 'loading' ? (
-                  <>
-                    <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
-                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
-                    </svg>
-                    Submitting...
-                  </>
-                ) : '🚀 Submit Application'}
-              </button>
-            </form>
-          </div>
+          {/* Interactive Form */}
+          <CareersClient />
         </div>
       </section>
+
+      {/* 3 FAQs Section */}
+      <FAQSection
+        title="Frequently Asked Questions: Guard Recruitment & Careers"
+        subtitle="EMPLOYMENT GUIDELINES"
+        description="Learn more about our hiring requirements, training modules, and employee benefits."
+        faqs={careersFaqs}
+      />
     </>
   );
 }

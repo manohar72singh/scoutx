@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import ServiceCard from '@/components/ServiceCard';
+import FAQSection from '@/components/FAQSection';
 import FadeIn from '@/components/FadeIn';
 
 export const metadata = {
@@ -11,8 +12,10 @@ export const metadata = {
   alternates: { canonical: 'https://scoutxsecurity.com/industries' },
   openGraph: {
     url: 'https://scoutxsecurity.com/industries',
-    title: 'Industries Secured by ScoutX',
+    title: 'Industries Secured by ScoutX | Delhi NCR Security Solutions',
     description: 'Specialized security guard services for residential, commercial, industrial, and institutional sectors in NCR.',
+    siteName: 'ScoutX Protection Group',
+    type: 'website',
   }
 };
 
@@ -68,30 +71,63 @@ const industries = [
   },
 ];
 
+const industryFaqs = [
+  {
+    q: 'How does ScoutX customize guard deployment for high-rise residential societies vs manufacturing factories?',
+    a: 'Residential societies receive customer-service-oriented guards trained in visitor apps (MyGate/NoBroker), intercom screening, and parking management. Factories receive heavy-duty personnel trained in material gate passes, frisking, loading dock surveillance, and Factory Act compliance.',
+  },
+  {
+    q: 'Do you provide security guards trained specifically for healthcare & hospital environments?',
+    a: 'Yes. Our hospital guards receive specialized training in emotional de-escalation, ICU/maternity ward access restrictions, ambulance driveway clearance, and crowd control during emergencies.',
+  },
+  {
+    q: 'Can ScoutX supply event security teams and bouncers on short notice for NCR banquets and exhibitions?',
+    a: 'Yes, we provide scalable event security squads (bouncers, female frisking personnel, access control marshals) deployable within 12 to 24 hours across Delhi NCR.',
+  },
+  {
+    q: 'Are your industrial factory guards trained in fire safety and industrial accident response?',
+    a: 'Yes, our industrial guards and supervisors complete fire extinguisher handling, CPR first-aid drills, and chemical hazard evacuation protocols.',
+  },
+];
+
 export default function IndustriesPage() {
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'BreadcrumbList',
-            itemListElement: [
-              {
-                '@type': 'ListItem',
-                position: 1,
-                name: 'Home',
-                item: 'https://scoutxsecurity.com',
-              },
-              {
-                '@type': 'ListItem',
-                position: 2,
-                name: 'Industries We Serve',
-                item: 'https://scoutxsecurity.com/industries',
-              },
-            ],
-          }),
+          __html: JSON.stringify([
+            {
+              '@context': 'https://schema.org',
+              '@type': 'BreadcrumbList',
+              itemListElement: [
+                {
+                  '@type': 'ListItem',
+                  position: 1,
+                  name: 'Home',
+                  item: 'https://scoutxsecurity.com',
+                },
+                {
+                  '@type': 'ListItem',
+                  position: 2,
+                  name: 'Industries We Serve',
+                  item: 'https://scoutxsecurity.com/industries',
+                },
+              ],
+            },
+            {
+              '@context': 'https://schema.org',
+              '@type': 'FAQPage',
+              mainEntity: industryFaqs.map((faq) => ({
+                '@type': 'Question',
+                name: faq.q,
+                acceptedAnswer: {
+                  '@type': 'Answer',
+                  text: faq.a,
+                },
+              })),
+            },
+          ]),
         }}
       />
       {/* Hero */}
@@ -125,14 +161,14 @@ export default function IndustriesPage() {
                   <div className="space-y-4">
                     <div>
                       <h3 className="font-heading text-xs font-bold uppercase tracking-widest text-[#C0C0C0] mb-2">
-                        ⚠️ The Challenge
+                        ⚠️ The Security Challenge
                       </h3>
                       <p className="text-xs">{ind.challenge}</p>
                     </div>
                     <div>
-                      <h3 className="font-heading text-xs font-bold uppercase tracking-widest text-[#C0C0C0] mb-2">
-                        ✅ Our Solution
-                      </h3>
+                      <h4 className="font-heading text-xs font-bold uppercase tracking-widest text-[#C0C0C0] mb-2">
+                        ✅ Our Tailored Solution
+                      </h4>
                       <p className="text-xs">{ind.solution}</p>
                     </div>
                   </div>
@@ -143,6 +179,14 @@ export default function IndustriesPage() {
         </div>
       </section>
 
+      {/* 4 FAQs Section */}
+      <FAQSection
+        title="Frequently Asked Questions: Industry Deployments"
+        subtitle="SECTOR-SPECIFIC PROTOCOLS"
+        description="How we tailor guard skillsets and deployment routines to different business sectors."
+        faqs={industryFaqs}
+      />
+
       {/* CTA */}
       <section className="py-16 px-4 sm:px-6" style={{ background: 'linear-gradient(135deg, #1E4D8C, #2E6FBF)' }}>
         <FadeIn direction="up">
@@ -151,7 +195,7 @@ export default function IndustriesPage() {
               Don&apos;t See Your Industry?
             </h2>
             <p className="text-[rgba(255,255,255,0.8)] mb-6">We adapt to any environment. Contact us to discuss your specific security requirements.</p>
-            <Link href="/contact#quote" className="inline-flex items-center gap-2 px-8 py-4 bg-white text-[#1E4D8C] font-heading font-bold text-base uppercase tracking-wider rounded-md hover:bg-[#0B0B0D] hover:text-white hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all duration-300">
+            <Link href="/contact#quote" title="Request a customized industry security plan" className="inline-flex items-center gap-2 px-8 py-4 bg-white text-[#1E4D8C] font-heading font-bold text-base uppercase tracking-wider rounded-md hover:bg-[#0B0B0D] hover:text-white hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all duration-300">
               Request a Custom Plan
             </Link>
           </div>

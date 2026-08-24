@@ -1,6 +1,8 @@
 // app/why-choose-us/page.js
 
 import Link from 'next/link';
+import CertificationsSection from '@/components/CertificationsSection';
+import FAQSection from '@/components/FAQSection';
 
 export const metadata = {
   title: 'Why Choose ScoutX | PSARA Licensed Security Guards in NCR',
@@ -9,8 +11,10 @@ export const metadata = {
   alternates: { canonical: 'https://scoutxsecurity.com/why-choose-us' },
   openGraph: {
     url: 'https://scoutxsecurity.com/why-choose-us',
-    title: 'Why Choose ScoutX Protection Group?',
+    title: 'Why Choose ScoutX Protection Group? | Licensed & Verified',
     description: '100% PSARA licensed, Police verified, and professionally trained security guards in NCR.',
+    siteName: 'ScoutX Protection Group',
+    type: 'website',
   }
 };
 
@@ -66,30 +70,63 @@ const credentials = [
   },
 ];
 
+const whyUsFaqs = [
+  {
+    q: 'Why is hiring a PSARA-licensed agency legally required for businesses in UP & NCR?',
+    a: 'Under the Private Security Agencies (Regulation) Act, 2005, engaging an unlicensed vendor carries legal penalties and voids insurance coverage for on-site theft and premises liability. ScoutX holds full state authorization.',
+  },
+  {
+    q: 'Can client committees audit guard background verification records at any time?',
+    a: 'Yes. We maintain complete physical and digital compliance dossiers including police verification slips, Aadhaar copies, and medical fitness certificates for client inspection.',
+  },
+  {
+    q: 'What happens if a guard falls sick or fails to report on time for duty?',
+    a: 'Our operations team maintains a 15% roving relief reserve across Ghaziabad and Noida. If a guard is absent, a relief guard is dispatched immediately to ensure 0% post vacancy.',
+  },
+  {
+    q: 'Are your security rates competitive and inclusive of all statutory taxes and EPF/ESIC?',
+    a: 'Yes. Our quotations clearly outline base wages, statutory ESIC, EPF, bonus, uniform allowances, and GST with zero hidden overheads.',
+  },
+];
+
 export default function WhyChooseUsPage() {
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'BreadcrumbList',
-            itemListElement: [
-              {
-                '@type': 'ListItem',
-                position: 1,
-                name: 'Home',
-                item: 'https://scoutxsecurity.com',
-              },
-              {
-                '@type': 'ListItem',
-                position: 2,
-                name: 'Why Choose Us',
-                item: 'https://scoutxsecurity.com/why-choose-us',
-              },
-            ],
-          }),
+          __html: JSON.stringify([
+            {
+              '@context': 'https://schema.org',
+              '@type': 'BreadcrumbList',
+              itemListElement: [
+                {
+                  '@type': 'ListItem',
+                  position: 1,
+                  name: 'Home',
+                  item: 'https://scoutxsecurity.com',
+                },
+                {
+                  '@type': 'ListItem',
+                  position: 2,
+                  name: 'Why Choose Us',
+                  item: 'https://scoutxsecurity.com/why-choose-us',
+                },
+              ],
+            },
+            {
+              '@context': 'https://schema.org',
+              '@type': 'FAQPage',
+              mainEntity: whyUsFaqs.map((faq) => ({
+                '@type': 'Question',
+                name: faq.q,
+                acceptedAnswer: {
+                  '@type': 'Answer',
+                  text: faq.a,
+                },
+              })),
+            },
+          ]),
         }}
       />
       {/* Hero */}
@@ -141,6 +178,9 @@ export default function WhyChooseUsPage() {
         </div>
       </section>
 
+      {/* Certifications Showcase */}
+      <CertificationsSection />
+
       {/* Comparison */}
       <section className="py-20 px-4 sm:px-6" style={{ background: 'linear-gradient(135deg, #0A0F1F, #111827)' }}>
         <div className="max-w-5xl mx-auto">
@@ -153,20 +193,20 @@ export default function WhyChooseUsPage() {
             <table className="admin-table">
               <thead>
                 <tr>
-                  <th>Feature</th>
+                  <th>Compliance &amp; Operational Feature</th>
                   <th className="text-[#4A8FD4]">ScoutX ✓</th>
                   <th className="text-red-400">Typical Unlicensed Agency</th>
                 </tr>
               </thead>
               <tbody>
                 {[
-                  ['PSARA License', '✅ Yes', '❌ Often missing'],
-                  ['Police Verification', '✅ 100% of guards', '⚠️ Inconsistent'],
-                  ['Formal Training', '✅ 160+ hours', '❌ On-the-job at best'],
-                  ['Insurance Coverage', '✅ Full liability', '❌ None'],
-                  ['Supervisor Checks', '✅ GPS + unannounced', '❌ Rarely'],
-                  ['Replacement Guarantee', '✅ Same-day', '❌ Not guaranteed'],
-                  ['Transparent Contract', '✅ Always', '⚠️ Verbal agreements common'],
+                  ['PSARA Statutory License', '✅ Yes (UP-PSARA Verified)', '❌ Often missing / Fake'],
+                  ['Police Character Verification', '✅ 100% of guards verified', '⚠️ Inconsistent / Skipped'],
+                  ['Certified Formal Training', '✅ 160+ hours with drills', '❌ On-the-job at best'],
+                  ['Statutory Workmen’s Insurance', '✅ Full liability cover', '❌ None (Client liable)'],
+                  ['Supervisor Audits & Night Checks', '✅ GPS attendance + unannounced', '❌ Rarely / No checks'],
+                  ['Emergency Relief Replacement', '✅ Same-day guaranteed', '❌ Not guaranteed'],
+                  ['Transparent SLA Contracts', '✅ Complete legal clarity', '⚠️ Verbal agreements common'],
                 ].map(([feat, yes, no]) => (
                   <tr key={feat}>
                     <td className="font-medium text-[#E8E8E8]">{feat}</td>
@@ -180,6 +220,14 @@ export default function WhyChooseUsPage() {
         </div>
       </section>
 
+      {/* 4 FAQs Section */}
+      <FAQSection
+        title="Frequently Asked Questions: Credentials & Compliance"
+        subtitle="DUE DILIGENCE & VETTING"
+        description="Clear answers regarding our licensing, liability coverage, and operational oversight."
+        faqs={whyUsFaqs}
+      />
+
       {/* CTA */}
       <section className="py-16 px-4 sm:px-6" style={{ background: '#0B0B0D', borderTop: '1px solid rgba(192,192,192,0.1)' }}>
         <div className="max-w-3xl mx-auto text-center">
@@ -188,8 +236,8 @@ export default function WhyChooseUsPage() {
           </h2>
           <p className="text-[#A8A8A8] mb-6">Get your customised security deployment from a fully compliant agency.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/contact#quote" className="btn-primary">Request a Quote</Link>
-            <a href="tel:+918682066666" className="btn-secondary">Call Ashok Choudhary: 86820 66666</a>
+            <Link href="/contact#quote" title="Request a security quote" className="btn-primary">Request a Quote</Link>
+            <a href="tel:+918682066666" title="Call Director Ashok Choudhary" className="btn-secondary">Call Ashok Choudhary: 86820 66666</a>
           </div>
         </div>
       </section>

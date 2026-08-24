@@ -11,7 +11,7 @@ export async function GET() {
     const [rows] = await pool.query(
       `SELECT title, slug, excerpt, published_at, updated_at 
        FROM blog_posts 
-       WHERE status = 'published' 
+       WHERE status = 'published' OR (status = 'scheduled' AND published_at <= NOW())
        ORDER BY published_at DESC 
        LIMIT 20`
     );

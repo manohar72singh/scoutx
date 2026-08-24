@@ -4,6 +4,7 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import WhyChooseUsSection from '@/components/WhyChooseUsSection';
+import CertificationsSection from '@/components/CertificationsSection';
 import CityLeadForm from '@/components/CityLeadForm';
 
 const servicesList = [
@@ -70,6 +71,10 @@ const cities = {
       {
         q: 'Can we get customized security guard uniforms matching our corporate branding in Noida?',
         a: 'Yes, our guards can be deployed in standard crisp tactical uniforms, safari suits (for executive buildings), or specialized corporate blazers.'
+      },
+      {
+        q: 'Are your security guards in Noida covered under EPF and ESIC?',
+        a: 'Yes, 100% of our security personnel are enrolled in EPF, ESIC, and covered under Workmen’s Compensation insurance.'
       }
     ]
   },
@@ -81,7 +86,7 @@ const cities = {
     description: 'Greater Noida features sprawling industrial belts, university campuses, and large-scale residential projects. ScoutX provides robust perimeter protection, gate management, vehicle checking, and quick-response security teams tailored for large premises.',
     localities: ['Pari Chowk & Commercial Belt', 'Knowledge Park I, II & III (Universities)', 'Ecotech Industrial Areas I to XVI', 'Greater Noida West (Noida Extension)', 'Yamuna Expressway Industrial Corridor', 'Surajpur Industrial Area'],
     industries: ['Colleges, Universities & Educational Campuses', 'Large Manufacturing & Automobile Industrial Plants', 'Gated Townships & Multi-Acre Societies', 'Warehouses & Logistics Hubs along Yamuna Expressway', 'Hospitals & Research Institutes'],
-    meta_title: 'Security Guard Services in Greater Noida | ScoutX Protection Group',
+    meta_title: 'Security Guard Services in Greater Noida | PSARA Licensed - ScoutX',
     meta_desc: 'Professional security guard agency in Greater Noida. PSARA certified, police verified guards for Knowledge Park campuses, factories & townships. Free quote.',
     faqs: [
       {
@@ -91,6 +96,14 @@ const cities = {
       {
         q: 'Are your security guards trained for heavy industrial safety in Greater Noida?',
         a: 'Yes, our industrial guards are trained in fire safety, material gate-pass verification, loading dock surveillance, and Factory Act compliance.'
+      },
+      {
+        q: 'How fast can guards be deployed to Greater Noida West (Noida Extension)?',
+        a: 'We can deploy verified residential and commercial security personnel to Greater Noida West societies within 24 to 48 hours.'
+      },
+      {
+        q: 'Do you provide mobile night patrol vehicles in Greater Noida industrial sectors?',
+        a: 'Yes, our mobile patrol supervisors conduct scheduled and surprise midnight inspections across Ecotech and Surajpur industrial parks.'
       }
     ]
   },
@@ -112,6 +125,14 @@ const cities = {
       {
         q: 'What is the contract duration for hiring security guards in Delhi?',
         a: 'We offer flexible contracts ranging from monthly ongoing deployments to short-term event security (daily or weekly).'
+      },
+      {
+        q: 'Are your security guards vetted by Delhi Police authorities?',
+        a: 'Yes, 100% of guards deployed in Delhi undergo complete police background verification and identity authentication.'
+      },
+      {
+        q: 'Can you provide female security guards for retail showrooms and hospitals in Delhi?',
+        a: 'Yes, we provide trained female security staff for frisking, crowd control, and visitor screening in Delhi hospitals and luxury retail venues.'
       }
     ]
   },
@@ -133,6 +154,14 @@ const cities = {
       {
         q: 'Are your guards insured under Workmen’s Compensation in Gurgaon?',
         a: 'Yes, all ScoutX security personnel are fully covered under statutory Workmen’s Compensation, PF, and ESIC.'
+      },
+      {
+        q: 'Do you provide armed gunmen for jewelry stores and banks in Gurugram?',
+        a: 'Yes, we provide licensed armed security guards with verified arms licenses for high-risk financial and retail establishments.'
+      },
+      {
+        q: 'How do you handle guard replacements in DLF Cyber City or Golf Course Road offices?',
+        a: 'We guarantee same-day replacement within 24 hours from our standby roster in Gurgaon.'
       }
     ]
   },
@@ -154,6 +183,14 @@ const cities = {
       {
         q: 'Do you manage shift handovers and night checks in Faridabad?',
         a: 'Yes, our patrol supervisors conduct mandatory daily attendance checks and random midnight audits across Faridabad client locations.'
+      },
+      {
+        q: 'Are guards in Faridabad trained in fire safety and industrial hazards?',
+        a: 'Yes, our industrial guards complete hands-on fire drill practice, fire extinguisher operation, and industrial safety compliance training.'
+      },
+      {
+        q: 'Can ScoutX supply housekeeping staff alongside security guards in Faridabad?',
+        a: 'Yes, we provide integrated security and housekeeping facility packages under a single contract.'
       }
     ]
   },
@@ -175,6 +212,14 @@ const cities = {
       {
         q: 'Are ScoutX guards in Meerut verified by local police?',
         a: 'Yes, every guard deployed in Meerut undergoes background verification through local police stations.'
+      },
+      {
+        q: 'How quickly can guards be deployed to Partapur industrial area?',
+        a: 'We can deploy trained industrial security personnel to Partapur and Modipuram facilities within 24 to 48 hours.'
+      },
+      {
+        q: 'Do you provide armed gunman security for cash transit and bank branches in Meerut?',
+        a: 'Yes, we supply licensed armed guards with valid arms licenses for banks, ATMs, and jewelry establishments across Meerut.'
       }
     ]
   },
@@ -196,6 +241,14 @@ const cities = {
       {
         q: 'How can I request a security audit for my factory in Hapur?',
         a: 'Call our team at +91 86820 66666 or submit the quick lead form on this page for a free on-site security assessment.'
+      },
+      {
+        q: 'Are ScoutX guards deployed in Pilkhuwa textile units police-verified?',
+        a: 'Yes, 100% of our security personnel undergo police verification and background screening before site deployment.'
+      },
+      {
+        q: 'What emergency relief support is available in Hapur if a guard is absent?',
+        a: 'We maintain reserve relief guards in our regional deployment roster to ensure 0% post vacancy.'
       }
     ]
   },
@@ -230,16 +283,7 @@ export default async function CityPage({ params }) {
   const city = cities[resolvedParams.citySlug];
   if (!city) notFound();
 
-  const cityFaqs = city.faqs || [
-    {
-      q: `How do I hire security guards in ${city.name}?`,
-      a: `Contact ScoutX Protection Group at +91 86820 66666 or fill out our online quote form. We will assess your requirements and deploy verified guards within 24–48 hours.`
-    },
-    {
-      q: `Are ScoutX guards in ${city.name} PSARA compliant?`,
-      a: `Yes, all operations and guard deployments strictly follow the PSARA Act rules and state government guidelines.`
-    }
-  ];
+  const cityFaqs = city.faqs;
 
   return (
     <>
@@ -303,8 +347,8 @@ export default async function CityPage({ params }) {
         <div className="absolute inset-0 tactical-grid opacity-30" />
         <div className="relative z-10 max-w-4xl mx-auto text-center">
           {/* Breadcrumb navigation */}
-          <nav className="flex items-center justify-center gap-2 text-xs font-bold uppercase tracking-wider text-[#8A93A6] mb-6">
-            <Link href="/" className="hover:text-white transition-colors">Home</Link>
+          <nav aria-label="Breadcrumb" className="flex items-center justify-center gap-2 text-xs font-bold uppercase tracking-wider text-[#8A93A6] mb-6">
+            <Link href="/" title="Home" className="hover:text-white transition-colors">Home</Link>
             <span className="text-[#2A3550]">/</span>
             <span className="text-[#4A8FD4]">Security in {city.name}</span>
           </nav>
@@ -318,10 +362,10 @@ export default async function CityPage({ params }) {
             {city.subheadline}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/contact#quote" className="btn-primary text-base px-8 py-4">
+            <Link href="/contact#quote" title={`Get a free quote in ${city.name}`} className="btn-primary text-base px-8 py-4">
               Get a Free Quote in {city.name}
             </Link>
-            <a href="tel:+918682066666" className="btn-secondary text-base px-8 py-4">
+            <a href="tel:+918682066666" title="Call ScoutX Security Director" className="btn-secondary text-base px-8 py-4">
               📞 Call: 86820 66666
             </a>
           </div>
@@ -383,7 +427,7 @@ export default async function CityPage({ params }) {
                   {city.industries.map((ind) => (
                     <li key={ind} className="flex items-center gap-3 text-[#D0D0D0] text-sm">
                       <span className="w-5 h-5 rounded-full flex items-center justify-center shrink-0 text-xs font-bold" style={{ background: 'rgba(46,111,191,0.2)', color: '#4A8FD4' }}>✓</span>
-                      {ind}
+                      <span>{ind}</span>
                     </li>
                   ))}
                 </ul>
@@ -428,13 +472,14 @@ export default async function CityPage({ params }) {
               <Link
                 key={svc.href}
                 href={svc.href}
+                title={`${svc.label} in ${city.name}`}
                 className="p-5 bg-[#0A0F1F] border border-[#1A2235] rounded-lg hover:border-[#2E6FBF] transition-all group flex items-center justify-between"
               >
                 <div className="flex items-center gap-3">
                   <span className="text-2xl">{svc.icon}</span>
-                  <span className="font-heading text-sm font-bold uppercase text-white group-hover:text-[#4A8FD4] transition-colors">
+                  <h3 className="font-heading text-sm font-bold uppercase text-white group-hover:text-[#4A8FD4] transition-colors">
                     {svc.label}
-                  </span>
+                  </h3>
                 </div>
                 <span className="text-[#2E6FBF] group-hover:translate-x-1 transition-transform">→</span>
               </Link>
@@ -442,6 +487,9 @@ export default async function CityPage({ params }) {
           </div>
         </div>
       </section>
+
+      {/* Certifications Section */}
+      <CertificationsSection title={`ScoutX Compliance & Certifications in ${city.name}`} />
 
       {/* Local FAQs Section */}
       <section className="py-20 px-4 sm:px-6 bg-[#0A0F1F] border-t border-[#1A2235]">
@@ -488,6 +536,7 @@ export default async function CityPage({ params }) {
               <Link
                 key={slug}
                 href={`/${slug}`}
+                title={`Security Guards in ${cities[slug].name}`}
                 className="px-4 py-2.5 text-xs font-heading uppercase tracking-wider text-[#C0C0C0] bg-[#111827] border border-[rgba(192,192,192,0.2)] rounded hover:border-[#2E6FBF] hover:text-white transition-all"
               >
                 Security Guards in {cities[slug].name}

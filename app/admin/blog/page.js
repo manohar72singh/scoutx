@@ -49,11 +49,12 @@ export default function AdminBlogPage() {
         <select
           value={filter}
           onChange={(e) => { setFilter(e.target.value); setPage(1); }}
-          className="form-input max-w-[160px]"
+          className="form-input max-w-[180px]"
           style={{ background: '#111827' }}
         >
           <option value="">All Status</option>
           <option value="published">Published</option>
+          <option value="scheduled">⏰ Scheduled</option>
           <option value="draft">Draft</option>
         </select>
       </div>
@@ -68,7 +69,7 @@ export default function AdminBlogPage() {
             <table className="admin-table">
               <thead>
                 <tr>
-                  <th>Title</th><th>Slug</th><th>Status</th><th>Published</th><th>Actions</th>
+                  <th>Title</th><th>Slug</th><th>Status</th><th>Published / Scheduled</th><th>Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -77,12 +78,20 @@ export default function AdminBlogPage() {
                     <td className="font-medium">{post.title}</td>
                     <td className="text-[#A8A8A8]">/blog/{post.slug}</td>
                     <td>
-                      <span className={`status-badge ${post.status === 'published' ? 'status-closed' : 'status-new'}`}>
-                        {post.status}
+                      <span className={`status-badge ${
+                        post.status === 'published'
+                          ? 'status-closed'
+                          : post.status === 'scheduled'
+                          ? 'bg-amber-900/40 text-amber-300 border border-amber-600/40'
+                          : 'status-new'
+                      }`}>
+                        {post.status === 'scheduled' ? '⏰ Scheduled' : post.status}
                       </span>
                     </td>
                     <td className="text-[#A8A8A8]">
-                      {post.published_at ? new Date(post.published_at).toLocaleDateString('en-IN') : '—'}
+                      {post.published_at
+                        ? new Date(post.published_at).toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' })
+                        : '—'}
                     </td>
                     <td>
                       <div className="flex gap-2">

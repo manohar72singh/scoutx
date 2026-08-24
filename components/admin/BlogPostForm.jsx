@@ -65,6 +65,13 @@ export default function BlogPostForm({ initialData, postId }) {
   const [metaTitle, setMetaTitle] = useState(initialData?.meta_title || '');
   const [metaDescription, setMetaDescription] = useState(initialData?.meta_description || '');
   const [status, setStatus] = useState(initialData?.status || 'draft');
+  const [scheduledAt, setScheduledAt] = useState(
+    initialData?.published_at
+      ? new Date(new Date(initialData.published_at).getTime() - new Date().getTimezoneOffset() * 60000)
+          .toISOString()
+          .slice(0, 16)
+      : ''
+  );
   const [imageFile, setImageFile] = useState(null);
   const [imagePreview, setImagePreview] = useState(
     initialData?.featured_image ? `/uploads/blog/${initialData.featured_image}` : null
@@ -103,6 +110,11 @@ export default function BlogPostForm({ initialData, postId }) {
       return;
     }
 
+    if (status === 'scheduled' && !scheduledAt) {
+      setError('Please choose a scheduled publication date and time.');
+      return;
+    }
+
     setSaving(true);
     try {
       const formData = new FormData();
@@ -113,6 +125,7 @@ export default function BlogPostForm({ initialData, postId }) {
       formData.set('meta_title', metaTitle.trim());
       formData.set('meta_description', metaDescription.trim());
       formData.set('status', status);
+      if (scheduledAt) formData.set('published_at', new Date(scheduledAt).toISOString());
       if (imageFile) formData.set('featured_image', imageFile);
 
       const url = isEditing ? `/api/admin/blog/${postId}` : '/api/admin/blog';
@@ -173,14 +186,35 @@ export default function BlogPostForm({ initialData, postId }) {
         {/* Sidebar column */}
         <div className="space-y-5">
           <div className="card-dark p-5">
-            <label className="block text-[#C0C0C0] text-sm font-medium mb-1.5">Status</label>
+            <label className="block text-[#C0C0C0] text-sm font-medium mb-1.5">Publish Status</label>
             <select value={status} onChange={(e) => setStatus(e.target.value)} className="form-input" style={{ background: '#111827' }}>
               <option value="draft">Draft</option>
               <option value="published">Published</option>
+              <option value="scheduled">⏰ Schedule for Later</option>
             </select>
 
+            {(status === 'scheduled' || status === 'published') && (
+              <div className="mt-4 pt-3 border-t border-[rgba(192,192,192,0.15)]">
+                <label className="block text-[#C0C0C0] text-xs font-medium mb-1.5">
+                  {status === 'scheduled' ? 'Scheduled Publication Date & Time *' : 'Published Date (Optional)'}
+                </label>
+                <input
+                  type="datetime-local"
+                  value={scheduledAt}
+                  onChange={(e) => setScheduledAt(e.target.value)}
+                  className="form-input text-xs"
+                  required={status === 'scheduled'}
+                />
+                {status === 'scheduled' && (
+                  <p className="text-[11px] text-[#8A93A6] mt-1.5">
+                    Post will automatically go live when this date and time arrives.
+                  </p>
+                )}
+              </div>
+            )}
+
             <button type="submit" disabled={saving} className="btn-primary w-full justify-center py-3 mt-4 disabled:opacity-60">
-              {saving ? 'Saving...' : isEditing ? '💾 Update Post' : '➕ Create Post'}
+              {saving ? 'Saving...' : isEditing ? '💾 Update Post' : status === 'scheduled' ? '⏰ Schedule Post' : '➕ Create Post'}
             </button>
           </div>
 

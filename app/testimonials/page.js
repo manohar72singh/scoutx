@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import TestimonialsClientPage from './TestimonialsClientPage';
+import FAQSection from '@/components/FAQSection';
 
 export const metadata = {
   title: 'Client Reviews & Ratings | ScoutX Protection Group',
@@ -10,10 +11,27 @@ export const metadata = {
   alternates: { canonical: 'https://scoutxsecurity.com/testimonials' },
   openGraph: {
     url: 'https://scoutxsecurity.com/testimonials',
-    title: 'ScoutX Security Client Reviews & Ratings',
+    title: 'ScoutX Security Client Reviews & Ratings | 4.9★ Rated',
     description: 'See verified reviews and ratings from our residential, corporate, and industrial clients in NCR.',
+    siteName: 'ScoutX Protection Group',
+    type: 'website',
   }
 };
+
+const testimonialFaqs = [
+  {
+    q: 'How does ScoutX maintain its 4.9★ client satisfaction rating across 100+ sites in NCR?',
+    a: 'We attribute our high retention and satisfaction to our hands-on founder oversight, 24/7 surprise supervisor visits, disciplined guard rosters, and immediate replacement guarantee within 24 hours.',
+  },
+  {
+    q: 'Can our management committee talk to existing ScoutX clients for references?',
+    a: 'Yes. Upon request, we connect prospective RWA presidents and facility heads with our active client references across Ghaziabad, Noida, and Greater Noida.',
+  },
+  {
+    q: 'How does ScoutX resolve site-level feedback or guard conduct complaints?',
+    a: 'Clients have a dedicated 24/7 Operations Manager. Minor operational adjustments are resolved immediately, and guard replacement requests are fulfilled within 24 hours at no extra charge.',
+  },
+];
 
 export default function TestimonialsPage() {
   return (
@@ -62,6 +80,18 @@ export default function TestimonialsPage() {
                 },
               ],
             },
+            {
+              '@context': 'https://schema.org',
+              '@type': 'FAQPage',
+              mainEntity: testimonialFaqs.map((faq) => ({
+                '@type': 'Question',
+                name: faq.q,
+                acceptedAnswer: {
+                  '@type': 'Answer',
+                  text: faq.a,
+                },
+              })),
+            },
           ]),
         }}
       />
@@ -84,6 +114,14 @@ export default function TestimonialsPage() {
       {/* Testimonials (client-side for API fetch) */}
       <TestimonialsClientPage />
 
+      {/* 3 FAQs Section */}
+      <FAQSection
+        title="Frequently Asked Questions: Client Service & Feedback"
+        subtitle="SERVICE ASSURANCE"
+        description="Learn how we monitor quality and maintain our high client satisfaction standards."
+        faqs={testimonialFaqs}
+      />
+
       {/* CTA */}
       <section className="py-16 px-4 sm:px-6" style={{ background: 'linear-gradient(135deg, #1E4D8C, #2E6FBF)' }}>
         <div className="max-w-3xl mx-auto text-center">
@@ -91,7 +129,7 @@ export default function TestimonialsPage() {
             Ready to Be Our Next Success Story?
           </h2>
           <p className="text-[rgba(255,255,255,0.8)] mb-6">Join 100+ businesses and societies that trust ScoutX for their security.</p>
-          <Link href="/contact#quote" className="inline-flex items-center gap-2 px-8 py-4 bg-white text-[#1E4D8C] font-heading font-bold text-base uppercase tracking-wider rounded-md hover:bg-[#F5F5F5] transition-all hover:-translate-y-1">
+          <Link href="/contact#quote" title="Request a free quote" className="inline-flex items-center gap-2 px-8 py-4 bg-white text-[#1E4D8C] font-heading font-bold text-base uppercase tracking-wider rounded-md hover:bg-[#F5F5F5] transition-all hover:-translate-y-1">
             Get a Free Quote
           </Link>
         </div>

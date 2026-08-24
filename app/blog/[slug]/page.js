@@ -6,27 +6,42 @@ import Link from 'next/link';
 import Image from 'next/image';
 import pool from '@/lib/db';
 import BlogCard from '@/components/BlogCard';
+import TableOfContents from '@/components/TableOfContents';
+import BlogComments from '@/components/BlogComments';
+import FAQSection from '@/components/FAQSection';
 import { readingTime } from '@/lib/readingTime';
 import { extractHeadings } from '@/lib/extractHeadings';
 
 async function getPost(slug) {
-  const [rows] = await pool.query(
-    `SELECT * FROM blog_posts WHERE slug = ? AND status = 'published' LIMIT 1`,
-    [slug]
-  );
-  return rows[0] || null;
+  try {
+    const [rows] = await pool.query(
+      `SELECT * FROM blog_posts
+       WHERE slug = ? AND (status = 'published' OR (status = 'scheduled' AND published_at <= NOW()))
+       LIMIT 1`,
+      [slug]
+    );
+    return rows[0] || null;
+  } catch (err) {
+    console.error('getPost error:', err);
+    return null;
+  }
 }
 
 async function getRelatedPosts(excludeId) {
-  const [rows] = await pool.query(
-    `SELECT id, title, slug, excerpt, content, featured_image, published_at
-     FROM blog_posts
-     WHERE status = 'published' AND id != ?
-     ORDER BY published_at DESC
-     LIMIT 3`,
-    [excludeId]
-  );
-  return rows.map((post) => ({ ...post, reading_time: readingTime(post.content) }));
+  try {
+    const [rows] = await pool.query(
+      `SELECT id, title, slug, excerpt, content, featured_image, published_at
+       FROM blog_posts
+       WHERE (status = 'published' OR (status = 'scheduled' AND published_at <= NOW())) AND id != ?
+       ORDER BY published_at DESC
+       LIMIT 3`,
+      [excludeId]
+    );
+    return rows.map((post) => ({ ...post, reading_time: readingTime(post.content) }));
+  } catch (err) {
+    console.error('getRelatedPosts error:', err);
+    return [];
+  }
 }
 
 export async function generateMetadata({ params }) {
@@ -34,7 +49,7 @@ export async function generateMetadata({ params }) {
   const post = await getPost(slug);
   if (!post) return {};
 
-  const title = post.meta_title || post.title;
+  const title = post.meta_title || `${post.title} | ScoutX Security`;
   const description = post.meta_description || post.excerpt || `${post.title} — ScoutX Protection Group Pvt. Ltd.`;
   const url = `https://scoutxsecurity.com/blog/${post.slug}`;
   const image = post.featured_image
@@ -52,10 +67,31 @@ export async function generateMetadata({ params }) {
       type: 'article',
       publishedTime: post.published_at,
       modifiedTime: post.updated_at,
-      images: [{ url: image }],
+      images: [{ url: image, width: 1200, height: 630, alt: post.title }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: [image],
     },
   };
 }
+
+const articleFaqs = [
+  {
+    q: 'How does ScoutX ensure the operational advice in this article is practiced on site?',
+    a: 'Every protocol detailed in our guides is integrated into our guard training curriculum and enforced through daily GPS attendance logging and random supervisor site audits.',
+  },
+  {
+    q: 'Can ScoutX customize a security deployment plan based on these guidelines for our premises?',
+    a: 'Yes. Our security directors conduct free on-site risk assessments across Ghaziabad, Noida, Greater Noida, and Delhi NCR to draft a tailor-made deployment plan within 24 hours.',
+  },
+  {
+    q: 'What legal compliance documents does ScoutX provide upon guard deployment?',
+    a: 'We provide our official UP-PSARA license certificate, police character clearance slips for every guard, ESIC/EPFO registration documents, and comprehensive Workmen’s Compensation insurance policies.',
+  },
+];
 
 export default async function BlogPostPage({ params }) {
   const { slug } = await params;
@@ -81,10 +117,14 @@ export default async function BlogPostPage({ params }) {
               '@type': 'Article',
               headline: post.title,
               description: post.meta_description || post.excerpt,
-              image: image ? [image] : undefined,
+              image: image ? [image] : ['https://scoutxsecurity.com/logo.png'],
               datePublished: post.published_at,
               dateModified: post.updated_at,
-              author: { '@type': 'Organization', name: 'ScoutX Protection Group Pvt. Ltd.' },
+              author: {
+                '@type': 'Organization',
+                name: 'ScoutX Protection Group Pvt. Ltd.',
+                url: 'https://scoutxsecurity.com',
+              },
               publisher: {
                 '@type': 'Organization',
                 name: 'ScoutX Protection Group Pvt. Ltd.',
@@ -101,6 +141,18 @@ export default async function BlogPostPage({ params }) {
                 { '@type': 'ListItem', position: 3, name: post.title, item: url },
               ],
             },
+            {
+              '@context': 'https://schema.org',
+              '@type': 'FAQPage',
+              mainEntity: articleFaqs.map((faq) => ({
+                '@type': 'Question',
+                name: faq.q,
+                acceptedAnswer: {
+                  '@type': 'Answer',
+                  text: faq.a,
+                },
+              })),
+            },
           ]),
         }}
       />
@@ -110,10 +162,10 @@ export default async function BlogPostPage({ params }) {
         <div className="absolute inset-0 tactical-grid opacity-30" />
         <div className="relative z-10 max-w-3xl mx-auto">
           {/* Breadcrumb */}
-          <nav className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-wider text-[#8A93A6] mb-6">
-            <Link href="/" className="hover:text-white transition-colors">Home</Link>
+          <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-wider text-[#8A93A6] mb-6">
+            <Link href="/" title="ScoutX Home" className="hover:text-white transition-colors">Home</Link>
             <span className="text-[#2A3550]">/</span>
-            <Link href="/blog" className="hover:text-white transition-colors">Blog</Link>
+            <Link href="/blog" title="ScoutX Security Blog" className="hover:text-white transition-colors">Blog</Link>
             <span className="text-[#2A3550]">/</span>
             <span className="text-[#4A8FD4] truncate max-w-[200px]">{post.title}</span>
           </nav>
@@ -141,7 +193,14 @@ export default async function BlogPostPage({ params }) {
           {/* Featured image / gradient banner */}
           <div className="relative w-full h-72 md:h-[26rem] rounded-lg overflow-hidden mb-10 border border-[#1A2235]">
             {post.featured_image ? (
-              <Image src={`/uploads/blog/${post.featured_image}`} alt={post.title} fill className="object-cover" priority />
+              <Image
+                src={`/uploads/blog/${post.featured_image}`}
+                alt={post.title}
+                title={post.title}
+                fill
+                className="object-cover"
+                priority
+              />
             ) : (
               <div
                 className="w-full h-full flex items-center justify-center relative"
@@ -155,11 +214,12 @@ export default async function BlogPostPage({ params }) {
 
           {/* Share row */}
           <div className="flex items-center gap-3 mb-10 pb-8 border-b border-[#1A2235]">
-            <span className="text-[10px] font-bold uppercase tracking-widest text-[#8A93A6]">Share</span>
+            <span className="text-[10px] font-bold uppercase tracking-widest text-[#8A93A6]">Share Guide</span>
             <a
               href={whatsappShare}
               target="_blank"
               rel="noreferrer"
+              title="Share this security guide on WhatsApp"
               className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#25D366]/10 border border-[#25D366]/30 text-[#25D366] text-xs font-bold rounded hover:bg-[#25D366]/20 transition-colors"
             >
               <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" /></svg>
@@ -168,48 +228,50 @@ export default async function BlogPostPage({ params }) {
           </div>
 
           {/* Table of contents */}
-          {headings.length > 1 && (
-            <div className="card-dark p-6 mb-10">
-              <h2 className="font-heading text-xs font-bold uppercase tracking-widest text-[#A8A8A8] mb-4">In This Article</h2>
-              <ol className="space-y-2.5">
-                {headings.map((h, i) => (
-                  <li key={h.id} className={h.level === 3 ? 'pl-5' : ''}>
-                    <a href={`#${h.id}`} className="flex items-start gap-2.5 text-sm text-[#C0C0C0] hover:text-[#4A8FD4] transition-colors">
-                      <span className="text-[#2E6FBF] font-heading font-bold text-xs shrink-0 mt-0.5">
-                        {String(i + 1).padStart(2, '0')}
-                      </span>
-                      {h.text}
-                    </a>
-                  </li>
-                ))}
-              </ol>
-            </div>
-          )}
+          <TableOfContents headings={headings} />
 
           {/* Article content */}
-          <div className="blog-content" dangerouslySetInnerHTML={{ __html: contentHtml }} />
+          <article className="blog-content" dangerouslySetInnerHTML={{ __html: contentHtml }} />
 
           {/* CTA */}
           <div className="mt-16 p-8 rounded-lg text-center border border-[#1A2235]" style={{ background: 'linear-gradient(135deg, #0A0F1F, #111827)' }}>
-            <p className="text-[#E8E8E8] font-heading uppercase tracking-wide text-sm mb-4">Need professional security guards for your premises?</p>
+            <h3 className="font-heading text-lg font-bold uppercase text-white mb-2">
+              Need Professional PSARA-Licensed Security Guards?
+            </h3>
+            <p className="text-[#A8A8A8] text-xs sm:text-sm mb-6 max-w-md mx-auto">
+              Get a customized security deployment plan and transparent quote within 24 hours.
+            </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <Link href="/contact#quote" className="btn-primary text-sm px-6 py-3 inline-flex justify-center">
+              <Link href="/contact#quote" title="Get a free security quote" className="btn-primary text-xs uppercase tracking-wider px-6 py-3 inline-flex justify-center">
                 Get a Free Quote →
               </Link>
-              <a href="tel:+918682066666" className="btn-secondary text-sm px-6 py-3 inline-flex justify-center">
+              <a href="tel:+918682066666" title="Call ScoutX Security Director" className="btn-secondary text-xs uppercase tracking-wider px-6 py-3 inline-flex justify-center">
                 📞 Call +91 86820 66666
               </a>
             </div>
           </div>
+
+          {/* Interactive Comments Section */}
+          <BlogComments postSlug={post.slug} postId={post.id} />
         </div>
       </section>
+
+      {/* 3 FAQs Section */}
+      <FAQSection
+        title="Key Questions on Security Implementation"
+        subtitle="GROUND-LEVEL PROTOCOLS"
+        description="Common operational questions related to guard deployment and compliance."
+        faqs={articleFaqs}
+      />
 
       {/* Related posts */}
       {relatedPosts.length > 0 && (
         <section className="py-16 px-4 sm:px-6 border-t border-[#1A2235]" style={{ background: '#0A0F1F' }}>
           <div className="max-w-6xl mx-auto">
             <div className="flex items-center gap-4 mb-8">
-              <h2 className="font-heading text-sm font-bold uppercase tracking-widest text-[#A8A8A8] shrink-0">Read Next</h2>
+              <h2 className="font-heading text-sm font-bold uppercase tracking-widest text-[#A8A8A8] shrink-0">
+                Recommended Related Articles
+              </h2>
               <div className="h-px flex-grow bg-[#1A2235]" />
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
