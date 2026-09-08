@@ -5,8 +5,16 @@ import { verifyAuth } from '@/lib/auth';
 import fs from 'fs/promises';
 import path from 'path';
 
-const ALLOWED_IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/gif', 'image/svg+xml'];
-const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
+const ALLOWED_IMAGE_TYPES = [
+  'image/jpeg',
+  'image/jpg',
+  'image/png',
+  'image/webp',
+  'image/gif',
+  'image/svg+xml',
+  'image/avif',
+];
+const MAX_FILE_SIZE = 15 * 1024 * 1024; // 15MB
 
 export async function POST(req) {
   const auth = verifyAuth(req);
@@ -23,15 +31,15 @@ export async function POST(req) {
     }
 
     if (file.size > MAX_FILE_SIZE) {
-      return NextResponse.json({ success: false, message: 'Image size exceeds 10MB limit.' }, { status: 400 });
+      return NextResponse.json({ success: false, message: 'Image size exceeds 15MB limit.' }, { status: 400 });
     }
 
     if (!ALLOWED_IMAGE_TYPES.includes(file.type)) {
-      return NextResponse.json({ success: false, message: 'Invalid image format. JPEG, PNG, WEBP, and GIF are allowed.' }, { status: 400 });
+      return NextResponse.json({ success: false, message: 'Invalid image format. JPEG, PNG, WEBP, GIF, and AVIF are allowed.' }, { status: 400 });
     }
 
     const buffer = Buffer.from(await file.arrayBuffer());
-    const ext = path.extname(file.name) || '.jpg';
+    const ext = (path.extname(file.name) || '.jpg').toLowerCase();
     const cleanBase = path.basename(file.name, ext).replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
     const filename = `${Date.now()}-${Math.round(Math.random() * 1e6)}-${cleanBase}${ext}`;
 

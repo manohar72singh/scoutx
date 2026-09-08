@@ -6,11 +6,22 @@ import { verifyAuth } from '@/lib/auth';
 import fs from 'fs/promises';
 import path from 'path';
 
-const ALLOWED_IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
+const ALLOWED_IMAGE_TYPES = [
+  'image/jpeg',
+  'image/jpg',
+  'image/png',
+  'image/webp',
+  'image/gif',
+  'image/svg+xml',
+  'image/avif',
+];
+const MAX_FILE_SIZE = 15 * 1024 * 1024; // 15MB
 
 async function saveImage(file) {
   const buffer = Buffer.from(await file.arrayBuffer());
-  const filename = `${Date.now()}-${Math.round(Math.random() * 1e9)}-${file.name.replace(/[^a-zA-Z0-9.]/g, '_')}`;
+  const ext = (path.extname(file.name) || '.jpg').toLowerCase();
+  const cleanBase = path.basename(file.name, ext).replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
+  const filename = `${Date.now()}-${Math.round(Math.random() * 1e6)}-${cleanBase}${ext}`;
   const uploadDir = path.join(process.cwd(), 'public', 'uploads', 'hero');
   await fs.mkdir(uploadDir, { recursive: true });
   await fs.writeFile(path.join(uploadDir, filename), buffer);
@@ -59,9 +70,12 @@ export async function PUT(req) {
     const [existingRows] = await pool.query('SELECT hero_image FROM cta_content WHERE id = 1 LIMIT 1');
     let heroImage = existingRows[0]?.hero_image || null;
 
-    if (imageFile && imageFile.size > 0) {
+    if (imageFile && typeof imageFile === 'object' && imageFile.size > 0) {
+      if (imageFile.size > MAX_FILE_SIZE) {
+        return NextResponse.json({ success: false, message: 'Image size exceeds 15MB limit.' }, { status: 400 });
+      }
       if (!ALLOWED_IMAGE_TYPES.includes(imageFile.type)) {
-        return NextResponse.json({ success: false, message: 'Invalid image type. Only JPEG, PNG, and WEBP are allowed.' }, { status: 400 });
+        return NextResponse.json({ success: false, message: 'Invalid image type. JPEG, PNG, WEBP, GIF, and AVIF are allowed.' }, { status: 400 });
       }
       heroImage = await saveImage(imageFile);
     } else if (removeImage) {

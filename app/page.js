@@ -245,6 +245,7 @@ export default async function HomePage() {
             alt="ScoutX Security Guards on duty across Delhi NCR"
             fill
             priority
+            unoptimized={Boolean(cta.hero_image)}
             className="object-cover object-center"
           />
         </div>

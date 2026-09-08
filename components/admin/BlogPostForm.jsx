@@ -94,7 +94,7 @@ function EditorToolbar({ editor }) {
         type="file"
         ref={fileInputRef}
         onChange={handleInlineImageUpload}
-        accept="image/jpeg,image/png,image/webp,image/gif"
+        accept="image/jpeg,image/jpg,image/png,image/webp,image/gif,image/avif"
         className="hidden"
       />
       <ToolbarButton
@@ -140,6 +140,8 @@ export default function BlogPostForm({ initialData, postId }) {
           : `/uploads/blog/${initialData.featured_image}`)
       : null
   );
+  const [removeImage, setRemoveImage] = useState(false);
+  const featuredFileInputRef = useRef(null);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
 
@@ -169,7 +171,15 @@ export default function BlogPostForm({ initialData, postId }) {
     const file = e.target.files?.[0];
     if (!file) return;
     setImageFile(file);
+    setRemoveImage(false);
     setImagePreview(URL.createObjectURL(file));
+  };
+
+  const handleRemoveImage = () => {
+    setImageFile(null);
+    setImagePreview(null);
+    setRemoveImage(true);
+    if (featuredFileInputRef.current) featuredFileInputRef.current.value = '';
   };
 
   const handleSubmit = async (e) => {
@@ -198,6 +208,7 @@ export default function BlogPostForm({ initialData, postId }) {
       formData.set('status', status);
       if (scheduledAt) formData.set('published_at', new Date(scheduledAt).toISOString());
       if (imageFile) formData.set('featured_image', imageFile);
+      if (removeImage) formData.set('remove_image', 'true');
 
       const url = isEditing ? `/api/admin/blog/${postId}` : '/api/admin/blog';
       const res = await fetch(url, { method: isEditing ? 'PUT' : 'POST', body: formData });
@@ -293,11 +304,26 @@ export default function BlogPostForm({ initialData, postId }) {
           <div className="card-dark p-5">
             <label className="block text-[#C0C0C0] text-sm font-medium mb-1.5">Featured Image</label>
             {imagePreview && (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img src={imagePreview} alt="Featured Preview" className="w-full h-36 object-cover rounded mb-2 border border-[rgba(192,192,192,0.15)]" />
+              <div className="relative mb-2 rounded overflow-hidden border border-[rgba(192,192,192,0.15)]">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={imagePreview} alt="Featured Preview" className="w-full h-36 object-cover" />
+                <button
+                  type="button"
+                  onClick={handleRemoveImage}
+                  className="absolute top-2 right-2 bg-black/70 hover:bg-red-900/80 text-white text-xs px-2 py-1 rounded"
+                >
+                  ✕ Remove
+                </button>
+              </div>
             )}
-            <input type="file" accept="image/jpeg,image/png,image/webp,image/gif" onChange={handleImageChange} className="form-input text-xs" />
-            <p className="text-[11px] text-[#8A93A6] mt-1.5">Supported formats: JPG, PNG, WEBP, GIF (Max 10MB)</p>
+            <input
+              ref={featuredFileInputRef}
+              type="file"
+              accept="image/jpeg,image/jpg,image/png,image/webp,image/gif,image/avif"
+              onChange={handleImageChange}
+              className="form-input text-xs"
+            />
+            <p className="text-[11px] text-[#8A93A6] mt-1.5">Supported formats: JPG, PNG, WEBP, GIF, AVIF (Max 15MB)</p>
           </div>
 
           <div className="card-dark p-5">

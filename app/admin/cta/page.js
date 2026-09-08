@@ -1,7 +1,7 @@
 'use client';
 // app/admin/cta/page.js — Admin-editable homepage closing CTA section
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import Link from 'next/link';
 import AdminLayout from '@/components/AdminLayout';
 
@@ -29,6 +29,7 @@ export default function AdminCtaPage() {
   const [heroImageFile, setHeroImageFile] = useState(null);
   const [heroImagePreview, setHeroImagePreview] = useState(null);
   const [removeHeroImage, setRemoveHeroImage] = useState(false);
+  const fileInputRef = useRef(null);
 
   const fetchData = useCallback(async () => {
     try {
@@ -59,6 +60,7 @@ export default function AdminCtaPage() {
     setHeroImageFile(null);
     setHeroImagePreview(null);
     setRemoveHeroImage(true);
+    if (fileInputRef.current) fileInputRef.current.value = '';
   };
 
   const handleSubmit = async (e) => {
@@ -77,8 +79,12 @@ export default function AdminCtaPage() {
       const res = await fetch('/api/admin/cta', { method: 'PUT', body: formData });
       const data = await res.json();
       setMsgType(data.success ? 'success' : 'error');
-      setMsg(data.message || (data.success ? 'Saved!' : 'Error'));
-      if (data.success) { setHeroImageFile(null); setRemoveHeroImage(false); fetchData(); }
+      if (data.success) {
+        setHeroImageFile(null);
+        setRemoveHeroImage(false);
+        if (fileInputRef.current) fileInputRef.current.value = '';
+        fetchData();
+      }
     } catch {
       setMsgType('error');
       setMsg('Connection error. Please try again.');
@@ -131,8 +137,14 @@ export default function AdminCtaPage() {
                     </button>
                   </div>
                 )}
-                <input type="file" accept="image/jpeg,image/png,image/webp" onChange={handleHeroImageChange} className="form-input" />
-                <p className="text-[#666] text-xs mt-1">JPEG, PNG, or WEBP. Leave empty to keep the current image.</p>
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept="image/jpeg,image/jpg,image/png,image/webp,image/gif,image/avif"
+                  onChange={handleHeroImageChange}
+                  className="form-input"
+                />
+                <p className="text-[#666] text-xs mt-1">JPEG, PNG, WEBP, GIF, or AVIF (Max 15MB). Leave empty to keep the current image.</p>
               </div>
 
               <div>

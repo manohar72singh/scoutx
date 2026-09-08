@@ -7,7 +7,16 @@ import { slugify } from '@/lib/slugify';
 import fs from 'fs/promises';
 import path from 'path';
 
-const ALLOWED_IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/gif', 'image/svg+xml'];
+const ALLOWED_IMAGE_TYPES = [
+  'image/jpeg',
+  'image/jpg',
+  'image/png',
+  'image/webp',
+  'image/gif',
+  'image/svg+xml',
+  'image/avif',
+];
+const MAX_FILE_SIZE = 15 * 1024 * 1024; // 15MB
 
 async function uniqueSlug(base, excludeId) {
   let slug = base;
@@ -21,7 +30,7 @@ async function uniqueSlug(base, excludeId) {
 
 async function saveImage(file) {
   const buffer = Buffer.from(await file.arrayBuffer());
-  const ext = path.extname(file.name) || '.jpg';
+  const ext = (path.extname(file.name) || '.jpg').toLowerCase();
   const cleanBase = path.basename(file.name, ext).replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
   const filename = `${Date.now()}-${Math.round(Math.random() * 1e6)}-${cleanBase}${ext}`;
   const uploadDir = path.join(process.cwd(), 'public', 'uploads', 'blog');
@@ -73,6 +82,7 @@ export async function PUT(req, { params }) {
     const requestedSlug = formData.get('slug')?.toString().trim();
     const imageFile = formData.get('featured_image');
     const imageUrl = formData.get('featured_image_url')?.toString().trim();
+    const removeImage = formData.get('remove_image') === 'true';
 
     if (!title || !content) {
       return NextResponse.json({ success: false, message: 'Title and content are required.' }, { status: 400 });
@@ -86,10 +96,15 @@ export async function PUT(req, { params }) {
 
     let featuredImage = existing.featured_image;
     if (imageFile && typeof imageFile === 'object' && imageFile.size > 0) {
+      if (imageFile.size > MAX_FILE_SIZE) {
+        return NextResponse.json({ success: false, message: 'Image size exceeds 15MB limit.' }, { status: 400 });
+      }
       if (!ALLOWED_IMAGE_TYPES.includes(imageFile.type)) {
-        return NextResponse.json({ success: false, message: 'Invalid image type. Only JPEG, PNG, WEBP, and GIF are allowed.' }, { status: 400 });
+        return NextResponse.json({ success: false, message: 'Invalid image type. JPEG, PNG, WEBP, GIF, and AVIF are allowed.' }, { status: 400 });
       }
       featuredImage = await saveImage(imageFile);
+    } else if (removeImage) {
+      featuredImage = null;
     } else if (imageUrl) {
       featuredImage = imageUrl;
     }
